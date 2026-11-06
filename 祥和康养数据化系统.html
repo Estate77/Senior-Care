@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1360">
+<title>祥和康养 · 数据化系统 v2.0（PC 端演示）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Lora:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pri:#2E7D6B; --pri-l:#E8F0EE; --pri-d:#245F51; --pri-xd:#1B4A3E;
+  --warn:#E8A33D; --warn-l:#FDF3E3;
+  --dan:#C0392B; --dan-l:#FBEAE8;
+  --bg:#FAF9F5; --card:#FFFFFF; --tx:#141413; --mut:#8A857A;
+  --line:#E8E6DC; --line2:#F0EEE6;
+  --blue:#4A7BAA; --blue-l:#EDF2F8;
+  --purple:#6B5FA8; --purple-l:#F0EEF9;
+  --acc:#D97757; --acc-d:#C05F3F; --acc-l:#F9EDE6;
+  --ink:#141413; --paper:#FAF9F5;
+  --sh-sm:0 1px 2px rgba(20,20,19,.04),0 2px 10px rgba(20,20,19,.04);
+  --sh-md:0 2px 4px rgba(20,20,19,.05),0 10px 28px rgba(20,20,19,.09);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  color:var(--tx);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased;min-width:1280px;
+  background:
+    radial-gradient(1100px 560px at 88% -120px, rgba(217,119,87,.07), transparent 62%),
+    radial-gradient(900px 520px at -120px 32%, rgba(46,125,107,.06), transparent 60%),
+    var(--bg);
+  background-attachment:fixed}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+/* ===================== 官网（未登录） ===================== */
+.stnav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);height:66px;display:flex;align-items:center;padding:0 40px;gap:30px}
+.stnav .brand{font-size:19px;font-weight:800;color:var(--pri-d);letter-spacing:-.3px;line-height:1.2;cursor:pointer}
+.stnav .brand small{display:block;font-size:10px;color:var(--mut);font-weight:500;letter-spacing:1.5px;margin-top:1px}
+.stnav .nl{font-size:14px;color:#3E4C49;cursor:pointer;padding:6px 2px;border-bottom:2px solid transparent;transition:.15s}
+.stnav .nl:hover{color:var(--pri);border-bottom-color:var(--pri)}
+.btn-login{margin-left:auto;font-family:inherit;font-size:13.5px;font-weight:600;padding:9px 22px;border-radius:8px;border:1px solid var(--pri);background:var(--pri);color:#fff;cursor:pointer;transition:.15s}
+.btn-login:hover{background:var(--pri-d)}
+.hero{background:linear-gradient(135deg,#173B32 0%,#245F51 45%,#2E7D6B 75%,#43947F 100%);color:#fff;padding:88px 0 0;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-120px;top:-80px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%)}
+.hero .wrap{position:relative;z-index:2}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 16px;font-size:12.5px;letter-spacing:2px;margin-bottom:22px}
+.hero h1{font-size:42px;font-weight:800;letter-spacing:-.5px;line-height:1.3}
+.hero h1 em{font-style:normal;color:#F2D8A7}
+.hero p.sub{font-size:15.5px;opacity:.88;margin-top:18px;max-width:640px;line-height:1.9}
+.hero .cta{margin-top:30px;display:flex;gap:12px}
+.hero .cta button{font-family:inherit;font-size:14px;font-weight:600;padding:12px 26px;border-radius:8px;border:none;cursor:pointer;transition:.15s}
+.hero .cta .b1{background:#fff;color:var(--pri-d)}
+.hero .cta .b1:hover{background:#EAF3F0}
+.hero .cta .b2{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.hero .cta .b2:hover{background:rgba(255,255,255,.1)}
+.hstats{margin-top:52px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px 14px 0 0;display:grid;grid-template-columns:repeat(4,1fr);backdrop-filter:blur(4px)}
+.hstats .hs{padding:22px 30px;border-right:1px solid rgba(255,255,255,.14)}
+.hstats .hs:last-child{border-right:none}
+.hstats .hv{font-size:30px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.hstats .hv small{font-size:13px;font-weight:500;opacity:.8;margin-left:2px}
+.hstats .hk{font-size:12px;opacity:.75;margin-top:4px}
+.site-sec{background:#fff;padding:66px 0}
+.site-sec.alt{background:#F6F9F8}
+.sec-head{text-align:center;margin-bottom:38px}
+.sec-head .st{font-size:26px;font-weight:800;letter-spacing:-.3px}
+.sec-head .sd{font-size:13.5px;color:var(--mut);margin-top:10px}
+.sec-head .bar-c{width:44px;height:4px;background:var(--pri);border-radius:2px;margin:14px auto 0}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 24px 20px;transition:.2s;position:relative;overflow:hidden}
+.site-sec.alt .svc{border-color:#E7EEEB}
+.svc:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(30,60,54,.1);border-color:#BFD8D0}
+.svc .ic{width:46px;height:46px;border-radius:11px;background:var(--pri-l);color:var(--pri-d);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.svc.hot .ic{background:var(--warn-l)}
+.svc h3{font-size:16.5px;font-weight:700;margin-bottom:8px}
+.svc p{font-size:12.5px;color:var(--mut);line-height:1.8}
+.svc .hot-tag{position:absolute;top:14px;right:-30px;background:var(--warn);color:#fff;font-size:10.5px;font-weight:600;padding:3px 34px;transform:rotate(38deg)}
+.pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pay-c{border-radius:12px;padding:22px 20px;border:1px solid var(--line);background:#fff;border-top:4px solid var(--pri)}
+.pay-c.m{border-top-color:var(--blue)}
+.pay-c.l{border-top-color:var(--warn)}
+.pay-c.y{border-top-color:var(--purple)}
+.pay-c .pt{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.pay-c .pd{font-size:12px;color:var(--mut);margin-top:9px;line-height:1.8}
+.pay-c .pe{margin-top:10px;font-size:11.5px;font-weight:600;color:var(--pri-d);background:var(--pri-l);border-radius:6px;padding:5px 9px;display:inline-block}
+.pay-c.m .pe{color:var(--blue);background:var(--blue-l)}
+.pay-c.l .pe{color:#8A5A05;background:var(--warn-l)}
+.pay-c.y .pe{color:var(--purple);background:var(--purple-l)}
+.flow{display:flex;gap:0;position:relative}
+.flow .fs{flex:1;text-align:center;position:relative;padding:0 10px}
+.flow .fs::before{content:'';position:absolute;top:23px;left:calc(50% + 26px);right:calc(-50% + 26px);height:2px;background:#D6E4DF}
+.flow .fs:last-child::before{display:none}
+.flow .fn{width:46px;height:46px;border-radius:50%;background:var(--pri);color:#fff;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;position:relative;z-index:2}
+.flow .fs:nth-child(2) .fn{background:#3E927E}.flow .fs:nth-child(3) .fn{background:#4FA38D}
+.flow .fs:nth-child(4) .fn{background:#63B49C}.flow .fs:nth-child(5) .fn{background:#79C2AB}
+.flow .ft{font-size:14.5px;font-weight:700}
+.flow .fd{font-size:11.5px;color:var(--mut);margin-top:6px;line-height:1.7}
+.news-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.news{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s}
+.news:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(30,60,54,.1)}
+.news .nc{height:96px;position:relative;display:flex;align-items:flex-end;padding:12px 14px}
+.news .nc .nd{background:rgba(255,255,255,.92);border-radius:6px;font-size:10.5px;color:var(--pri-d);font-weight:600;padding:3px 8px}
+.news .nb{padding:14px 16px 16px}
+.news .nt{font-size:13.5px;font-weight:700;line-height:1.55}
+.news .ns{font-size:11.5px;color:var(--mut);margin-top:8px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tm{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 22px;text-align:center;transition:.2s}
+.tm:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(30,60,54,.1)}
+.tm .av{width:64px;height:64px;border-radius:50%;margin:0 auto 13px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff}
+.tm .av.c1{background:linear-gradient(135deg,#2E7D6B,#4FA38D)}
+.tm .av.c2{background:linear-gradient(135deg,#3F6FB5,#6B93CC)}
+.tm .av.c3{background:linear-gradient(135deg,#8A6FBF,#A78FD4)}
+.tm .av.c4{background:linear-gradient(135deg,#C98A3D,#DFAE6C)}
+.tm h4{font-size:16px;font-weight:700}
+.tm .tt{font-size:11.5px;color:var(--pri-d);font-weight:600;margin-top:4px}
+.tm p{font-size:11.5px;color:var(--mut);margin-top:10px;line-height:1.8}
+.honor-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center}
+.about-p{font-size:13.5px;line-height:2.1;color:#3E4C49}
+.honors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hon{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;display:flex;gap:10px;align-items:center;font-size:12.5px;font-weight:600}
+.hon .medal{font-size:18px}
+.sfooter{background:#1B4A3E;color:#fff;padding:44px 0 0}
+.sfooter .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding-bottom:34px}
+.sfooter h5{font-size:14px;font-weight:700;margin-bottom:14px;opacity:.95}
+.sfooter .fi{font-size:12px;opacity:.72;line-height:2.1}
+.sfooter .bt{border-top:1px solid rgba(255,255,255,.14);padding:15px 0;text-align:center;font-size:11.5px;opacity:.55}
+
+/* ===================== 登录页 ===================== */
+.login{min-height:100vh;background:linear-gradient(135deg,#173B32 0%,#2E7D6B 70%,#43947F 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden}
+.login::before{content:'';position:absolute;left:-140px;bottom:-160px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 65%)}
+.login-card{background:#fff;border-radius:16px;padding:36px 38px;width:460px;max-width:100%;position:relative;z-index:2;box-shadow:0 24px 60px rgba(10,30,25,.35)}
+.login-card .lg{font-size:21px;font-weight:800;color:var(--pri-d);text-align:center}
+.login-card .ls{text-align:center;font-size:12px;color:var(--mut);margin:7px 0 24px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:12px;color:var(--mut);margin-bottom:6px;font-weight:600}
+.fld input{width:100%;font-family:inherit;font-size:13.5px;padding:11px 13px;border:1px solid var(--line);border-radius:8px;outline:none;transition:.15s}
+.fld input:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(46,125,107,.1)}
+.role-tip{font-size:12px;color:var(--mut);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.role-tip::before,.role-tip::after{content:'';flex:1;height:1px;background:var(--line)}
+.role-row{display:flex;flex-wrap:wrap;gap:8px}
+.role-chip{font-family:inherit;font-size:12px;font-weight:600;padding:8px 13px;border-radius:18px;border:1px solid var(--line);background:#FAFCFB;color:#3E4C49;cursor:pointer;transition:.15s}
+.role-chip:hover{border-color:var(--pri);color:var(--pri-d);background:var(--pri-l)}
+.login .btn-login{width:100%;margin:22px 0 0;padding:12px;font-size:14.5px;border-radius:9px}
+.login-back{text-align:center;margin-top:16px;font-size:12px;color:var(--mut);cursor:pointer}
+.login-back:hover{color:var(--pri)}
+
+/* ===================== 系统框架 ===================== */
+.topnav{height:60px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:4px;padding:0 22px;position:sticky;top:0;z-index:80}
+.topnav .brand{font-size:15.5px;font-weight:800;color:var(--pri-d);margin-right:20px;white-space:nowrap;letter-spacing:-.2px}
+.topnav .brand small{display:inline-block;font-size:9.5px;color:#fff;background:var(--pri);border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:600;vertical-align:2px;letter-spacing:1px}
+.tnav-item{padding:0 17px;height:60px;display:flex;align-items:center;font-size:13.5px;color:#3E4C49;cursor:pointer;border-bottom:2.5px solid transparent;font-weight:600;transition:.12s;gap:6px}
+.tnav-item:hover{color:var(--pri)}
+.tnav-item.on{color:var(--pri-d);border-bottom-color:var(--pri)}
+.topnav .sp{flex:1}
+.selwrap{display:flex;align-items:center;gap:6px;margin-right:14px}
+.selwrap label{font-size:11.5px;color:var(--mut);white-space:nowrap}
+select{font-family:inherit;font-size:12.5px;padding:6px 9px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--tx);cursor:pointer;outline:none}
+select:focus{border-color:var(--pri)}
+.who{display:flex;align-items:center;gap:9px;font-size:12.5px}
+.who .wrole{font-size:10.5px;color:var(--pri-d);background:var(--pri-l);border-radius:5px;padding:2px 7px;font-weight:600}
+.who .av{width:30px;height:30px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:600}
+.who .out{font-size:11.5px;color:var(--mut);cursor:pointer;padding:4px 8px;border-radius:6px}
+.who .out:hover{color:var(--dan);background:var(--dan-l)}
+.subnav{height:44px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:4px;padding:0 22px;position:sticky;top:60px;z-index:79;overflow-x:auto}
+.subnav-item{padding:5px 14px;border-radius:17px;font-size:12.5px;color:var(--mut);cursor:pointer;white-space:nowrap;transition:.12s}
+.subnav-item:hover{background:#F0F4F2;color:var(--pri-d)}
+.subnav-item.on{background:var(--pri-l);color:var(--pri-d);font-weight:600}
+.subnav .gap{width:8px}
+.appbody{padding:16px 22px 60px;max-width:1400px;margin:0 auto}
+
+/* ===================== 通用组件 ===================== */
+h1.pt{font-size:19px;font-weight:700;letter-spacing:-.3px}
+.psub{font-size:12px;color:var(--mut);margin-top:4px}
+.phead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.card.np{padding:0;overflow:hidden}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.ct{font-size:13.5px;font-weight:700}
+.ct small{font-size:11px;font-weight:400;color:var(--mut);margin-left:7px}
+.i{width:16px;height:16px;border-radius:50%;border:1px solid #C6D3CF;color:#8FA39E;font-size:10px;font-style:italic;font-family:Georgia,serif;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 16px;transition:.12s}
+.i:hover{background:var(--pri-l);color:var(--pri-d);border-color:var(--pri)}
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:600;white-space:nowrap}
+.pill.g{background:var(--pri-l);color:var(--pri-d)}
+.pill.y{background:var(--warn-l);color:#8A5A05}
+.pill.r{background:var(--dan-l);color:var(--dan)}
+.pill.b{background:var(--blue-l);color:var(--blue)}
+.pill.p{background:var(--purple-l);color:var(--purple)}
+.pill.n{background:#F0F3F2;color:var(--mut)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;transition:.15s}
+.kpi:hover{box-shadow:0 4px 14px rgba(30,60,54,.07)}
+.kpi.click{cursor:pointer}
+.kpi.click:hover{border-color:var(--pri)}
+.kpi .k{font-size:11.5px;color:var(--mut);display:flex;align-items:center;gap:5px}
+.kpi .v{font-size:25px;font-weight:700;letter-spacing:-.8px;margin:7px 0 3px;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+.kpi .c{font-size:10.5px;color:var(--mut);line-height:1.45}
+.kpi .c.y{color:#8A5A05}.kpi .c.r{color:var(--dan)}.kpi .c.g{color:var(--pri)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:11px;color:var(--mut);font-weight:600;padding:9px 10px;background:#FBFCFB;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--line2);vertical-align:middle}
+tbody tr:hover{background:#F9FBFA}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.sum td{background:#F7FAF9;font-weight:700;border-top:1.5px solid var(--line)}
+.lk{color:var(--pri);font-weight:600;cursor:pointer;font-size:12px}
+.lk:hover{text-decoration:underline}
+.hint{font-size:11px;color:var(--mut);line-height:1.65}
+.note{background:#FBFCFB;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:11.5px;color:#5E6E6A;line-height:1.65}
+.note.y{background:var(--warn-l);border-color:#F2E1C0;color:#8A5A05}
+.note.r{background:var(--dan-l);border-color:#F0CDC8;color:#8A2E22}
+.note.b{background:var(--blue-l);border-color:#D3E2F3;color:#22527F}
+.note.g{background:var(--pri-l);border-color:#CBE0DA;color:var(--pri-d)}
+.bar{display:flex;height:26px;border-radius:6px;overflow:hidden;font-size:10px;color:#fff;font-weight:600;margin:8px 0 6px}
+.bar div{display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:8px 15px;font-size:12.5px;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap}
+.tab:hover{color:var(--pri)}
+.tab.on{color:var(--pri-d);font-weight:600;border-bottom-color:var(--pri)}
+.btn{font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:7px;border:1px solid var(--pri);background:var(--pri);color:#fff;cursor:pointer;transition:.12s;white-space:nowrap}
+.btn:hover{background:var(--pri-d)}
+.btn.gh{background:#fff;color:var(--pri)}
+.btn.gh:hover{background:var(--pri-l)}
+.btn.sm{padding:4px 10px;font-size:11.5px;border-radius:6px}
+.btn.dn{background:var(--dan);border-color:var(--dan)}
+.btn.dn:hover{background:#A93226}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.acc{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;overflow:hidden}
+.acc .ah{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;cursor:pointer;font-size:12.5px;font-weight:600;background:#FBFCFB;gap:8px}
+.acc .ab{display:none;padding:0 13px 12px;font-size:12px;line-height:1.75;color:#3E4C49}
+.acc.open .ab{display:block}
+.acc .ar{font-size:10px;color:var(--mut);transition:.2s}
+.acc.open .ar{transform:rotate(90deg)}
+
+/* 床位图 */
+.bedwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:6px}
+.bed{height:48px;border-radius:7px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;cursor:pointer;transition:.12s;line-height:1.25}
+.bed:hover{transform:translateY(-2px);box-shadow:0 3px 9px rgba(30,60,54,.14);border-color:var(--pri)}
+.bed .bn{font-weight:700;font-size:10.5px}
+.bed.live{background:#DFF0EB;border-color:#A9D3C9;color:var(--pri-d)}
+.bed.res{background:#FDF3E3;border-color:#EFD9B0;color:#8A5A05}
+.bed.idle{background:#fff;color:#9AAA9F}
+.bed.maint{background:#EDF1EF;border-color:#D5DEDA;color:#8A9A95}
+.bed.iso{background:#FBEDE9;border-color:#F0CFC7;color:#9B4436}
+.legend{display:flex;gap:13px;font-size:11px;color:var(--mut);margin-top:10px;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+/* 评估双标 */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative}
+.rpt{border-radius:10px;padding:14px 16px}
+.rpt.mz{background:var(--pri-l);border:1px solid #CBE0DA}
+.rpt.lis{background:var(--warn-l);border:1px solid #F0E2C6}
+.rpt .tg{font-size:10.5px;font-weight:600;opacity:.75;letter-spacing:.3px}
+.rpt .lv{font-size:21px;font-weight:700;margin:7px 0 5px;letter-spacing:-.5px}
+.rpt.mz .lv{color:var(--pri-d)}.rpt.lis .lv{color:#8A5A05}
+.rpt .why{font-size:11.5px;line-height:1.6;color:#4E5E5A}
+.dim{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;font-size:11px}
+.dim div{background:rgba(255,255,255,.65);border-radius:6px;padding:6px 8px;display:flex;justify-content:space-between}
+.duallink{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border:1px solid var(--line);border-radius:16px;padding:5px 11px;font-size:10.5px;color:var(--mut);white-space:nowrap;box-shadow:0 2px 8px rgba(30,60,54,.08);z-index:2}
+.rule{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:8px;margin-bottom:7px;cursor:pointer;font-size:12px;background:#fff;transition:.12s}
+.rule.on{border-color:var(--warn);background:var(--warn-l)}
+.rule:hover{border-color:#E0C896}
+.chk{width:15px;height:15px;border-radius:4px;border:1.5px solid #C9D4D1;flex:0 0 15px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;margin-top:1px}
+.rule.on .chk{background:var(--warn);border-color:var(--warn)}
+.score-btns{display:inline-flex;gap:3px}
+.sb{width:22px;height:20px;border-radius:5px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:11px;color:var(--mut);cursor:pointer;transition:.1s}
+.sb:hover{border-color:var(--pri);color:var(--pri-d)}
+.sb.on{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:700}
+
+/* 支付方卡 */
+.paycards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;border-top:3px solid var(--pri);transition:.15s}
+.pc:hover{box-shadow:0 4px 14px rgba(30,60,54,.08)}
+.pc.s{border-top-color:var(--pri)}
+.pc.l{border-top-color:var(--warn)}
+.pc.m{border-top-color:var(--blue)}
+.pc.y{border-top-color:var(--purple)}
+.pc .t{font-size:11.5px;color:var(--mut)}
+.pc .v{font-size:20px;font-weight:700;margin:5px 0 2px;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.pc .p{font-size:10.5px;color:var(--mut)}
+
+/* 弹层 / toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,12px);background:rgba(24,38,35,.94);color:#fff;font-size:12.5px;padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:.25s;z-index:300;max-width:560px;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.mask{position:fixed;inset:0;background:rgba(20,34,31,.45);display:none;align-items:center;justify-content:center;z-index:400}
+.mask.on{display:flex}
+.modal{background:#fff;border-radius:12px;padding:20px 22px;width:580px;max-height:78vh;overflow-y:auto;box-shadow:0 20px 50px rgba(10,30,25,.3)}
+.modal h3{font-size:15.5px;margin-bottom:5px}
+.modal .st{font-size:11px;color:var(--mut);margin-bottom:14px}
+.modal .mb{font-size:12.5px;line-height:1.85;color:#3E4C49}
+.modal .mft{margin-top:16px;text-align:right;display:flex;gap:8px;justify-content:flex-end}
+.field-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line2);font-size:12.5px;gap:12px}
+.field-row:last-child{border-bottom:none}
+.field-row .fk{color:#5E6E6A;flex:0 0 auto}
+.field-row input,.field-row select{width:180px}
+.tl{position:relative;padding-left:17px}
+.tl::before{content:'';position:absolute;left:4px;top:5px;bottom:5px;width:1.5px;background:var(--line)}
+.tl .ti{position:relative;padding-bottom:11px}
+.tl .ti::before{content:'';position:absolute;left:-17px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--pri);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--pri)}
+.tl .ti.gray::before{background:#B9CCC6;box-shadow:0 0 0 1.5px #B9CCC6}
+.tl .ti.red::before{background:var(--dan);box-shadow:0 0 0 1.5px var(--dan)}
+.filter-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.filter-bar select,.filter-bar input{font-family:inherit;font-size:12.5px;padding:7px 10px;border:1px solid var(--line);border-radius:7px;outline:none;background:#fff}
+.filter-bar input{width:200px}
+.filter-bar input:focus,.filter-bar select:focus{border-color:var(--pri)}
+.assess-form{max-height:620px;overflow-y:auto;padding-right:4px}
+.af-group{margin-bottom:10px}
+.af-gt{font-size:11.5px;font-weight:700;color:var(--pri-d);background:var(--pri-l);border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;justify-content:space-between}
+.af-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-bottom:1px solid var(--line2);font-size:12px}
+.af-item:hover{background:#FAFCFB}
+.af-item .an{flex:1}
+.af-item .am{font-size:10.5px;color:var(--mut)}
+.badge-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.avatar-s{width:26px;height:26px;border-radius:50%;background:var(--pri-l);color:var(--pri-d);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:7px;vertical-align:middle}
+.empty-tip{padding:26px;text-align:center;color:var(--mut);font-size:12.5px}
+.mini-bar{display:flex;align-items:center;gap:8px;font-size:11px;margin-bottom:5px}
+.mini-bar .mb-l{width:88px;color:var(--mut);text-align:right;flex:0 0 88px}
+.mini-bar .mb-t{flex:1;background:#F1F5F3;border-radius:3px;height:13px;overflow:hidden}
+.mini-bar .mb-t div{height:100%;background:var(--pri);border-radius:3px}
+.mini-bar .mb-v{width:52px;font-variant-numeric:tabular-nums;font-weight:600}
+</style>
+<style id="brand-refine">
+/* ===================== 品牌精修层 · 暖纸美学 ===================== */
+/* 字体体系：标题 Poppins 风格，正文点缀 Lora 衬线（中文回退黑体） */
+h1.pt,.topnav .brand,.stnav .brand,.sec-head .st,.login-card .lg,.modal h3,.hero h1,.sfooter h5,.svc h3,.flow .ft{
+  font-family:"Poppins","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:-.2px}
+.kpi .v,.hstats .hv,.pc .v,.rpt .lv{font-family:"Poppins","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-variant-numeric:tabular-nums}
+.hero p.sub,.sec-head .sd,.about-p{font-family:"Lora",Georgia,"PingFang SC","Microsoft YaHei",serif}
+
+/* 主操作色：祥和橙（按钮/焦点/激活态），品牌绿保留用于导航与状态 */
+.btn,.btn-login{background:var(--acc);border-color:var(--acc)}
+.btn:hover,.btn-login:hover{background:var(--acc-d)}
+.btn.dn{background:var(--dan);border-color:var(--dan)}
+.btn.dn:hover{background:#A93226}
+.btn.gh{background:#fff;color:var(--ink);border-color:#D8D5CB}
+.btn.gh:hover{background:#F1EFE8;color:var(--ink)}
+.tnav-item:hover{color:var(--ink)}
+.tnav-item.on{color:var(--ink);border-bottom-color:var(--acc)}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);border-bottom-color:var(--acc)}
+.subnav-item.on{background:var(--acc-l);color:var(--acc-d)}
+.role-chip:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-l)}
+.fld input:focus,select:focus,.filter-bar input:focus,.filter-bar select:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(217,119,87,.12)}
+.who .av{background:var(--acc)}
+.i:hover{background:var(--acc-l);color:var(--acc-d);border-color:var(--acc)}
+.sec-head .bar-c{background:var(--acc)}
+.stnav{background:rgba(250,249,245,.9)}
+.stnav .nl:hover{color:var(--ink);border-bottom-color:var(--acc)}
+.svc:hover{border-color:#D8D3C4;box-shadow:var(--sh-md)}
+.news:hover,.tm:hover{box-shadow:var(--sh-md)}
+
+/* 卡片质感：暖边框 + 层次阴影 */
+.card,.kpi,.pc,.modal{border-radius:12px;box-shadow:var(--sh-sm)}
+.kpi:hover,.pc:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+.login-card{border-radius:18px}
+.bed{border-radius:8px}
+.topnav{background:rgba(255,255,255,.88);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.subnav{background:rgba(255,255,255,.82);backdrop-filter:blur(10px)}
+
+/* 表格：暖色表头 + 斑马纹 */
+th{background:#F7F5EE;font-size:10.5px;letter-spacing:.3px}
+tbody tr:nth-child(even){background:rgba(141,134,120,.035)}
+tbody tr:hover{background:#F6F3EB}
+
+/* 氛围：官网 Hero / 登录页 深墨→松绿渐变 + 细噪点 */
+.hero{background:linear-gradient(135deg,#141413 0%,#1B4A3E 42%,#245F51 72%,#2E7D6B 100%)}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.login{background:linear-gradient(135deg,#141413 0%,#1B4A3E 45%,#2E7D6B 100%)}
+.login::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23m)'/%3E%3C/svg%3E")}
+.sfooter{background:#141413}
+.toast{background:rgba(20,20,19,.94)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="toast" id="toast"></div>
+<div class="mask" id="mask"><div class="modal">
+  <h3 id="mTitle"></h3><div class="st" id="mSub"></div>
+  <div class="mb" id="mBody"></div>
+  <div class="mft"><button class="btn gh sm" id="mCancel" style="display:none" onclick="closeModal()">取消</button>
+  <button class="btn sm" onclick="closeModal()">知道了</button></div>
+</div></div>
+<script>
+/* ============================================================
+   一、静态数据（全部集中，保证各页面数字一致）
+   ============================================================ */
+const ORGS = {
+  group:{name:'集团总部', short:'集团', type:'集团', approved:720, filed:684, oper:668, live:596,
+         reserv:0, idle:0, maint:0, iso:0, star:'', lis:true, yb:true},
+  xh:{name:'新濠院区', short:'新濠', type:'养老院', approved:400, filed:380, oper:372, live:348,
+      reserv:6, idle:18, maint:5, iso:3, star:'三星级', lis:true, yb:true},
+  xz:{name:'孝庄护理中心', short:'孝庄', type:'护理院', approved:180, filed:172, oper:170, live:156,
+      reserv:3, idle:8, maint:2, iso:1, star:'四星级', lis:true, yb:true},
+  zf:{name:'纸坊街养老综合体', short:'纸坊街', type:'综合体', approved:96, filed:92, oper:88, live:64,
+      reserv:2, idle:20, maint:1, iso:1, star:'二星级', lis:true, yb:false},
+  ms:{name:'庙山社区宜家养老院', short:'庙山', type:'养老院', approved:44, filed:40, oper:38, live:28,
+      reserv:1, idle:8, maint:1, iso:0, star:'一星级', lis:false, yb:false}
+};
+const GROUP_DIS = {light:148, mid:186, heavy:172, total:68};
+const METRICS = {
+  xh:{unemp:11, costRate:52, sat:94, newIn:23, out:6, fall:1, ulcer:0, todo:7, income:286400, service:1842, ontime:96.2, closed:82},
+  xz:{unemp:4, costRate:61, sat:91, newIn:9, out:3, fall:2, ulcer:1, todo:5, income:198600, service:1210, ontime:94.8, closed:75},
+  zf:{unemp:8, costRate:55, sat:93, newIn:5, out:1, fall:0, ulcer:0, todo:4, income:86400, service:520, ontime:95.5, closed:88},
+  ms:{unemp:2, costRate:58, sat:90, newIn:2, out:1, fall:0, ulcer:0, todo:2, income:42200, service:186, ontime:93.0, closed:80},
+  group:{unemp:25, costRate:55, sat:93, newIn:39, out:11, fall:3, ulcer:1, todo:18, income:613600, service:3758, ontime:95.6, closed:82}
+};
+const PAY = {
+  xh:{self:168300, lis:86400, mz:26900, yb:4800, total:286400, recv:241200, owe:45200,
+      voucher:62400, voucherTimes:1240, voucherPool:38600, voucherExpired:1200}
+};
+/* 床位图：由老人档案实时生成（A 区 4 层 ×10 = 40 床样例），与档案床位号严格一致 */
+const BED_EXTRA = {
+  'A-303-10':{state:'res',  note:'已签约未入住（预计 11-12 入住）'},
+  'A-304-1' :{state:'res',  note:'已签约未入住（预计 11-20 入住）'},
+  'A-304-2' :{state:'iso',  note:'流感防控临时隔离间（11-03 起）'},
+  'A-304-3' :{state:'maint',note:'墙面粉刷维修（预计 11-12 恢复）'},
+  'A-304-4' :{state:'maint',note:'卫生间改造（预计 11-25 恢复）'}
+};
+function buildBedmap(){
+  const map = [];
+  for(let f=1;f<=4;f++) for(let r=1;r<=10;r++){
+    const no = `A-30${f}-${r}`;
+    const e = ELDERS.find(x=>x.bed===no);
+    if(e){ map.push({no, floor:f, state: e.status==='退住'?'idle':'live', eid:e.id, name:e.name}); }
+    else{ const x = BED_EXTRA[no]||{state:'idle'}; map.push({no, floor:f, state:x.state, eid:'', name:'', note:x.note||''}); }
+  }
+  return map;
+}
+/* 评估 26 条目（国标 GB/T 42195-2022 采集层，scope: BOTH/MZ/LIS） */
+const ASSESS_ITEMS = [
+  {g:'自理能力',code:'进食',s:1,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'洗澡',s:0,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'修饰',s:2,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'穿衣',s:1,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'大便控制',s:2,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'小便控制',s:2,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'如厕',s:0,max:4,scope:'BOTH'},
+  {g:'自理能力',code:'床椅转移',s:4,max:4,scope:'BOTH'},
+  {g:'基础运动',code:'平地行走',s:1,max:4,scope:'BOTH'},
+  {g:'基础运动',code:'上下楼梯',s:2,max:3,scope:'MZ'},
+  {g:'基础运动',code:'站立',s:3,max:4,scope:'BOTH'},
+  {g:'基础运动',code:'坐起',s:0,max:4,scope:'BOTH'},
+  {g:'精神状态',code:'认知功能',s:2,max:4,scope:'BOTH'},
+  {g:'精神状态',code:'攻击行为',s:1,max:1,scope:'BOTH'},
+  {g:'精神状态',code:'抑郁症状',s:1,max:1,scope:'BOTH'},
+  {g:'精神状态',code:'意识水平',s:1,max:2,scope:'LIS'},
+  {g:'精神状态',code:'痴呆表现',s:1,max:4,scope:'BOTH'},
+  {g:'精神状态',code:'幻觉妄想',s:3,max:4,scope:'MZ'},
+  {g:'精神状态',code:'情绪',s:2,max:4,scope:'MZ'},
+  {g:'精神状态',code:'行为',s:1,max:4,scope:'MZ'},
+  {g:'精神状态',code:'睡眠',s:2,max:4,scope:'MZ'},
+  {g:'感知与社会参与',code:'视力',s:2,max:4,scope:'BOTH'},
+  {g:'感知与社会参与',code:'听力',s:2,max:4,scope:'BOTH'},
+  {g:'感知与社会参与',code:'沟通交流',s:1,max:4,scope:'BOTH'},
+  {g:'感知与社会参与',code:'社会参与',s:1,max:4,scope:'MZ'},
+  {g:'感知与社会参与',code:'角色活动',s:0,max:4,scope:'MZ'}
+];
+const CITIES = {
+  wh:{name:'武汉', build:'8,000 元/床', op:'200 元/床/月', care:'300 元/人/月',
+      emp:'70%', res:'50%', cap:'上年度居民可支配收入 50%',
+      w1:'0.55', w2:'0.30', w3:'0.15', flow:'3 级 · 机构 → 区民政 → 市民政',
+      voucherRate:'50%（居家）/ 40%（机构）', voucherCap:'500 元/人/月'},
+  jm:{name:'荆门', build:'6,000 元/床', op:'150 元/床/月', care:'260 元/人/月',
+      emp:'70%', res:'55%', cap:'上年度居民可支配收入 45%',
+      w1:'0.50', w2:'0.35', w3:'0.15', flow:'2 级 · 机构 → 市医保局',
+      voucherRate:'45%（居家）/ 35%（机构）', voucherCap:'420 元/人/月'}
+};
+
+/* ---- 老人主档（30 条，新濠院区）---- */
+/* [id,姓名,性别,年龄,床位,入住日期,民政评估,长护险,救助类型,服务券,状态,护理员,家属联系人,风险标签,下次复评] */
+const ELDERS_RAW = [
+  ['E2026-0001','张桂芬','女',78,'A-302-1','2026-10-03','重度失能','3 级','自费','否','在住','王芳','李萍（女儿）1390716****','压疮 / 跌倒 / 吞咽','2027-10-04'],
+  ['E2026-0002','李长海','男',81,'A-303-2','2025-06-18','中度失能','2 级','特困供养','否','在住','陈慧','李强（侄子）1370716****','营养不良','2026-06-17'],
+  ['E2026-0003','王秀英','女',76,'A-302-2','2026-08-22','重度失能','3 级','自费','是','在住','赵秀兰','王军（儿子）1580716****','跌倒','2026-08-21'],
+  ['E2026-0004','刘桂兰','女',83,'A-302-4','2025-11-15','重度失能','4 级','低保','是','在住','孙玉梅','刘芳（女儿）1360716****','跌倒 / 走失','2026-11-20'],
+  ['E2026-0005','周建国','男',79,'A-303-4','2026-05-09','重度失能','4 级','自费','是','在住','钱进','郑淑芬（妻子）1590716****','压疮 / 约束具','2026-11-28'],
+  ['E2026-0006','陈国强','男',85,'A-301-2','2025-09-30','中度失能','2 级','自费','否','在住','吴海涛','陈斌（儿子）1860716****','高血压','2025-09-29'],
+  ['E2026-0007','赵德明','男',88,'A-301-3','2024-12-05','完全失能','5 级','特困供养','否','在住','钱进','—（街道对接）','压疮 / 认知症','2026-11-30'],
+  ['E2026-0008','孙秀珍','女',80,'A-302-6','2026-03-14','中度失能','2 级','低保边缘','否','在住','冯春花','孙涛（儿子）1350716****','—','2026-03-13'],
+  ['E2026-0009','吴淑芳','女',74,'A-303-3','2026-06-28','轻度失能','3 级','自费','否','在住','王芳','吴倩（女儿）1880716****','吞咽 / 营养','2026-06-27'],
+  ['E2026-0010','郑海涛','男',77,'A-301-5','2025-08-19','中度失能','2 级','自费','否','在住','沈月华','郑鹏（儿子）1500716****','糖尿病','2025-08-18'],
+  ['E2026-0011','冯玉梅','女',82,'A-301-4','2024-10-11','重度失能','3 级','自费','是','在住','赵秀兰','冯蕾（女儿）1330716****','跌倒','2024-10-10'],
+  ['E2026-0012','何志强','男',73,'A-301-6','2026-09-08','轻度失能','1 级','自费','否','在住','郑晓婷','何蓉（女儿）1770716****','—','2026-09-07'],
+  ['E2026-0013','许桂香','女',86,'A-302-5','2025-04-22','完全失能','4 级','特困供养','否','在住','孙玉梅','—（街道对接）','压疮 / 难免性','2025-04-21'],
+  ['E2026-0014','邓国强','男',71,'A-303-6','2026-10-26','能力完好','0 级','自费','否','在住','吴国栋','邓静（女儿）1550716****','—','2026-10-25'],
+  ['E2026-0015','曹秀兰','女',79,'A-302-7','2026-02-17','中度失能','3 级','低保','是','在住','冯春花','曹阳（儿子）1340716****','跌倒','2026-02-16'],
+  ['E2026-0016','彭建平','男',84,'A-303-5','2025-07-03','重度失能','4 级','自费','否','在住','钱进','彭莉（女儿）1820716****','压疮 / 约束具','2025-07-02'],
+  ['E2026-0017','苏凤英','女',75,'A-301-8','2026-07-21','轻度失能','1 级','自费','否','在住','郑晓婷','苏敏（儿子）1890716****','—','2026-07-20'],
+  ['E2026-0018','蒋大伟','男',80,'A-301-7','2024-11-28','中度失能','2 级','自费','否','在住','沈月华','蒋涛（儿子）1380716****','高血压','2024-11-27'],
+  ['E2026-0019','韩玉兰','女',88,'A-303-1','2025-03-30','重度失能','3 级','低保','否','在住','王芳','韩磊（儿子）1560716****','吞咽','2025-03-29'],
+  ['E2026-0020','沈国华','男',76,'A-301-9','2026-04-15','轻度失能','2 级','自费','否','在住','吴国栋','沈虹（女儿）1310716****','—','2026-04-14'],
+  ['E2026-0021','杨秀云','女',72,'A-303-8','2026-11-01','能力完好','0 级','自费','否','在住','郑晓婷','杨帆（儿子）1870716****','—','2027-11-01'],
+  ['E2026-0022','傅志刚','男',82,'A-301-1','2025-05-26','重度失能','5 级','特困供养','否','在住','陈慧','—（街道对接）','压疮 / 认知症 / 约束具','2025-05-25'],
+  ['E2026-0023','朱桂英','女',77,'A-302-3','2026-01-09','中度失能','2 级','自费','否','在住','孙玉梅','朱峰（儿子）1390728****','—','2026-01-08'],
+  ['E2026-0024','秦建华','男',69,'A-303-7','2026-10-12','轻度失能','1 级','自费','否','在住','吴国栋','秦岚（女儿）1520716****','—','2026-10-11'],
+  ['E2026-0025','尤秀华','女',83,'A-302-8','2025-09-07','重度失能','3 级','低保边缘','是','在住','王芳','尤刚（儿子）158027****','跌倒 / 骨折史','2025-09-06'],
+  ['E2026-0026','袁德海','男',86,'A-303-9','2026-08-30','完全失能','5 级','自费','否','在住','陈慧','袁泉（儿子）1360728****','压疮 / 认知症','2026-08-29'],
+  ['E2026-0027','吕玉珍','女',75,'A-302-10','2026-09-18','轻度失能','2 级','自费','否','请假','赵秀兰','吕方（儿子）1850716****','—','2026-09-17'],
+  ['E2026-0028','雷建强','男',78,'B-202-1','2025-02-14','中度失能','3 级','自费','否','退住','—','雷鸣（儿子）1370716****','—','2026-02-13'],
+  ['E2026-0029','聂秀芳','女',81,'A-302-9','2024-08-23','重度失能','4 级','低保','是','在住','沈月华','聂海（儿子）1300716****','跌倒 / 走失','2026-08-22'],
+  ['E2026-0030','汤国平','男',74,'A-301-10','2026-05-05','轻度失能','1 级','自费','否','在住','郑晓婷','汤雪（女儿）1830716****','—','2026-05-04']
+].map(r=>({id:r[0],name:r[1],sex:r[2],age:r[3],bed:r[4],inDate:r[5],mz:r[6],lis:r[7],
+  aid:r[8],voucher:r[9],status:r[10],carer:r[11],family:r[12],risk:r[13],reDate:r[14]}));
+const ELDERS = ELDERS_RAW;
+
+/* 5 位主数据的完整档案 */
+const ELDER_DETAIL = {
+  'E2026-0001':{
+    idcard:'4201**1948****0324', birth:'1948-02-14', origin:'湖北武汉', edu:'初中', belief:'无',
+    height:'156cm', weight:'46kg', bmi:'18.9（偏瘦）',
+    history:'高血压 12 年（药物控制）；陈旧性腰椎压缩骨折（2023）；白内障术后',
+    allergy:'青霉素（皮试 +）', diet:'普通膳食 → 糊状餐（防误吸）', swallow:'II 级（中度吞咽障碍）',
+    tag:'压疮 / 跌倒 / 吞咽', deposit:'¥20,000', prepaid:'1 个月',
+    assessList:[
+      {date:'2026-10-05', type:'入住评估', mz:'重度失能', lis:'3 级（重度Ⅰ级）', by:'王芳 / 周琳', exp:'2027-10-04', note:'总分 41 分，落在 30–45 区间；长护险 17 项计 58 分'},
+      {date:'2024-06-15', type:'入住评估（孝庄）', mz:'中度失能', lis:'2 级（中度失能）', by:'王芳 / 李红', exp:'2025-06-14', note:'总分 52 分'}
+    ],
+    carePlan:[
+      ['翻身叩背 + 受压部位检查','每 2 小时','护理员',2],['协助进食（糊状餐 · 防误吸）','3 次/日','护理员',3],
+      ['协助服药','2 次/日','护士',2],['擦浴（床上）','2 次/周','护理员',2],
+      ['认知功能训练','3 次/周','康复师',3],['测量血压','2 次/日','护士',1]],
+    execRec:[
+      ['11-05 09:00','翻身叩背','王芳','实时'],['11-05 08:22','协助进食','王芳','实时'],
+      ['11-05 08:00','测量血压','周琳','实时'],['11-04 21:10','擦浴（床上）','王芳','补记'],
+      ['11-04 20:05','协助服药','周琳','实时']],
+    family:[
+      ['李萍','女儿','1390716****','第一联系人 · 紧急联系人'],
+      ['张远','儿子','1350728****','第二联系人'],
+      ['李国栋','女婿','1580728****','探访登记 2 次/月']],
+    visitRec:[['11-02 14:20','李萍','探视 40 分钟 · 反映母亲近期胃口好'],['10-26 10:05','张远','探视 25 分钟']],
+    risks:[
+      {date:'2026-10-18', type:'跌倒（Ⅱ 级）', place:'房间卫生间', desc:'如厕后起身滑倒，臀部着地，无骨折',
+        handle:'现场评估 + 48h 观察，通知家属；卫生间加装扶手与防滑垫', report:'已 24h 内上报区民政', assess:'已触发复评，结论维持 3 级'},
+      {date:'2026-09-30', type:'压疮风险（预警）', place:'—', desc:'骶尾部 I 度压红',
+        handle:'翻身频次 2h→1.5h，水垫 + 减压器具，每周照片对比', report:'院内台账留档', assess:'—'}],
+    todos:[
+      ['评估','下次复评 2027-10-04（提前 30 天提醒）','计划'],
+      ['护理','观察右髋部隐痛（10-18 跌倒后）','进行中'],
+      ['费用','11 月账单已生成，家属确认中','待确认']],
+    bill:{bed:4200, care:3800, meal:900, med:320, lis:2660, voucher:0, status:'已结算'}
+  },
+  'E2026-0002':{
+    idcard:'4201**1945****0908', birth:'1945-09-08', origin:'湖北武汉', edu:'小学', belief:'无',
+    height:'170cm', weight:'52kg', bmi:'18.0（偏瘦）',
+    history:'特困供养人员；冠心病 8 年；前列腺增生', allergy:'无已知过敏',
+    diet:'软食', swallow:'0 级（正常）', tag:'营养不良',
+    deposit:'¥0（政府兜底）', prepaid:'—',
+    assessList:[
+      {date:'2025-06-20', type:'入住评估', mz:'中度失能', lis:'2 级（中度失能）', by:'王芳 / 周琳', exp:'2026-06-17', note:'总分 58 分'},
+      {date:'2026-06-18', type:'年度复评', mz:'中度失能', lis:'2 级（中度失能）', by:'王芳 / 周琳', exp:'2027-06-17', note:'总分 55 分，等级维持'}],
+    carePlan:[
+      ['协助进食 + 营养加餐','3 次/日 + 加餐','护理员',3],['协助如厕','按需','护理员',2],
+      ['协助服药','2 次/日','护士',2],['散步陪伴（防跌倒）','1 次/日','护理员',1]],
+    execRec:[
+      ['11-05 08:30','协助进食','陈慧','实时'],['11-05 08:00','协助服药','周琳','实时'],
+      ['11-04 19:40','协助如厕','陈慧','实时'],['11-04 15:30','散步陪伴','陈慧','实时']],
+    family:[['李强','侄子','1370716****','第一联系人 · 每月探视']],
+    visitRec:[['10-20 15:10','李强','探视 50 分钟 · 送换季衣物']],
+    risks:[{date:'2026-08-12', type:'营养不良（预警）', place:'—', desc:'体重 3 个月下降 2.1kg（↓3.9%）',
+      handle:'营养师会诊：每日加餐 + 口服营养补充剂', report:'院内台账', assess:'—'}],
+    todos:[['费用','民政兜底季度结算 10 月待申报','待办'],['护理','本月体重监测已达标','已闭环']],
+    bill:{bed:3600, care:3200, meal:900, med:180, lis:0, voucher:0, status:'未结算', mzPay:3200}
+  },
+  'E2026-0004':{
+    idcard:'4201**1943****0712', birth:'1943-07-12', origin:'湖北武汉', edu:'文盲', belief:'佛教',
+    height:'154cm', weight:'49kg', bmi:'20.7',
+    history:'阿尔茨海默病（ICD-10 F00）3 年；骨质疏松；2025 年股骨颈骨折（已愈）', allergy:'磺胺类',
+    diet:'普通膳食', swallow:'I 级（轻度）', tag:'跌倒 / 走失',
+    deposit:'¥15,000', prepaid:'2 个月',
+    assessList:[
+      {date:'2025-11-18', type:'入住评估', mz:'重度失能', lis:'3 级（重度Ⅰ级）', by:'王芳 / 周琳', exp:'2026-11-17', note:'总分 38 分'},
+      {date:'2026-05-20', type:'风险事件后复评', mz:'重度失能', lis:'4 级（重度Ⅱ级）', by:'王芳 / 李红', exp:'2026-11-20', note:'近 30 天 2 次走失未遂，按特殊规则提升一级'},
+      {date:'2026-11-20', type:'年度复评（待执行）', mz:'—', lis:'—', by:'待安排', exp:'—', note:'系统已生成待办，距到期 15 天'}],
+    carePlan:[
+      ['定向力支持（防走失）','持续','认知症专员',1],['翻身叩背','每 3 小时','护理员',2],
+      ['协助进食','3 次/日','护理员',3],['协助服药','2 次/日','护士',2],['腕带 + 门磁核查','每班','护理员',1]],
+    execRec:[
+      ['11-05 09:15','定向力支持','王芳','实时'],['11-05 08:20','协助进食','孙玉梅','实时'],
+      ['11-04 22:00','腕带 + 门磁核查','陈慧','实时'],['11-04 18:45','协助服药','周琳','实时']],
+    family:[['刘芳','女儿','1360716****','第一联系人 · 紧急联系人'],['刘海','儿子','1390728****','每周探视']],
+    visitRec:[['11-03 16:30','刘海','探视 60 分钟'],['10-27 10:00','刘芳','探视 35 分钟 · 咨询复评安排']],
+    risks:[
+      {date:'2026-05-11', type:'走失未遂 ×2', place:'B 区花园门', desc:'独自从花园门走出，门磁报警拦截',
+        handle:'升级为专人陪护 + 电子腕带 + 花园门禁加二级认证；触发评估提级', report:'已上报', assess:'长护险 3 级 → 4 级（特殊规则）'},
+      {date:'2026-03-02', type:'跌倒（Ⅰ 级）', place:'走廊', desc:'行走中被轮椅绊倒，软组织挫伤', handle:'冰敷 + 观察；走廊动线整理', report:'已上报', assess:'—'}],
+    todos:[['评估','复评 2026-11-20 到期（15 天），请安排评估员','待办'],['护理','走失风险：电子腕带电量月检','进行中']],
+    bill:{bed:3600, care:3800, meal:900, med:260, lis:3540, voucher:300, status:'部分结算'}
+  },
+  'E2026-0005':{
+    idcard:'4201**1947****0326', birth:'1947-03-26', origin:'湖北武汉', edu:'高中', belief:'无',
+    height:'172cm', weight:'58kg', bmi:'19.6',
+    history:'脑梗后遗症（左侧偏瘫）4 年；骶尾部 III 度压疮（好转中）；糖尿病', allergy:'无已知过敏',
+    diet:'糖尿病膳食', swallow:'I 级（轻度）', tag:'压疮 / 约束具',
+    deposit:'¥20,000', prepaid:'1 个月',
+    assessList:[
+      {date:'2026-05-12', type:'入住评估', mz:'重度失能', lis:'3 级（重度Ⅰ级）', by:'王芳 / 周琳', exp:'2027-05-11', note:'总分 34 分'},
+      {date:'2026-06-30', type:'风险事件后复评', mz:'重度失能', lis:'4 级（重度Ⅱ级）', by:'王芳 / 李红', exp:'2026-11-28', note:'压疮 III 度 + 管路，提升一级'}],
+    carePlan:[
+      ['压疮换药（骶尾部）','1 次/日','护士',1],['翻身 + 减压器具','每 2 小时','护理员',2],
+      ['胰岛素注射（早晚餐前）','2 次/日','护士',2],['被动关节活动','1 次/日','康复师',1],
+      ['约束具评估（必要性复核）','每班','护士',1]],
+    execRec:[
+      ['11-05 09:30','压疮换药','周琳','实时'],['11-05 09:00','翻身 + 减压器具','钱进','实时'],
+      ['11-05 07:50','胰岛素注射','周琳','实时'],['11-04 21:15','约束具评估','周琳','补记']],
+    family:[['郑淑芬','妻子','1590716****','同住安排外 · 每日探视'],['周磊','儿子','1880728****','每周探视']],
+    visitRec:[['11-04 15:00','郑淑芬','陪护 2 小时'],['11-01 09:30','周磊','探视 45 分钟 · 送蛋白粉']],
+    risks:[
+      {date:'2026-06-18', type:'压疮（III 度）', place:'骶尾部', desc:'入住时带入 II 度，6 月进展为 III 度 4×4cm',
+        handle:'伤口专科护士会诊 + 每日换药 + 气垫床；10 月评估创面缩小至 1.5×1.5cm', report:'已上报卫健/民政', assess:'长护险 3 级 → 4 级'},
+      {date:'2026-10-08', type:'非计划拔管（未遂）', place:'房间', desc:'夜间试图拔除胃管，约束具拦截',
+        handle:'约束具必要性每班复核并记录；家属沟通签署知情同意', report:'院内台账', assess:'—'}],
+    todos:[['评估','复评 2026-11-28 到期（23 天）','待办'],['护理','压疮创面本周照片对比（11-08）','进行中'],['护理','约束具使用超 7 天需复核必要性','今日']],
+    bill:{bed:4200, care:4200, meal:900, med:860, lis:3540, voucher:450, status:'未结算'}
+  },
+  'E2026-0003':{
+    idcard:'4201**1950****0519', birth:'1950-05-19', origin:'湖北武汉', edu:'初中', belief:'无',
+    height:'158cm', weight:'55kg', bmi:'22.0',
+    history:'帕金森病 5 年；白内障（未手术）', allergy:'无已知过敏',
+    diet:'普通膳食', swallow:'I 级（轻度）', tag:'跌倒',
+    deposit:'¥20,000', prepaid:'1 个月',
+    assessList:[
+      {date:'2026-08-25', type:'入住评估', mz:'重度失能', lis:'3 级（重度Ⅰ级）', by:'王芳 / 周琳', exp:'2027-08-24', note:'总分 36 分'}],
+    carePlan:[
+      ['协助行走（防跌倒）','2 次/日','护理员',2],['协助服药（抗帕金森，严格时间）','4 次/日','护士',4],
+      ['助浴','2 次/周','护理员',2],['认知功能训练','2 次/周','康复师',2]],
+    execRec:[
+      ['11-05 08:10','协助服药','周琳','实时'],['11-04 20:30','协助行走','赵秀兰','实时'],
+      ['11-04 14:00','助浴','赵秀兰','实时'],['11-04 08:05','协助服药','周琳','实时']],
+    family:[['王军','儿子','1580716****','第一联系人 · 紧急联系人'],['王霞','女儿','1320728****','每两周探视']],
+    visitRec:[['11-01 10:20','王军','探视 1 小时 · 反映睡眠好转']],
+    risks:[{date:'2026-09-15', type:'跌倒（Ⅰ 级）', place:'床边', desc:'晨起服药前体位性低血压跌坐床边，无损伤',
+      handle:'调整为服药前坐起 5 分钟流程；夜间感应夜灯', report:'已上报', assess:'—'}],
+    todos:[['护理','帕金森药效波动观察记录（本周）','进行中'],['费用','10 月服务券核销凭证补录 1 条','待办']],
+    bill:{bed:4200, care:3800, meal:900, med:240, lis:2660, voucher:300, status:'已结算'}
+  }
+};
+/* 其余老人的通用详情模板 */
+function defaultDetail(e){
+  return {
+    idcard:'4201**' + (1952 + (e.age % 20)) + '****' + (100 + e.age) % 10000,
+    birth:(2026 - e.age) + '-06-15', origin:'湖北武汉', edu:'—', belief:'无',
+    height:'—', weight:'—', bmi:'—',
+    history:'见入住体检报告', allergy:'无已知过敏', diet:'普通膳食', swallow:'—',
+    tag:e.risk || '—', deposit:'¥10,000–20,000', prepaid:'1 个月',
+    assessList:[{date:e.inDate, type:'入住评估', mz:e.mz, lis:e.lis, by:'王芳 / 周琳',
+      exp:e.reDate, note:'详情见评估中心档案'}],
+    carePlan:[['生活照护（按护理等级）','按计划','护理员',2],['生命体征监测','2 次/日','护士',1]],
+    execRec:[['11-05 08:30','晨间照护',(e.carer==='—'?'—':e.carer),'实时'],['11-04 19:00','晚间照护',(e.carer==='—'?'—':e.carer),'实时']],
+    family:[e.family==='—'?['—','—','—','待补充紧急联系人']:e.family.replace(/（/,'（').split(' '),].filter(Boolean).map(x=>Array.isArray(x)?x:[x]),
+    visitRec:[], risks:[], todos:[['评估','按期复评：' + e.reDate,'计划']],
+    bill:{bed:3600, care:3600, meal:900, med:200, lis:0, voucher:e.voucher==='是'?300:0, status:'已结算'}
+  };
+}
+
+/* ---- 护理人员（12 名）---- */
+const CARERS_RAW = [
+  ['C-001','王芳','女',45,'护理中','早班 08:00–20:00',4,'养老护理员（初级）','2027-06-18','131****2468'],
+  ['C-002','陈慧','女',38,'护理中','早班 08:00–20:00',3,'养老护理员（中级）','2028-01-25','135****3692'],
+  ['C-003','赵秀兰','女',49,'护理中','夜班 20:00–08:00',3,'养老护理员（初级）','2026-12-10','138****4571'],
+  ['C-004','孙玉梅','女',42,'护理中','早班 08:00–20:00',3,'养老护理员（初级）','2027-09-03','150****7823'],
+  ['C-005','钱进','男',35,'护理中','早班 08:00–20:00',3,'养老护理员（中级）','2028-03-19','186****9134'],
+  ['C-006','吴海涛','男',31,'护理中','夜班 20:00–08:00',1,'养老护理员（初级）','2027-02-28','159****2068'],
+  ['C-007','冯春花','女',47,'休息','—（本周轮休）',2,'养老护理员（初级）','2027-08-11','137****5390'],
+  ['C-008','郑晓婷','女',27,'护理中','早班 08:00–20:00',5,'养老护理员（初级）','2027-11-30','188****6417'],
+  ['C-009','蒋兰','女',36,'休息','—（本周轮休）',0,'养老护理员（中级）','2028-05-06','133****8752'],
+  ['C-010','沈月华','女',44,'护理中','夜班 20:00–08:00',3,'养老护理员（初级）','2026-11-30','152****0936'],
+  ['C-011','吴国栋','男',39,'护理中','早班 08:00–20:00',2,'培训中（待考证）','—','136****4108'],
+  ['C-012','周琳','女',40,'护理中','白班 08:00–18:00',0,'护士执业证','2027-04-22','189****5623']
+].map(r=>({id:r[0],name:r[1],sex:r[2],age:r[3],status:r[4],shift:r[5],count:r[6],cert:r[7],certExp:r[8],phone:r[9]}));
+const CARERS = CARERS_RAW;
+
+const CARER_EXTRA = {
+  'C-001':{join:'2021-03-15', dept:'A 区 3 层', alert:[['2026-10-18','跌倒事件（张桂芬）','现场评估 + 协助送检 + 记录','合格'],['2026-09-02','噎食预警（韩玉兰）','立即海姆立克备用位观察','合格']],
+    month:{hours:208, ontime:97.4, redo:2.1, service:186}},
+  'C-002':{join:'2022-06-01', dept:'A 区 1 层 / B 区', alert:[['2026-10-09','非计划拔管未遂（袁德海）','及时拦截 + 通知护士','合格']],
+    month:{hours:208, ontime:98.1, redo:1.8, service:172}},
+  'C-003':{join:'2020-09-10', dept:'A 区 2 层', alert:[], month:{hours:224, ontime:95.8, redo:3.4, service:168}},
+  'C-005':{join:'2023-02-20', dept:'B 区 1 层', alert:[['2026-05-11','走失未遂（刘桂兰）','门磁响应 + 截拦','合格']], month:{hours:208, ontime:96.6, redo:2.6, service:158}},
+  'C-011':{join:'2025-04-01', dept:'C 区', alert:[], month:{hours:200, ontime:94.2, redo:4.8, service:120}}
+};
+
+/* ---- 护理条目（全量服务项目表）---- */
+const CARE_ITEMS = [
+  ['LC-001','生活照护','翻身叩背及受压部位检查','每 2 小时','护理员','重度失能及以上','已对码','—','启用'],
+  ['LC-002','生活照护','协助进食（含糊状餐制备）','3 次/日','护理员','中度失能及以上','已对码','—','启用'],
+  ['LC-003','生活照护','床上擦浴','2 次/周','护理员','重度失能及以上','已对码','—','启用'],
+  ['LC-004','生活照护','助浴（含上门）','按需','护理员','轻度及以上','已对码','¥120/次','启用'],
+  ['LC-005','生活照护','协助如厕 / 更换纸尿裤','按需','护理员','中度失能及以上','已对码','—','启用'],
+  ['LC-006','医疗护理','协助服药（含摆药核对）','2 次/日','护士','全等级','已对码','—','启用'],
+  ['LC-007','医疗护理','生命体征监测（血压 / 体温）','2 次/日','护士','全等级','已对码','—','启用'],
+  ['LC-008','医疗护理','胰岛素注射','按医嘱','护士','糖尿病老人','已对码','¥8/次','启用'],
+  ['LC-009','医疗护理','伤口换药（压疮护理）','按医嘱','护士','压疮风险','已对码','¥45/次','启用'],
+  ['LC-010','康复理疗','关节活动度训练（被动）','1 次/日','康复师','失能老人','已对码','—','启用'],
+  ['LC-011','康复理疗','认知功能训练','3 次/周','康复师','认知障碍','已对码','¥30/次','启用'],
+  ['LC-012','康复理疗','吞咽功能训练','2 次/周','康复师','吞咽障碍','未对码','¥35/次','启用'],
+  ['LC-013','认知照护','认知症定向力支持','每日','认知症专员','认知症专区','未对码','—','启用'],
+  ['LC-014','居家服务','助洁（上门 2 小时）','按需','居家护理员','居家老人','已对码','¥160/次','启用'],
+  ['LC-015','居家服务','助餐（送餐上门）','按需','居家护理员','居家老人','已对码','¥25/次','启用']
+].map(r=>({code:r[0],cat:r[1],name:r[2],freq:r[3],role:r[4],level:r[5],lis:r[6],price:r[7],st:r[8]}));
+
+/* ---- 账单（2026-10，新濠院区，展示 12 条 + 汇总）---- */
+const BILLS_RAW = [
+  ['E2026-0001','张桂芬','自费','否',4200,3800,900,320,'长护险 2,660','6,560','已结算'],
+  ['E2026-0002','李长海','特困供养','否',3600,3200,900,180,'民政兜底 3,200','4,680','未结算'],
+  ['E2026-0003','王秀英','自费','是',4200,3800,900,240,'长护险 2,660 · 服务券 300','6,180','已结算'],
+  ['E2026-0004','刘桂兰','低保','是',3600,3800,900,260,'长护险 3,540 · 服务券 300 · 民政 500','1,520','部分结算'],
+  ['E2026-0005','周建国','自费','是',4200,4200,900,860,'长护险 3,540 · 服务券 450','6,170','未结算'],
+  ['E2026-0006','陈国强','自费','否',3600,3200,900,180,'长护险 1,780','6,100','已结算'],
+  ['E2026-0007','赵德明','特困供养','否',3600,4200,900,420,'民政兜底 6,400','2,720','未结算'],
+  ['E2026-0008','孙秀珍','低保边缘','是',3600,3200,900,200,'长护险 1,780 · 服务券 300','5,820','已结算'],
+  ['E2026-0009','吴淑芳','自费','否',4200,3800,900,160,'长护险 2,660','6,400','已结算'],
+  ['E2026-0013','许桂香','特困供养','否',3600,3800,900,380,'民政兜底 5,600','3,080','未结算'],
+  ['E2026-0025','尤秀华','低保边缘','是',3600,3800,900,240,'长护险 2,660 · 服务券 300','5,580','已结算'],
+  ['E2026-0026','袁德海','自费','否',4200,4200,900,520,'长护险 4,420','5,400','部分结算']
+].map(r=>({id:r[0],name:r[1],aid:r[2],voucher:r[3],bed:r[4],care:r[5],meal:r[6],med:r[7],
+  split:r[8],self:r[9],st:r[10]}));
+BILLS_RAW.forEach(b=>{b.total=b.bed+b.care+b.meal+b.med;});
+
+/* ---- 待办 ---- */
+const TODOS = [
+  {id:'T1', title:'护理比超标：B 区 2 层 1:6.8（标准 1:5）', lv:'超期 2 天', c:'r', go:'carers', tag:'护理'},
+  {id:'T2', title:'3 位长者评估将满 12 个月，需复评（刘桂兰 / 周建国 / 赵德明）', lv:'今日到期', c:'y', go:'assess', tag:'评估'},
+  {id:'T3', title:'1 起跌倒事件待 24h 内上报民政（张桂芬 · 10-18）', lv:'今日到期', c:'y', go:'report', tag:'安全'},
+  {id:'T4', title:'长护险 10 月结算材料退回 2 单（缺服务记录）', lv:'已处理 1', c:'n', go:'bill', tag:'结算'},
+  {id:'T5', title:'2 位长者缺紧急联系人（E2026-0007 / E2026-0013）', lv:'待补', c:'n', go:'elders', tag:'档案'},
+  {id:'T6', title:'护理员沈月华健康证 11-30 到期，请安排体检换证', lv:'本周', c:'y', go:'audit', tag:'人事'},
+  {id:'T7', title:'10 月民政补贴申领待提交（截止 11-08）', lv:'今日到期', c:'y', go:'subsidy', tag:'补贴'}
+];
+
+/* ---- 官网：新闻 / 团队 / 资质 ---- */
+const NEWS = [
+  {date:'2026-10-29', cat:'机构动态', t:'新濠院区获评武汉市三星级养老机构', s:'经市民政局综合评审，我院在照护质量、安全管理、智慧化建设三个维度全部达标，正式授牌三星级。',
+   bg:'linear-gradient(135deg,#2E7D6B,#4FA38D)'},
+  {date:'2026-10-18', cat:'政策资讯', t:'长护险政策宣讲会走进社区，失能照护服务受关注', s:'我院联合江夏区医保经办机构开展长护险入户宣讲，现场为 63 户家庭做失能等级初筛与政策解读。',
+   bg:'linear-gradient(135deg,#3F6FB5,#6B93CC)'},
+  {date:'2026-09-26', cat:'机构动态', t:'九九重阳 · 孝亲敬老：集团四院区联动敬老月', s:'重阳节期间开展文艺汇演、义诊、家属开放日等 12 场活动，累计接待家属 480 余人次。',
+   bg:'linear-gradient(135deg,#C98A3D,#DFAE6C)'},
+  {date:'2026-09-05', cat:'质量与安全', t:'孝庄护理中心通过医养结合监测年度检查', s:'护理床位配比、院感管理、病历质量三项核心指标全部合格，获检查组通报表扬。',
+   bg:'linear-gradient(135deg,#8A6FBF,#A78FD4)'}
+];
+const TEAM = [
+  {name:'周明', title:'集团运营院长', cls:'c1', ch:'周', desc:'深耕养老行业 20 年，先后运营 6 家养老机构，主导集团标准化照护体系建设。'},
+  {name:'刘敏', title:'护理部主任', cls:'c2', ch:'刘', desc:'副主任护师，三甲医院护理背景 15 年，带领 42 人护理团队，主抓失能照护与压疮管理。'},
+  {name:'陈志远', title:'医疗总监', cls:'c3', ch:'陈', desc:'内科主治医师，医养结合学科带头人，负责慢病管理、用药安全与双向转诊。'},
+  {name:'王雅琴', title:'社工部部长', cls:'c4', ch:'王', desc:'高级社会工作师，认知症照护专家，设计非药物干预课程 20 余门。'}
+];
+const HONORS = [
+  ['🏅','武汉市三星级养老机构（新濠院区）'],['🏅','四星级养老机构（孝庄护理中心）'],
+  ['🤝','长护险定点护理服务机构'],['🏥','医养结合示范机构'],
+  ['📜','养老服务标准化试点单位'],['💚','家属满意度 93%（2026 年度）']
+];
+const ROLES = {
+  gm:{name:'李静', title:'集团运营总监', av:'李'},
+  dean:{name:'周明', title:'院长', av:'周'},
+  fin:{name:'张敏', title:'财务主管', av:'张'},
+  nurse:{name:'刘敏', title:'护理部主任', av:'刘'},
+  clerk:{name:'王信息员', title:'信息员', av:'王'}
+};
+/* 角色工作台差异化卡片：[指标, 值, 说明, 颜色, 跳转页面] */
+const ROLE_CARDS = {
+  gm:[['本月集团收入','¥61.4 万','环比 +3.2%','g','bill'],['集团在住 / 使用率','596 人 / 89.2%','4 家机构汇总','g','beds'],
+      ['待审批事项','3 件','补贴申请 1 · 用人 2','y','subsidy'],['风险事件（月）','3 起','已全部闭环','g','monitor']],
+  dean:[['今日在院','348 人','请假外出 4 人','g','elders'],['今日待处理','7 件','2 件超期','r','todo'],
+      ['本月新入住 / 退住','23 / 6 人','净增 17','g','dash'],['风险事件（月）','1 起','已上报民政','y','monitor']],
+  fin:[['本月应收 / 已收','¥28.6 万 / 24.1 万','收缴率 84.2%','y','bill'],['欠费','¥4.5 万','涉及 12 户','r','bill'],
+      ['长护险结算（10 月）','¥8.6 万','已受理 · 预计 11-18 到账','g','bill'],['民政补贴待申报','¥2.7 万','截止 11-08','y','subsidy']],
+  nurse:[['护理比达标分区','4 / 5 个','B 区 2 层超标','y','carers'],['复评到期（30 天内）','3 人','刘桂兰 / 周建国 / 赵德明','r','assess'],
+      ['护理员在岗 / 休息','10 / 2 人','排班缺口 1','y','carers'],['风险事件待跟进','2 件','压疮对比照 11-08','y','todo']],
+  clerk:[['上报任务（10 月）','4 张','待提交 1 张','y','report'],['校验结果','9 通过 / 2 提醒 / 1 阻断','1 项阻断待处理','r','report'],
+      ['差异单未闭合','1 条','9 月在住床位 +4','y','report'],['下批截止','11-08','补贴申领','y','report']]
+};
+/* ============================================================
+   二、状态与工具
+   ============================================================ */
+const S = {
+  view:'site',            // site | login | app
+  page:'dash',            // 系统页面 id
+  anchor:'',              // 官网锚点
+  role:'gm',              // 当前登录角色
+  org:'group',            // 当前机构（集团版主视角）
+  city:'wh',
+  tab:{},                 // 页内 tab
+  filters:{elderSearch:'', elderMz:'', elderAid:'', elderStatus:'',
+           billM:'', billAid:'', billSt:'', carerSt:'', personSearch:'', personMz:''},
+  rules:{coma:false, dementia:false, event:true},
+  formScores:null,        // 评估表单分数（深拷贝 ASSESS_ITEMS）
+  formElder:'E2026-0001',
+  elderId:'E2026-0001',   // 当前查看的老人
+  carerId:'C-001',        // 当前查看的护理员
+  policyVer:3
+};
+const $ = s=>document.querySelector(s);
+const nf = n=>n.toLocaleString('en-US');
+const pct = (a,b)=>(b?(a/b*100).toFixed(1):'0.0');
+const esc = s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+let toastTimer=null;
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2200); }
+function openModal(title,sub,body,hasCancel){
+  $('#mTitle').textContent=title; $('#mSub').textContent=sub||''; $('#mBody').innerHTML=body;
+  $('#mCancel').style.display = hasCancel?'':'none';
+  $('#mask').classList.add('on');
+}
+function closeModal(){ $('#mask').classList.remove('on'); }
+$('#mask').addEventListener('click',e=>{ if(e.target.id==='mask') closeModal(); });
+function info(title,sub,body){ return `<span class="i" title="${esc(sub)}" onclick="showInfo('${esc(title)}','${esc(sub)}',\`${esc(body)}\`)">i</span>`; }
+function showInfo(t,s,b){ openModal(t,s,b.replace(/\n/g,'<br>')); }
+function go(page,keepOrg){ S.page=page; if(page!=='dash'&&!keepOrg) {} render(); window.scrollTo(0,0); }
+function jumpTodo(t){ S.page=t.go; render(); window.scrollTo(0,0);
+  toast('已定位到「'+t.tag+'」待办：'+t.title.slice(0,18)+'…'); }
+function credIcons(ev){
+  const all=[['loc','📍'],['face','🙂'],['sign','✍️']];
+  return all.map(a=>ev.includes(a[0])?a[1]:'<span style="color:var(--dan)">'+a[1]+'缺</span>').join(' ');
+}
+function navGroupOf(page){ for(const k in NAV){ if(NAV[k].pages.some(p=>p[0]===page)) return k; } return 'home'; }
+function mzLevel(total){
+  if(S.rules.coma) return {name:'完全失能',range:'直接判定',idx:4};
+  let base;
+  if(total>=90) base={name:'能力完好',range:'≥ 90',idx:0};
+  else if(total>=66) base={name:'轻度失能',range:'66–89',idx:1};
+  else if(total>=46) base={name:'中度失能',range:'46–65',idx:2};
+  else if(total>=30) base={name:'重度失能',range:'30–45',idx:3};
+  else base={name:'完全失能',range:'0–29',idx:4};
+  const up=(S.rules.dementia?1:0)+(S.rules.event?1:0);
+  if(up>0&&!S.rules.coma){
+    const N=['能力完好','轻度失能','中度失能','重度失能','完全失能'];
+    const R=['≥ 90','66–89','46–65','30–45','0–29'];
+    const ni=Math.min(4,base.idx+up);
+    return {name:N[ni],range:R[ni],idx:ni,raised:true,orig:base.name,origR:base.range};
+  }
+  return base;
+}
+function lisLevel(total){
+  if(S.rules.coma) return {name:'5 级（重度Ⅲ级）',idx:5};
+  let i = total>=90?0: total>=66?1: total>=46?2: total>=30?3: total>=20?4:5;
+  if(S.rules.dementia||S.rules.event) i=Math.min(5,i+1);
+  return {name:['0 级（基本正常）','1 级（轻度失能）','2 级（中度失能）','3 级（重度Ⅰ级）','4 级（重度Ⅱ级）','5 级（重度Ⅲ级）'][i], idx:i};
+}
+function getDetail(id){ return ELDER_DETAIL[id] || defaultDetail(ELDERS.find(e=>e.id===id)); }
+
+/* ============================================================
+   三、导航定义
+   ============================================================ */
+const NAV = {
+  home:{label:'首页', pages:[['dash','机构驾驶舱'],['weekly','周报'],['todo','待办中心']]},
+  data:{label:'机构数据', pages:[['beds','床位管理'],['elders','老人档案'],['bill','收费与结算'],['disab','失能专区看板'],['metric','指标与报表']]},
+  care:{label:'护理服务', pages:[['assess','评估中心'],['careitems','护理条目'],['carers','护理人员']]},
+  gov:{label:'数据监管', pages:[['report','数据上报与校验'],['subsidy','政府补贴申请'],['audit','档案预警自查'],['monitor','异常波动监测'],['policy','政策参数配置']]}
+};
+
+/* ============================================================
+   四、官网（未登录）
+   ============================================================ */
+function renderSite(){
+  const g=ORGS.group;
+  const svc=[
+    ['🦽','失能失智专业照护','长护险定点服务机构，重度失能照护占比 40%。分级分区管理：自理区、半失能区、失能区、认知症专区，护理比 1:2.6–1:15。',true],
+    ['🏥','医养结合','内设医务室与康复科，24 小时医护值守，与三甲医院建立双向转诊绿色通道，慢病管理与用药安全全程管理。',false],
+    ['💪','康复理疗','康复师团队提供运动治疗、作业治疗、吞咽与言语训练，帮助长者维持和恢复功能，延缓失能进程。',false],
+    ['🧠','认知症专区','24 床认知症照护单元，非药物干预课程（怀旧疗法、音乐疗法、园艺疗法），防走失电子腕带全覆盖。',false],
+    ['🏠','居家上门服务','政府购买服务定点机构，助餐、助洁、助浴上门服务，服务全程定位打卡 + 人脸核验 + 电子签名留痕。',false],
+    ['🥗','营养膳食','营养师按评估结果配餐：普通餐、软食、糊状餐、糖尿病餐、低盐餐，每月营养监测体重管理。',false]
+  ];
+  const flow=[
+    ['咨询预约','电话 / 到访 / 线上登记，顾问 1v1 解答'],
+    ['参观体验','实地参观院区，试用餐、体验活动'],
+    ['入住评估','民政 + 长护险双标评估，确定照护等级'],
+    ['签约缴费','合同、押金、费用透明清单确认'],
+    ['制定照护计划','按评估等级生成个性化照护计划']
+  ];
+  const fees=[
+    ['💵','自费入住','床位费 + 护理费 + 餐费，按评估等级定价，费用清单逐项透明，月度账单可查。','价格公开 · 无隐形收费'],
+    ['🏛','民政兜底（特困 / 低保）','特困供养、低保对象由政府供养，机构按政策限价收费，差额由民政补贴或财政补差覆盖。','救助对象 · 政策限价'],
+    ['🛡','长护险支付','失能等级评估通过后，护理费用由长护险基金按等级报销（职工 70% / 居民 50%），机构直接对接经办结算。','医保定点 · 基金直付'],
+    ['🎫','政府购买服务券','民政发放的居家养老服务券、助餐补贴可在院内抵扣，凭服务记录核销，凭证三要素齐全才可结算。','代收代付 · 服务留痕']
+  ];
+  const newsBg=(i)=>NEWS[i].bg;
+  return `
+  <div class="stnav">
+    <div class="brand" onclick="S.anchor='';render()">祥和康养<small>XIANGHE KANGYANG GROUP</small></div>
+    <a class="nl" onclick="siteAnchor('top')">首页</a>
+    <a class="nl" onclick="siteAnchor('services')">服务介绍</a>
+    <a class="nl" onclick="siteAnchor('fees')">收费说明</a>
+    <a class="nl" onclick="siteAnchor('news')">新闻动态</a>
+    <a class="nl" onclick="siteAnchor('team')">团队介绍</a>
+    <a class="nl" onclick="siteAnchor('about')">关于我们</a>
+    <button class="btn-login" onclick="S.view='login';render()">机构登录</button>
+  </div>
+  <div class="hero" id="top">
+    <div class="wrap">
+      <span class="tag">医养结合 · 长护险定点 · 四星级 & 三星级院区</span>
+      <h1>让专业照护，守护<br>每一位长者的<em>尊严与温度</em></h1>
+      <p class="sub">祥和康养运营 4 家养老机构、核定床位 720 张，提供从自理到完全失能的全周期照护服务。
+      一次评估、双标输出：民政能力等级与长护险失能等级同步生成，让补贴、结算与照护计划精准联动。</p>
+      <div class="cta">
+        <button class="b1" onclick="toast('演示：已登记参观预约，顾问将在 1 个工作日内与您联系')">预约参观</button>
+        <button class="b2" onclick="siteAnchor('services')">了解服务</button>
+      </div>
+      <div class="hstats">
+        <div class="hs"><div class="hv">4<small>家机构</small></div><div class="hk">集团化运营 · 一星至四星级</div></div>
+        <div class="hs"><div class="hv">720<small>张核定床位</small></div><div class="hk">护理型床位占比 71.1%</div></div>
+        <div class="hs"><div class="hv">596<small>位在住长者</small></div><div class="hk">失能长者占比 78%</div></div>
+        <div class="hs"><div class="hv">93<small>% 家属满意度</small></div><div class="hk">2026 年度第三方调查</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-sec" id="services">
+    <div class="wrap">
+      <div class="sec-head"><div class="st">核心服务</div>
+        <div class="sd">以失能照护为核心，医、养、康、护、智一体化服务</div><div class="bar-c"></div></div>
+      <div class="svc-grid">
+        ${svc.map(s=>`<div class="svc ${s[3]?'hot':''}">
+          ${s[3]?'<span class="hot-tag">长护险定点</span>':''}
+          <div class="ic">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="site-sec alt" id="fees">
+    <div class="wrap">
+      <div class="sec-head"><div class="st">收费说明 · 四类支付口径</div>
+        <div class="sd">费用透明是信任的开始 —— 一位长者可由多个支付方组合支付</div><div class="bar-c"></div></div>
+      <div class="pay-grid">
+        ${fees.map(f=>`<div class="pay-c ${f[0]==='🏛'?'m':f[0]==='🛡'?'l':f[0]==='🎫'?'y':''}">
+          <div class="pt">${f[0]} ${f[1]}</div><div class="pd">${f[2]}</div><span class="pe">${f[3]}</span></div>`).join('')}
+      </div>
+      <div class="hint" style="text-align:center;margin-top:22px">最终费用以评估等级与签约合同为准 · 押金第三方存管 · 月度账单逐项可查</div>
+    </div>
+  </div>
+
+  <div class="site-sec">
+    <div class="wrap">
+      <div class="sec-head"><div class="st">入住流程</div>
+        <div class="sd">五步入住，每一步都有专人对接</div><div class="bar-c"></div></div>
+      <div class="flow">
+        ${flow.map((f,i)=>`<div class="fs"><div class="fn">${i+1}</div><div class="ft">${f[0]}</div><div class="fd">${f[1]}</div></div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="site-sec alt" id="news">
+    <div class="wrap">
+      <div class="sec-head"><div class="st">新闻动态</div>
+        <div class="sd">了解祥和康养正在发生的事</div><div class="bar-c"></div></div>
+      <div class="news-grid">
+        ${NEWS.map((n,i)=>`<div class="news" onclick="openNews(${i})">
+          <div class="nc" style="background:${newsBg(i)}"><span class="nd">${n.cat} · ${n.date}</span></div>
+          <div class="nb"><div class="nt">${n.t}</div><div class="ns">${n.s}</div></div></div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="site-sec" id="team">
+    <div class="wrap">
+      <div class="sec-head"><div class="st">专业团队</div>
+        <div class="sd">医生、护士、康复师、养老护理员、社工五支专业队伍 · 126 名员工</div><div class="bar-c"></div></div>
+      <div class="team-grid">
+        ${TEAM.map(t=>`<div class="tm"><div class="av ${t.cls}">${t.ch}</div>
+          <h4>${t.name}</h4><div class="tt">${t.title}</div><p>${t.desc}</p></div>`).join('')}
+      </div>
+      <div class="hint" style="text-align:center;margin-top:22px">养老护理员持证率 91.7%（1 人培训中）· 护士 9 人 · 医师 3 人 · 康复师 4 人 · 社工 5 人</div>
+    </div>
+  </div>
+
+  <div class="site-sec alt" id="about">
+    <div class="wrap">
+      <div class="sec-head"><div class="st">关于我们</div><div class="bar-c"></div></div>
+      <div class="honor-wrap">
+        <div>
+          <p class="about-p">祥和康养成立于 2016 年，是江夏区规模最大的集团化养老服务运营商之一。
+          我们坚持「医养结合、以失能照护为核心」的定位，旗下养老院、护理院、街道综合体、社区养老院四种业态互补，
+          为长者提供机构养老、社区养老、居家上门的连续性服务。</p>
+          <p class="about-p" style="margin-top:14px">我们相信：照护的品质不只在硬件，更在每一次翻身、每一餐饭、每一次记录的细节里。
+          全集团使用统一的数据化系统，让照护服务可记录、可追溯、可审计。</p>
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn" onclick="S.view='login';render()">机构员工登录 ›</button>
+            <button class="btn gh" onclick="toast('演示：已拨打 027-8888 6666')">☎ 027-8888 6666</button>
+          </div>
+        </div>
+        <div class="honors">${HONORS.map(h=>`<div class="hon"><span class="medal">${h[0]}</span>${h[1]}</div>`).join('')}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sfooter">
+    <div class="wrap">
+      <div class="cols">
+        <div><h5>祥和康养养老服务集团</h5>
+          <div class="fi">医养结合 · 长护险定点 · 集团化运营<br>地址：武汉市江夏区纸坊大街 88 号<br>总机：027-8888 6666（咨询 / 预约参观）</div></div>
+        <div><h5>机构分布</h5><div class="fi">新濠院区（三星级 · 400 床）<br>孝庄护理中心（四星级 · 180 床）<br>纸坊街养老综合体（96 床）<br>庙山社区宜家养老院（44 床）</div></div>
+        <div><h5>服务</h5><div class="fi">失能失智照护 · 医养结合<br>康复理疗 · 认知症专区<br>居家上门 · 营养膳食</div></div>
+        <div><h5>员工入口</h5><div class="fi">机构数据化系统（内部）<br>仅限授权员工登录使用<br><span class="lk" style="color:#8FD0BE" onclick="S.view='login';render()">前往登录 ›</span></div></div>
+      </div>
+      <div class="bt">© 2026 祥和康养养老服务集团 · 鄂ICP备2026XXXXXX号-1（演示数据，非真实机构）</div>
+    </div>
+  </div>`;
+}
+function siteAnchor(id){
+  render();
+  requestAnimationFrame(()=>{ if(id!=='top'){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); } else window.scrollTo(0,0); });
+}
+function openNews(i){
+  const n=NEWS[i];
+  openModal(n.t, n.cat+' · '+n.date, `<div style="background:${n.bg};border-radius:10px;height:120px;margin-bottom:14px;display:flex;align-items:flex-end;padding:14px;color:#fff;font-size:12px;opacity:.95">配图占位 · 新闻封面</div>
+  <p style="line-height:2">${n.s}</p>
+  <p style="line-height:2;margin-top:10px;color:var(--mut)">（演示数据：正文与配图为示意。实际系统中此处展示完整图文详情，支持机构自行发布与撤稿。）</p>`);
+}
+
+/* ============================================================
+   五、登录页
+   ============================================================ */
+function renderLogin(){
+  return `
+  <div class="login">
+    <div class="login-card">
+      <div class="lg">祥和康养 · 数据化系统</div>
+      <div class="ls">内部系统，仅限授权员工登录 · 演示环境任意账号可登录</div>
+      <div class="fld"><label>账号</label><input id="lgUser" value="demo@xianghe" readonly></div>
+      <div class="fld"><label>密码</label><input type="password" value="********" readonly></div>
+      <div class="role-tip">选择演示身份（决定工作台侧重，菜单全量可见）</div>
+      <div class="role-row">
+        ${Object.entries(ROLES).map(([k,r])=>`<button class="role-chip" data-role="${k}">${r.title} · ${r.name}</button>`).join('')}
+      </div>
+      <button class="btn-login" onclick="doLogin()">登 录</button>
+      <div class="login-back" onclick="S.view='site';render()">← 返回机构官网</div>
+    </div>
+  </div>`;
+}
+function doLogin(role){
+  if(role) S.role=role;
+  S.view='app'; S.page='dash';
+  render(); window.scrollTo(0,0);
+  toast('欢迎回来，'+ROLES[S.role].name+'（'+ROLES[S.role].title+'）· 已进入 '+ORGS[S.org].short+'视角');
+}
+/* ============================================================
+   六、系统框架（登录后）
+   ============================================================ */
+function renderApp(){
+  const g = navGroupOf(S.page);
+  return `
+  <div class="topnav">
+    <div class="brand">祥和康养 · 数据化系统<small>机构端</small></div>
+    ${Object.entries(NAV).map(([k,v])=>`<div class="tnav-item ${g===k?'on':''}" onclick="switchGroup('${k}')">${v.label}</div>`).join('')}
+    <div class="sp"></div>
+    <div class="selwrap"><label>当前机构</label>
+      <select id="orgSel" onchange="switchOrg(this.value)">
+        ${Object.entries(ORGS).map(([k,o])=>`<option value="${k}" ${S.org===k?'selected':''}>${o.name}${k==='group'?'（汇总）':''}</option>`).join('')}
+      </select></div>
+    <div class="who">
+      <span class="wrole">${ROLES[S.role].title}</span>
+      <div class="av">${ROLES[S.role].av}</div><span>${ROLES[S.role].name}</span>
+      <span class="out" onclick="S.view='site';S.page='dash';render();toast('已退出登录，返回机构官网')">退出</span>
+    </div>
+  </div>
+  <div class="subnav">
+    ${NAV[g].pages.map(p=>`<div class="subnav-item ${S.page===p[0]?'on':''}" onclick="go('${p[0]}')">${p[1]}</div>`).join('')}
+    <div class="gap"></div>
+    <span class="hint" style="margin-left:auto">数据口径：<b>床位使用率 = 在住床日 ÷ 可运营床日</b> ｜ <b>入住率(民政) = 在住 ÷ 备案床位</b> ｜ 更新至 2026-11-05 24:00</span>
+  </div>
+  <div class="appbody">${PAGES[S.page]()}</div>`;
+}
+function switchGroup(k){ S.page = NAV[k].pages[0][0]; render(); window.scrollTo(0,0); }
+function switchOrg(v){ S.org=v; render(); toast('已切换为「'+ORGS[v].name+'」视角'+(v==='group'?' · 显示集团汇总':'')); }
+function switchRole(v){ S.role=v; render(); toast('已切换身份：'+ROLES[v].title+' · 工作台已更新'); }
+
+/* ============================================================
+   七、首页类：驾驶舱 / 周报 / 待办中心
+   ============================================================ */
+function pageDash(){
+  const k = S.org==='group'?'group':S.org;
+  const o=ORGS[k], m=METRICS[k];
+  const use = pct(o.live,o.oper);
+  const r = ROLES[S.role];
+  const groupRows = S.org==='group' ? ['xh','xz','zf','ms'].map(kk=>{
+    const oo=ORGS[kk], mm=METRICS[kk];
+    return `<tr onclick="S.org='${kk}';render();toast('已切换为「${oo.name}」视角')" style="cursor:pointer">
+      <td><b>${oo.name}</b></td><td>${oo.type}</td><td class="num">${oo.filed}</td><td class="num">${oo.live}</td>
+      <td class="num">${pct(oo.live,oo.oper)}%</td><td class="num">${pct(oo.live,oo.filed)}%</td>
+      <td class="num">${mm.income>9999?(mm.income/10000).toFixed(1)+' 万':nf(mm.income)}</td>
+      <td class="num">${mm.fall}</td><td>${kk==='ms'?'<span class="pill y">入住率偏低</span>':kk==='xz'?'<span class="pill y">人力成本 61%</span>':'<span class="pill g">正常</span>'}</td></tr>`;
+  }).join('') : '';
+  const todos = TODOS.slice(0,5);
+  return `
+  <div class="phead">
+    <div><h1 class="pt">${o.name} · 机构驾驶舱</h1>
+      <div class="psub">${o.type||'集团汇总'}${o.star?' · '+o.star:''} · 在住 ${o.live} 人 · 当前身份：${r.title} ${r.name} · 2026-11-05</div></div>
+    <div style="display:flex;gap:8px">
+      <select style="font-family:inherit;font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:7px" onchange="switchRole(this.value)">
+        ${Object.entries(ROLES).map(([kk,rr])=>`<option value="${kk}" ${S.role===kk?'selected':''}>切换身份：${rr.title}</option>`).join('')}
+      </select>
+      <button class="btn gh sm" onclick="go('weekly')">周报</button>
+      <button class="btn sm" onclick="go('todo')">去处理待办（${TODOS.length}）</button>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(120deg,#245F51,#2E7D6B);border:none;color:#fff">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <span style="font-size:13px;font-weight:700">我的工作台</span>
+      <span style="font-size:11px;background:rgba(255,255,255,.16);border-radius:12px;padding:2px 10px">${r.title}视图</span>
+      <span class="hint" style="color:rgba(255,255,255,.7);margin-left:auto">按角色聚合关注数据，点击卡片直达对应页面</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      ${ROLE_CARDS[S.role].map(c=>`<div class="kpi click" style="border:none;background:rgba(255,255,255,.1)" onclick="go('${c[4]}')">
+        <div class="k" style="color:rgba(255,255,255,.75)">${c[0]}</div>
+        <div class="v" style="color:#fff;font-size:21px;margin:6px 0 2px">${c[1]}</div>
+        <div class="c" style="color:rgba(255,255,255,.72)">${c[2]} <span style="opacity:.85">›</span></div></div>`).join('')}
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi click" onclick="go('beds')"><div class="k">床位使用率</div><div class="v">${use}<small>%</small></div>
+      <div class="c">在住 ${o.live} ÷ 可运营 ${o.oper}（经营口径）</div></div>
+    <div class="kpi click" onclick="go('beds')"><div class="k">在住 / 空床可售</div><div class="v">${o.live}<small> / ${Math.max(0,o.oper-o.live-o.reserv)}</small></div>
+      <div class="c">预留 ${o.reserv} 床，空置 ${o.idle||0} 床</div></div>
+    <div class="kpi"><div class="k">本月新入住 / 退住</div><div class="v">${m.newIn}<small> / ${m.out}</small></div>
+      <div class="c g">净增 ${m.newIn-m.out} 人</div></div>
+    <div class="kpi"><div class="k">家属满意度</div><div class="v">${m.sat}<small>%</small></div>
+      <div class="c ${m.sat<93?'y':'g'}">较上月 ${m.sat<93?'↓1.2%':'↑0.4%'}</div></div>
+    <div class="kpi"><div class="k">本月跌倒</div><div class="v">${m.fall}<small> 起</small></div>
+      <div class="c ${m.fall>0?'r':'g'}">${m.fall>0?'需 24h 内上报民政':'无'}</div></div>
+    <div class="kpi"><div class="k">压疮（II 度及以上）</div><div class="v">${m.ulcer}<small> 起</small></div>
+      <div class="c ${m.ulcer>0?'y':'g'}">目标 0 起</div></div>
+    <div class="kpi"><div class="k">人力成本占比</div><div class="v">${m.costRate}<small>%</small></div>
+      <div class="c ${m.costRate>60?'y':'g'}">行业区间 50%–60%</div></div>
+    <div class="kpi click" onclick="go('todo')"><div class="k">今日待处理</div><div class="v">${m.todo}<small> 件</small></div>
+      <div class="c">其中 2 件超期 ›</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">床位口径小结 ${info('床位四口径','为什么必须一起看',
+      '核定床位：建筑与消防核定\\n备案床位：民政备案（上报与补贴基数）\\n可运营床位：备案 − 维修 − 隔离 − 停用\\n在住床位：当日 24:00 实际在住\\n\\n四个数一定不一样。产品必须一次展示四个数并说明差额，否则每次开会都在吵"到底多少床"。')}</div>
+      <button class="btn gh sm" onclick="go('beds')">查看床位图 ›</button></div>
+    <div class="bar">
+      <div style="flex:${o.approved};background:#B9CCC6">核定 ${o.approved}</div>
+      <div style="flex:${o.filed};background:#8FB3AA">备案 ${o.filed}</div>
+      <div style="flex:${o.oper};background:#5E9488">可运营 ${o.oper}</div>
+      <div style="flex:${o.live};background:var(--pri)">在住 ${o.live}</div>
+    </div>
+    <div class="grid3" style="gap:10px;margin-top:10px">
+      <div class="note">核定 ${o.approved} → 备案 ${o.filed}，差 <b>${o.approved-o.filed}</b>：康复床位未取得消防验收，暂未备案</div>
+      <div class="note">备案 ${o.filed} → 可运营 ${o.oper}，差 <b>${o.filed-o.oper}</b>：维修 + 隔离 ${o.maint+o.iso} 间</div>
+      <div class="note">可运营 ${o.oper} → 在住 ${o.live}，差 <b>${o.oper-o.live}</b>：空置 ${o.idle||0} + 预留 ${o.reserv}</div>
+    </div>
+  </div>
+
+  ${S.org==='group'?`<div class="card np">
+    <div style="padding:13px 16px 4px"><div class="ch" style="margin-bottom:6px"><div class="ct">四家机构对比
+      ${info('集团对比','两个率必须同时存在','床位使用率 = 在住 ÷ 可运营床位（经营口径）\\n入住率 = 在住 ÷ 备案床位（民政上报口径）\\n\\n同一个机构这两个数一定不一样。只给一个，开会时一定吵。\\n点击行可切换到该院区视角。')}</div>
+      <span class="lk" onclick="go('metric')">完整指标对比 ›</span></div></div>
+    <table><thead><tr><th>机构</th><th>类型</th><th class="num">备案</th><th class="num">在住</th>
+      <th class="num">使用率</th><th class="num">入住率(民政)</th><th class="num">月收入</th>
+      <th class="num">跌倒</th><th>状态</th></tr></thead>
+    <tbody>${groupRows}
+      <tr class="sum"><td>集团合计</td><td>4 家</td><td class="num">${ORGS.group.filed}</td><td class="num">${ORGS.group.live}</td>
+      <td class="num">${pct(ORGS.group.live,ORGS.group.oper)}%</td><td class="num">${pct(ORGS.group.live,ORGS.group.filed)}%</td>
+      <td class="num">${(METRICS.group.income/10000).toFixed(1)} 万</td><td class="num">${METRICS.group.fall}</td><td>—</td></tr>
+    </tbody></table>
+  </div>`:''}
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">今日待办</div><span class="hint">${TODOS.length} 条 · 2 条超期</span>
+        <span class="lk" style="margin-left:auto" onclick="go('todo')">全部待办 ›</span></div>
+      ${todos.map(t=>`<div style="display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line2)">
+        <span class="pill ${t.c}">${t.c==='r'?'超期':t.c==='y'?'待办':'进行'}</span>
+        <span style="flex:1;font-size:12.5px">${t.title}</span>
+        <span style="font-size:11px;color:var(--mut)">${t.lv}</span>
+        <span class="lk" onclick='jumpTodo(${JSON.stringify(t).replace(/'/g,"&#39;")})'>去处理 ›</span>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">本周需关注</div><span class="pill n">系统规则提示，是否执行由你判断</span></div>
+      <div class="note y" style="margin-bottom:8px">本月退住 ${m.out} 人中，<b>3 人家属提到"不清楚老人每天在做什么"</b>，建议 48 小时内主动沟通一次</div>
+      <div class="note y" style="margin-bottom:8px"><b>失能区 3 位老人约束具使用超过 7 天</b>，需复核使用必要性并留记录</div>
+      <div class="note b">护理型床位占比 ${pct(512,720)}%，距政策目标 73% 还差 1.9 个百分点，可申请改造补贴（<span class="lk" onclick="go('subsidy')">去申请 ›</span>）</div>
+    </div>
+  </div>`;
+}
+
+/* ---- 周报 ---- */
+function pageWeekly(){
+  const o=ORGS[S.org==='group'?'group':S.org], m=METRICS[S.org==='group'?'group':S.org];
+  return `
+  <div class="phead">
+    <div><h1 class="pt">经营周报（2026-11-02 ~ 11-08）</h1>
+      <div class="psub">${o.name} · 自动汇总自床位、老人档案、护理服务、收费结算四个模块 · 每周一 08:00 自动生成</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：周报 PDF 已生成（含图表与数据附表）')">导出 PDF</button>
+      <button class="btn sm" onclick="toast('演示：周报已推送至院长、总监企业微信')">推送</button></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="k">本周新入住 / 退住</div><div class="v">5<small> / 2</small></div><div class="c g">环比 ↑2 人 · 净增 3</div></div>
+    <div class="kpi"><div class="k">本周收入 / 回款</div><div class="v">¥66.8<small> / 52.4 万</small></div><div class="c">回款率 78.4% · 环比 ↑1.9%</div></div>
+    <div class="kpi"><div class="k">护理服务执行</div><div class="v">1,842<small> 条</small></div><div class="c g">按时率 96.2% · 补记率 3.1%</div></div>
+    <div class="kpi"><div class="k">风险事件</div><div class="v">1<small> 起</small></div><div class="c y">跌倒（Ⅱ 级）已处置上报</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">入住变动明细</div><span class="hint">点击人名可跳转档案</span></div>
+      <table><thead><tr><th>日期</th><th>新入住</th><th>退住</th><th>原因</th></tr></thead><tbody>
+        ${[['11-02','杨秀云（72 岁 · 自理）','—','家属口碑转介'],['11-03','—','雷建强（78 岁）','转院治疗'],
+           ['11-04','—','—','—'],['11-05','2 人（床位 A-304 预备）','—','渠道合作 · 养老顾问接待']]
+          .map(r=>`<tr><td>${r[0]}</td><td>${r[1]==='—'?'<span style="color:var(--mut)">—</span>':r[1]}</td>
+          <td>${r[2]==='—'?'<span style="color:var(--mut)">—</span>':r[2]}</td><td style="font-size:11.5px;color:var(--mut)">${r[3]}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note b" style="margin-top:10px">本周空床可售 8 → 6 床：新签约 2 床（A-304 预留），营销渠道转化 1 单来自"长护险宣讲会"。</div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">收入与结算进度</div></div>
+      <table><thead><tr><th>支付方</th><th class="num">本周新增应收</th><th class="num">本周回款</th><th>进度</th></tr></thead><tbody>
+        <tr><td>自费</td><td class="num">38,200</td><td class="num">31,600</td><td><span class="pill g">正常</span></td></tr>
+        <tr><td>长护险</td><td class="num">19,800</td><td class="num">—</td><td><span class="pill b">10 月账期 · 11-18 到账</span></td></tr>
+        <tr><td>民政兜底</td><td class="num">6,700</td><td class="num">—</td><td><span class="pill y">季度结算待申报</span></td></tr>
+        <tr><td>服务券（代收代付）</td><td class="num">14,600</td><td class="num">12,200</td><td><span class="pill n">不计收入</span></td></tr>
+      </tbody></table>
+      <div class="note y" style="margin-top:10px">欠费提醒：¥45,200 涉及 12 户，其中 2 户欠费超 2 个月，建议财务本周内电话催缴并记录。</div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">护理质量周览</div></div>
+      <table><thead><tr><th>指标</th><th class="num">本周</th><th class="num">上周</th><th>趋势</th></tr></thead><tbody>
+        ${[['按时执行率','96.2%','95.8%','↑'],['补记率','3.1%','3.4%','↓ 改善'],['压疮新发','0 起','1 起','↓ 改善'],
+           ['跌倒','1 起','0 起','↑ 需关注'],['家属投诉','0 起','1 起','↓ 改善'],['待办闭环率','82%','78%','↑']]
+          .map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num" style="color:var(--mut)">${r[2]}</td>
+          <td>${r[3].startsWith('↑')?'<span class="pill '+(r[0]==='跌倒'?'y':'g')+'">'+r[3]+'</span>':'<span class="pill g">'+r[3]+'</span>'}</td></tr>`).join('')}
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">下周关注事项</div></div>
+      ${[['11-08','民政补贴申领截止（信息员 T7）','r'],['11-12','A-304-3 维修间恢复，恢复可售','n'],
+         ['11-15','家属开放日 · 中度失能区','n'],['11-18','长护险 10 月结算预计到账 ¥86,400','b'],
+         ['11-20','刘桂兰年度复评到期','y']]
+        .map(r=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:12.5px">
+        <span class="pill ${r[2]}">${r[0]}</span><span style="flex:1">${r[1]}</span></div>`).join('')}
+      <div class="note" style="margin-top:10px">周报由系统按固定模板自动生成，机构可自定义指标项与推送范围。</div>
+    </div>
+  </div>`;
+}
+
+/* ---- 待办中心 ---- */
+function pageTodo(){
+  const f = S.tab.todoSt || '全部';
+  const list = TODOS.filter(t=>f==='全部' || (f==='超期'&&t.c==='r') || (f==='今日'&&t.c==='y'));
+  return `
+  <div class="phead">
+    <div><h1 class="pt">待办中心</h1>
+      <div class="psub">汇集驾驶舱、床位、评估、结算、上报、补贴、档案预警的全部待办 · 共 ${TODOS.length} 条</div></div>
+    <button class="btn gh sm" onclick="toast('演示：已按当前筛选导出待办清单')">导出</button>
+  </div>
+  <div class="filter-bar">
+    ${['全部','超期','今日','本周'].map(x=>`<div class="subnav-item ${f===x?'on':''}" onclick="S.tab.todoSt='${x}';render()">${x}</div>`).join('')}
+    <span class="hint" style="margin-left:auto">「去处理」将直达对应业务页面并高亮待办上下文</span>
+  </div>
+  <div class="card np">
+    <table><thead><tr><th>状态</th><th>类型</th><th>待办事项</th><th>时限</th><th style="width:90px">操作</th></tr></thead>
+    <tbody>${list.length?list.map(t=>`<tr>
+      <td><span class="pill ${t.c}">${t.c==='r'?'超期':t.c==='y'?'待办':'进行中'}</span></td>
+      <td><span class="pill n">${t.tag}</span></td><td>${t.title}</td><td style="font-size:11.5px;color:var(--mut)">${t.lv}</td>
+      <td><button class="btn sm" onclick='jumpTodo(${JSON.stringify(t).replace(/'/g,"&#39;")})'>去处理</button></td></tr>`).join('')
+      :'<tr><td colspan="5" class="empty-tip">当前筛选暂无待办 ✓</td></tr>'}
+    </tbody></table>
+  </div>
+  <div class="note b">待办来源：① 系统规则（护理比、复评到期、上报截止）② 人工指派 ③ 退回单（结算材料退回自动生成）。
+  待办处理完成后自动闭环并记录处理人与时间，用于周报"闭环率"统计。</div>`;
+}
+/* ============================================================
+   八、机构数据：床位管理
+   ============================================================ */
+let BEDMAP = [];
+function pageBedsInit(){ BEDMAP = buildBedmap(); }
+function pageBeds(){
+  pageBedsInit();
+  const o=ORGS[S.org==='group'?'xh':S.org];
+  const f = S.tab.bedFloor||'全部', st = S.tab.bedSt||'全部';
+  const beds = BEDMAP.filter(b=>(f==='全部'||b.floor===+f)&&st==='全部'?true:(f!=='全部'&&b.floor!==+f?false:(st!=='全部'&&b.state!==st?false:true)));
+  const counts = BEDMAP.reduce((a,b)=>{a[b.state]=(a[b.state]||0)+1;return a;},{});
+  const legend=[['live','在住',counts.live||0],['res','预留',counts.res||0],['idle','空置',counts.idle||0],
+                ['maint','维修',counts.maint||0],['iso','隔离',counts.iso||0]];
+  return `
+  <div class="phead">
+    <div><h1 class="pt">床位管理 ${info('床位管理','这一屏解决"到底多少床"',
+      '四个口径一起展示，且每个差额都要能解释来源。\\n三个百分比并列：床位使用率（经营口径）、入住率（民政上报口径）、空床可售。')}</h1>
+      <div class="psub">${o.name} · A 区 1–4 层（样例 40 床，与老人档案床位号一致）· 点击任一床位查看详情</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：支持批量调整床位状态（维修/停用/恢复），全部留痕')">批量调整</button>
+      <button class="btn sm" onclick="toast('演示：床位表已导出（含四口径统计与状态明细）')">导出床位表</button></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">四口径统计</div><span class="hint">差额全部可解释</span></div>
+    <div class="bar">
+      <div style="flex:${o.approved};background:#B9CCC6">核定 ${o.approved}</div>
+      <div style="flex:${o.filed};background:#8FB3AA">备案 ${o.filed}</div>
+      <div style="flex:${o.oper};background:#5E9488">可运营 ${o.oper}</div>
+      <div style="flex:${o.live};background:var(--pri)">在住 ${o.live}</div>
+    </div>
+    <div class="grid3" style="gap:10px;margin-top:12px">
+      <div class="kpi" style="border-color:#A9D3C9"><div class="k">床位使用率（经营口径）</div>
+        <div class="v" style="color:var(--pri)">${pct(o.live,o.oper)}<small>%</small></div>
+        <div class="c">在住 ${o.live} ÷ 可运营 ${o.oper}</div></div>
+      <div class="kpi"><div class="k">入住率（民政上报口径）</div><div class="v">${pct(o.live,o.filed)}<small>%</small></div>
+        <div class="c">在住 ${o.live} ÷ 备案 ${o.filed}，分母不同所以更低</div></div>
+      <div class="kpi"><div class="k">空床可售</div><div class="v">${o.oper-o.live-o.reserv}<small> 床</small></div>
+        <div class="c">可运营 − 在住 − 预留 = ${o.oper} − ${o.live} − ${o.reserv}</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">床位图 · A 区（40 床样例）</div>
+      <div class="filter-bar" style="margin:0">
+        <select onchange="S.tab.bedFloor=this.value;render()">
+          ${['全部',1,2,3,4].map(x=>`<option ${f==String(x)?'selected':''} value="${x}">${x==='全部'?'全部楼层':x+' 层'}</option>`).join('')}
+        </select>
+        <select onchange="S.tab.bedSt=this.value;render()">
+          ${['全部','live','res','idle','maint','iso'].map(x=>`<option ${st===x?'selected':''} value="${x}">${x==='全部'?'全部状态':{live:'在住',res:'预留',idle:'空置',maint:'维修',iso:'隔离'}[x]}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="legend" style="margin:0 0 10px">${legend.map(l=>`<span><i class="bed ${l[0]}" style="width:10px;height:10px;padding:0;border-radius:2px"></i>${l[1]} ${l[2]}</span>`).join('')}</div>
+    <div class="bedwrap">
+      ${beds.map(b=>{
+        const tip = b.name?`${b.no} ${b.name}`:`${b.no} ${{res:'预留',idle:'空置',maint:'维修',iso:'隔离'}[b.state]}${b.note?' · '+b.note:''}`;
+        return `<div class="bed ${b.state}" title="${tip}" onclick="openBed('${b.no}')">
+          <span class="bn">${b.no.slice(2)}</span>
+          <span>${b.name?b.name.slice(0,2):{live:'在住',res:'预留',idle:'空置',maint:'维修',iso:'隔离'}[b.state]}</span></div>`;
+      }).join('')}
+    </div>
+    <div class="hint" style="margin-top:10px">床号规则 A-30【层】-【床】；点击床位弹出详情：状态变更记录 + 在住人完整信息。全院 400 床实际部署为楼栋-楼层-房间-床位四级树。</div>
+  </div>
+
+  <div class="grid2" style="grid-template-columns:1fr 1.15fr">
+    <div class="card">
+      <div class="ch"><div class="ct">口径差异说明</div></div>
+      <div class="acc open"><div class="ah" onclick="this.parentNode.classList.toggle('open')">
+        <span>核定 ${o.approved} → 备案 ${o.filed}，差 ${o.approved-o.filed}</span><span class="ar">›</span></div>
+        <div class="ab">消防核定含 ${o.approved-o.filed} 张康复床位，因未取得消防验收暂未备案。<b>消防检查用核定数，民政上报用备案数</b>。</div></div>
+      <div class="acc"><div class="ah" onclick="this.parentNode.classList.toggle('open')">
+        <span>备案 ${o.filed} → 可运营 ${o.oper}，差 ${o.filed-o.oper}</span><span class="ar">›</span></div>
+        <div class="ab">维修 ${o.maint} 间 + 隔离 ${o.iso} 间。<b>这部分不参与使用率计算</b>，恢复运营时自动回归。</div></div>
+      <div class="acc"><div class="ah" onclick="this.parentNode.classList.toggle('open')">
+        <span>可运营 ${o.oper} → 在住 ${o.live}，差 ${o.oper-o.live}</span><span class="ar">›</span></div>
+        <div class="ab">空置 ${o.idle||0} 床 + 预留 ${o.reserv} 床（已签约未入住）。<b>空床可售 = ${o.oper-o.live-o.reserv} 床</b>，是销售的真实库存。</div></div>
+      <div class="note" style="margin-top:10px">与民政上报核对：本月上报在住 <b>${o.live}</b> 床 ｜ 在住床日 <b>${nf(o.live*30)}</b>　<span class="pill g">✅ 系统与上报一致（差 0）</span></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">最近状态变更（全留痕）</div><span class="hint">换床、退住、隔离都会留痕，不允许直接改数</span></div>
+      <table><thead><tr><th>时间</th><th>床位</th><th>变更</th><th>原因</th><th>操作人</th></tr></thead><tbody>
+        ${[['11-05 09:12','A-303-10','空置 → 预留','新签约（预计 11-12 入住）','销售 · 吴倩'],
+           ['11-04 16:30','A-304-3','可运营 → 维修','墙面粉刷','后勤 · 王工'],
+           ['11-03 10:05','A-303-8','空置 → 在住','新入住 · 杨秀云','前台 · 李萍'],
+           ['11-03 09:00','A-304-2','可运营 → 隔离','流感防控','护士长 · 周琳'],
+           ['11-02 14:20','B-201-1','隔离 → 可运营','解除隔离','护士长 · 周琳']]
+          .map(r=>`<tr><td style="font-size:11.5px;color:var(--mut)">${r[0]}</td><td><b>${r[1]}</b></td>
+          <td>${r[2]}</td><td style="font-size:11.5px">${r[3]}</td><td style="font-size:11.5px;color:var(--mut)">${r[4]}</td></tr>`).join('')}
+      </tbody></table>
+    </div>
+  </div>`;
+}
+/* 床位详情弹层 */
+function openBed(no){
+  const b = BEDMAP.find(x=>x.no===no); if(!b) return;
+  const stTxt = {live:'在住',res:'预留',idle:'空置',maint:'维修',iso:'隔离'}[b.state];
+  let body='';
+  if(b.state==='live' && b.eid){
+    const e = ELDERS.find(x=>x.id===b.eid);
+    const d = getDetail(b.eid);
+    body = `
+    <div class="grid2" style="gap:8px;margin-bottom:10px">
+      <div class="note g" style="margin:0"><b>${e.name}</b> · ${e.sex} · ${e.age} 岁 · ID ${e.id}<br>
+        <span style="color:var(--mut)">民政评估：${e.mz} ｜ 长护险：${e.lis}</span></div>
+      <div class="note" style="margin:0">入住时间：<b>${e.inDate}</b>（已住 ${Math.max(1,Math.round((new Date('2026-11-05')-new Date(e.inDate))/86400000))} 天）<br>
+        <span style="color:var(--mut)">状态：${e.status}${e.status!=='在住'?'（请假中）':''} ｜ 救助类型：${e.aid}</span></div>
+      <div class="note" style="margin:0">护理人员：<b>${e.carer}</b><br><span style="color:var(--mut)">家属：${e.family}</span></div>
+      <div class="note" style="margin:0">风险标签：<b style="color:var(--dan)">${e.risk||'—'}</b><br>
+        <span style="color:var(--mut)">下次复评：${e.reDate}</span></div>
+    </div>
+    <div style="font-weight:700;font-size:12.5px;margin:10px 0 6px">风险事件（${d.risks.length}）</div>
+    ${d.risks.length?d.risks.map(r=>`<div class="note r" style="margin-bottom:6px"><b>${r.date} · ${r.type}</b>（${r.place}）<br>${r.desc}<br>
+      <span style="color:var(--mut)">处置：${r.handle}</span></div>`).join(''):'<div class="note">近 12 个月无风险事件记录 ✓</div>'}
+    <div style="font-weight:700;font-size:12.5px;margin:10px 0 6px">最近照护记录</div>
+    ${d.execRec.slice(0,3).map(r=>`<div class="note" style="margin-bottom:5px">${r[0]} · ${r[1]} · 执行人 ${r[2]} · <span class="pill ${r[3]==='实时'?'g':'y'}">${r[3]}</span></div>`).join('')}
+    <div style="font-weight:700;font-size:12.5px;margin:10px 0 6px">待办事项</div>
+    ${d.todos.map(t=>`<div class="note ${t[2]==='待办'?'y':''}" style="margin-bottom:5px">【${t[0]}】${t[1]} · ${t[2]}</div>`).join('')}
+    <div class="mft" style="justify-content:flex-start"><button class="btn sm" onclick="closeModal();viewElder('${b.eid}')">查看完整老人档案 ›</button></div>`;
+  } else {
+    const changes = {res:[['11-05 09:12','空置 → 预留','新签约','销售 · 吴倩']],
+      maint:[['11-04 16:30','可运营 → 维修','墙面粉刷','后勤 · 王工']],
+      iso:[['11-03 09:00','可运营 → 隔离','流感防控','护士长 · 周琳']]}[b.state]||[['—','保持空置','—','—']];
+    body = `
+    <div class="note ${b.state==='idle'?'':'y'}" style="margin-bottom:10px">当前状态：<b>${stTxt}</b>${b.note?' · '+b.note:''}<br>
+      ${b.state==='res'?'签约人信息在入住登记确认后自动转为老人档案。':b.state==='maint'?'维修/隔离床位不参与使用率计算。':b.state==='iso'?'隔离期间每日健康监测，解除需护士长确认。':'空置床位为销售真实库存。'}</div>
+    <div style="font-weight:700;font-size:12.5px;margin:0 0 6px">状态变更记录</div>
+    ${changes.map(c=>`<div class="note" style="margin-bottom:5px">${c[0]} · ${c[1]} · ${c[2]} · ${c[3]}</div>`).join('')}
+    <div style="font-weight:700;font-size:12.5px;margin:12px 0 6px">快捷操作</div>
+    <div class="mft" style="justify-content:flex-start">
+      ${b.state==='idle'?'<button class="btn sm" onclick="toast(\'演示：进入入住登记流程（签约→评估→收费→排床）\')">办理入住</button>':''}
+      ${b.state==='live'?'<button class="btn sm" onclick="toast(\'演示：进入换床流程，需选择目标空床并留痕\')">换床</button>':''}
+      <button class="btn gh sm" onclick="toast('演示：变更床位状态（维修/停用/恢复），操作留痕')">变更状态</button></div>`;
+  }
+  openModal('床位详情 · '+no, b.floor+' 层 · 状态：'+stTxt+' · 变更全程留痕', body);
+}
+
+/* ============================================================
+   九、机构数据：老人档案
+   ============================================================ */
+function filterElders(){
+  const f=S.filters;
+  return ELDERS.filter(e=>{
+    const q=(f.elderSearch||'').trim();
+    if(q && !(e.name.includes(q)||e.id.toLowerCase().includes(q.toLowerCase())||e.bed.toLowerCase().includes(q.toLowerCase()))) return false;
+    if(f.elderMz && e.mz!==f.elderMz) return false;
+    if(f.elderAid && e.aid!==f.elderAid) return false;
+    if(f.elderStatus && e.status!==f.elderStatus) return false;
+    return true;
+  });
+}
+function renderElderRows(){
+  const list=filterElders();
+  const tb=$('#elderTbody'); if(!tb) return;
+  tb.innerHTML = list.length?list.map(e=>`<tr>
+    <td style="font-family:monospace;font-size:11.5px">${e.id}</td>
+    <td><b>${e.name}</b></td><td>${e.sex}</td><td class="num">${e.age}</td><td>${e.bed}</td>
+    <td>${e.inDate}</td><td><span class="pill ${e.mz.includes('完全')?'r':e.mz.includes('重度')?'y':e.mz.includes('中度')?'b':'n'}">${e.mz}</span></td>
+    <td><span class="pill ${e.lis.startsWith('5')||e.lis.startsWith('4')?'r':e.lis.startsWith('3')?'y':e.lis.startsWith('0')?'n':'b'}">长护险 ${e.lis}</span></td>
+    <td><span class="pill ${e.aid==='自费'?'n':'b'}">${e.aid}</span></td>
+    <td>${e.status==='在住'?'<span class="pill g">在住</span>':e.status==='请假'?'<span class="pill y">请假</span>':'<span class="pill n">退住</span>'}</td>
+    <td><button class="btn gh sm" onclick="viewElder('${e.id}')">查看详情</button></td>
+  </tr>`).join(''):'<tr><td colspan="11" class="empty-tip">无符合条件的老人，请调整筛选条件</td></tr>';
+  const cnt=$('#elderCnt'); if(cnt) cnt.textContent=`共 ${list.length} 位长者（在住 ${ELDERS.filter(e=>e.status==='在住').length} · 请假 ${ELDERS.filter(e=>e.status==='请假').length} · 退住 ${ELDERS.filter(e=>e.status==='退住').length}）`;
+}
+function pageElders(){
+  const f=S.filters;
+  setTimeout(renderElderRows,0);
+  return `
+  <div class="phead">
+    <div><h1 class="pt">老人档案</h1>
+      <div class="psub">一人一档 · 身份证全局唯一主索引 · 支持跨机构查重，防"一人多院骗补"</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：已导出老人名册（含双评估等级与救助类型）')">导出名册</button>
+      <button class="btn sm" onclick="toast('演示：办理入住流程 = 登记建档 → 双标评估 → 签约收费 → 排床 → 排护理')">办理入住</button></div>
+  </div>
+  <div class="filter-bar">
+    <input placeholder="搜索：姓名 / 老人ID / 床位号" value="${esc(f.elderSearch)}" oninput="S.filters.elderSearch=this.value;renderElderRows()">
+    <select onchange="S.filters.elderMz=this.value;renderElderRows()">
+      <option value="">民政评估（全部）</option>
+      ${['能力完好','轻度失能','中度失能','重度失能','完全失能'].map(x=>`<option ${f.elderMz===x?'selected':''}>${x}</option>`).join('')}
+    </select>
+    <select onchange="S.filters.elderAid=this.value;renderElderRows()">
+      <option value="">救助类型（全部）</option>
+      ${['自费','特困供养','低保','低保边缘'].map(x=>`<option ${f.elderAid===x?'selected':''}>${x}</option>`).join('')}
+    </select>
+    <select onchange="S.filters.elderStatus=this.value;renderElderRows()">
+      <option value="">状态（全部）</option>
+      ${['在住','请假','退住'].map(x=>`<option ${f.elderStatus===x?'selected':''}>${x}</option>`).join('')}
+    </select>
+    <span class="hint" id="elderCnt" style="margin-left:auto"></span>
+  </div>
+  <div class="card np">
+    <table><thead><tr>
+      <th>老人ID</th><th>姓名</th><th>性别</th><th class="num">年龄</th><th>床位号</th><th>入住日期</th>
+      <th>民政评估</th><th>医保评估（长护险）</th><th>救助类型</th><th>状态</th><th>操作</th>
+    </tr></thead><tbody id="elderTbody"></tbody></table>
+  </div>
+  <div class="note b">字段说明：民政评估 = GB/T 42195-2022 能力等级（用于照护分级与民政补贴）；医保评估 = 长护险失能等级（用于长护险基金结算）。
+  两套等级由一次采集自动生成，详见 <span class="lk" onclick="go('assess')">评估中心 ›</span>。退住老人档案保留 5 年（护理院病历 15 年）。</div>`;
+}
+function viewElder(id){ S.elderId=id; S.tab.elder='info'; S.page='eldersDetail'; render(); window.scrollTo(0,0); }
+
+/* 老人详情（7 tab） */
+function pageElderDetail(){
+  const e = ELDERS.find(x=>x.id===S.elderId); if(!e) return pageElders();
+  const d = getDetail(S.elderId);
+  const tab = S.tab.elder||'info';
+  const dueDays = Math.round((new Date(e.reDate)-new Date('2026-11-05'))/86400000);
+  const b = d.bill;
+  const tabs=[['info','概览'],['assess','评估情况'],['care','护理与照护'],['fee','费用'],['family','家属与联系人'],['risk','风险事件'],['todo','待办事项']];
+  const tabHtml={
+    info:`<div class="grid2" style="grid-template-columns:1fr 1.2fr">
+      <div class="card"><div class="ct" style="margin-bottom:10px">基本信息</div>
+        ${[['身份证号',d.idcard],['出生日期',d.birth],['籍贯',d.origin],['文化程度',d.edu],['宗教信仰',d.belief],
+           ['身高 / 体重 / BMI',d.height+' / '+d.weight+' / '+d.bmi],['既往史',d.history],['过敏史',d.allergy],
+           ['膳食',d.diet],['吞咽等级',d.swallow],['押金',d.deposit],['预收',d.prepaid]]
+          .map(r=>`<div style="display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:12px">
+          <span style="color:var(--mut);flex:0 0 auto">${r[0]}</span><b style="text-align:right">${r[1]}</b></div>`).join('')}</div>
+      <div>
+        <div class="card"><div class="ct" style="margin-bottom:10px">住养状态</div>
+          ${[['当前床位',e.bed+'（A 区 '+(+e.bed.slice(2,5)-300)+' 层）'],['入住日期',e.inDate],['在住时长',Math.max(1,Math.round((new Date('2026-11-05')-new Date(e.inDate))/86400000))+' 天'],
+             ['状态',e.status],['护理人员',e.carer],['民政救助类型',e.aid],['服务券',e.voucher],['风险标签',e.risk||'—']]
+            .map(r=>`<div style="display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:12px">
+            <span style="color:var(--mut)">${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div>
+        <div class="card"><div class="ct" style="margin-bottom:10px">入住史 <span class="pill b">跨机构追溯</span></div>
+          <table><tbody>
+            <tr><td>新濠院区（本次）</td><td>${e.bed}</td><td>${e.inDate}</td><td>${e.status==='退住'?'2026-10-28':'在住'}</td></tr>
+            ${S.elderId==='E2026-0001'?'<tr><td>孝庄护理中心</td><td>B-105-2</td><td>2024-06-11</td><td>2024-09-20 · 家属接回</td></tr>':''}
+          </tbody></table>
+          <div class="note b" style="margin-top:8px">老人主索引以<b>身份证全局唯一</b>，跨机构查重、防一人多院骗补。</div></div>
+      </div></div>`,
+    assess:`<div style="margin-bottom:12px;position:relative"><div class="dual">
+        <div class="rpt mz"><div class="tg">民政口径 · GB/T 42195-2022</div><div class="lv">${e.mz}</div>
+          <div class="why">用于照护分级、居家服务、养老补贴。${dueDays<=30?'<b style="color:var(--dan)">复评 '+dueDays+' 天内到期</b>，未复评将影响补贴与结算。':''}</div></div>
+        <div class="rpt lis"><div class="tg">医保口径 · 长护险失能等级</div><div class="lv">${e.lis}</div>
+          <div class="why">用于长护险基金支付，等级越高可结算金额越高。</div></div>
+      </div><div class="duallink">一次采集 · 双标输出</div></div>
+      <div class="card"><div class="ct" style="margin-bottom:10px">评估历史时间线</div>
+        ${d.assessList.map((a,i)=>`<div class="tl" style="margin-top:6px"><div class="ti ${i===0?'':'gray'}">
+          <b>${a.date} · ${a.type}</b>　<span class="pill g">${a.mz}</span> <span class="pill y">长护险 ${a.lis}</span><br>
+          <span style="font-size:11.5px;color:var(--mut)">评估员：${a.by} ｜ 有效期至 ${a.exp} ｜ ${a.note}</span></div></div>`).join('')}
+        <button class="btn gh sm" onclick="S.formElder='${e.id}';S.page='assess';S.tab.assess='form';render();toast('已进入重新评估页面（${e.name}）')">发起再次评估</button></div>`,
+    care:`<div class="grid2" style="grid-template-columns:1.2fr 1fr">
+      <div class="card"><div class="ch"><div class="ct">照护计划</div><span class="hint">由评估结果推导 · ${d.carePlan.length} 项</span></div>
+        <table><thead><tr><th>服务项目</th><th>频次</th><th>执行角色</th><th class="num">记录字段</th></tr></thead>
+        <tbody>${d.carePlan.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="num">${r[3]}</td></tr>`).join('')}</tbody></table>
+        <div class="note" style="margin-top:10px">评估变了、医嘱变了、发生不良事件，都会触发计划修订并<b>保留版本</b>。</div></div>
+      <div class="card"><div class="ch"><div class="ct">执行记录（移动端）</div><span class="pill g">按时率 96%</span></div>
+        <table><thead><tr><th>时间</th><th>项目</th><th>执行人</th><th>来源</th></tr></thead>
+        <tbody>${d.execRec.map(r=>`<tr><td style="font-size:11.5px">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td>
+          <td>${r[3]==='实时'?'<span class="pill g">实时</span>':'<span class="pill y">补记</span>'}</td></tr>`).join('')}</tbody></table>
+        <div class="note y" style="margin-top:10px">补记率 3.1%，超过 5% 将在数据监管-异常波动中预警。</div></div></div>`,
+    fee:`<div class="grid2">
+      <div class="card"><div class="ct" style="margin-bottom:10px">本月账单（2026-10）</div>
+        <table><tbody>
+          <tr><td>床位费</td><td class="num">${nf(b.bed)}</td></tr>
+          <tr><td>护理费</td><td class="num">${nf(b.care)}</td></tr>
+          <tr><td>餐费</td><td class="num">${nf(b.meal)}</td></tr>
+          <tr><td>医疗费</td><td class="num">${nf(b.med)}</td></tr>
+          <tr class="sum"><td>合计</td><td class="num">${nf(b.bed+b.care+b.meal+b.med)}</td></tr></tbody></table></div>
+      <div class="card"><div class="ct" style="margin-bottom:10px">支付方拆分</div>
+        ${b.lis?`<div class="note l" style="margin-bottom:6px">长护险基金支付 <b>¥${nf(b.lis)}</b>（${e.lis} 等级对应月限额）</div>`:''}
+        ${b.voucher?`<div class="note y" style="margin-bottom:6px">服务券抵扣 <b>¥${nf(b.voucher)}</b>（凭证三要素齐全）</div>`:''}
+        ${b.mzPay?`<div class="note b" style="margin-bottom:6px">民政兜底支付 <b>¥${nf(b.mzPay)}</b>（${e.aid} · 政策限价）</div>`:''}
+        <div class="note" style="margin-bottom:6px">个人自费（家属支付）<b>¥${nf(b.bed+b.care+b.meal+b.med-b.lis-b.voucher-(b.mzPay||0))}</b></div>
+        <div class="note ${b.status==='已结算'?'g':'y'}">结算状态：<b>${b.status}</b>${b.status!=='已结算'?' · 详见收费与结算模块':''}</div>
+        <button class="btn gh sm" style="margin-top:8px" onclick="go('bill')">进入收费与结算 ›</button></div></div>
+      <div class="card"><div class="ct" style="margin-bottom:10px">缴费流水（近 3 笔）</div>
+        <table><thead><tr><th>日期</th><th>类型</th><th class="num">金额</th><th>方式</th></tr></thead><tbody>
+          ${[['11-02','11 月预交（床位+护理+餐）','9,220','对公转账'],['10-03','10 月费用','9,220','对公转账'],['09-28','押金补差','0','—']]
+            .map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody></table></div>`,
+    family:`<div class="card"><div class="ct" style="margin-bottom:10px">家属与紧急联系人</div>
+      ${(!d.family.length||d.family[0][0]==='—')?'<div class="note r">⚠ 缺紧急联系人，请在档案中补充（涉及上报完整率）</div>':
+      `<table><thead><tr><th>姓名</th><th>关系</th><th>电话</th><th>角色</th></tr></thead>
+      <tbody>${d.family.map(f=>`<tr><td><b>${f[0]}</b></td><td>${f[1]}</td><td>${f[2]}</td><td>${f[3]}</td></tr>`).join('')}</tbody></table>`}</div>
+      <div class="card"><div class="ct" style="margin-bottom:10px">探视记录</div>
+      ${d.visitRec.length?`<table><thead><tr><th>时间</th><th>探视人</th><th>内容</th></tr></thead>
+      <tbody>${d.visitRec.map(v=>`<tr><td>${v[0]}</td><td>${v[1]}</td><td style="font-size:11.5px">${v[2]}</td></tr>`).join('')}</tbody></table>`
+      :'<div class="note">暂无探视登记（登记由前台完成，自动归档）</div>'}</div>`,
+    risk:`${d.risks.length?d.risks.map(r=>`<div class="card" style="border-left:3px solid var(--dan)">
+      <div class="ch"><div class="ct">${r.type}</div><span class="pill r">${r.date}</span></div>
+      <div class="grid2" style="gap:8px">
+        <div class="note">发生地点：${r.place}<br>事件经过：${r.desc}</div>
+        <div class="note">处置措施：${r.handle}<br>上报情况：${r.report}</div></div>
+      ${r.assess!=='—'?`<div class="note y" style="margin-top:8px">⚡ 与评估联动：${r.assess}　<span class="lk" onclick="S.formElder='${e.id}';S.page='assess';S.tab.assess='form';render()">查看评估 ›</span></div>`:''}
+      </div>`).join(''):'<div class="card"><div class="note g">近 12 个月无风险事件记录 ✓（跌倒 / 压疮 / 走失 / 噎食 / 非计划拔管 / 约束具）</div></div>'}
+      <div class="note b">风险事件与评估中心绑定：近 30 天内发生 ≥2 次照护风险事件时，评估定级<b>自动提示提升一级</b>，由评估员确认。</div>`,
+    todo:`<div class="card">${d.todos.length?d.todos.map(t=>`<div style="display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line2)">
+      <span class="pill ${t[2]==='待办'?'y':t[2]==='进行中'?'b':'n'}">${t[2]}</span>
+      <span class="pill n">${t[0]}</span><span style="flex:1;font-size:12.5px">${t[1]}</span></div>`).join('')
+      :'<div class="note g">该长者暂无待办事项 ✓</div>'}</div>
+      <div class="note b">待办自动生成来源：复评到期、证件缺失、费用确认、风险事件复查；也可由护理员/护士长手工添加。</div>`
+  }[tab];
+  return `
+  <div class="phead">
+    <div style="display:flex;gap:14px;align-items:center">
+      <div class="av" style="width:52px;height:52px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">${e.name[0]}</div>
+      <div><h1 class="pt">${e.name} <span style="font-size:13px;color:var(--mut);font-weight:400">${e.id}</span></h1>
+        <div class="psub">${e.sex} · ${e.age} 岁 · 床位 ${e.bed} · ${e.status} · <span class="pill y" style="vertical-align:1px">${e.mz}</span> <span class="pill b" style="vertical-align:1px">长护险 ${e.lis}</span>${dueDays<=30?` <span class="pill r" style="vertical-align:1px">复评 ${dueDays>0?dueDays+' 天内到期':'已到期'}</span>`:''}</div></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn gh sm" onclick="S.page='elders';render()">← 返回列表</button>
+      <button class="btn sm" onclick="S.formElder='${e.id}';S.page='assess';S.tab.assess='form';render()">发起再次评估</button>
+    </div>
+  </div>
+  <div class="card np">
+    <div style="padding:10px 16px 0"><div class="tabs" style="margin-bottom:0">
+      ${tabs.map(t=>`<div class="tab ${tab===t[0]?'on':''}" onclick="S.tab.elder='${t[0]}';render()">${t[1]}</div>`).join('')}
+    </div></div>
+    <div style="padding:14px 16px 16px">${tabHtml}</div>
+  </div>`;
+}
+/* ============================================================
+   十、机构数据：收费与结算
+   ============================================================ */
+function pageBill(){
+  const p=PAY.xh, o=ORGS.xh;
+  const tab=S.tab.bill||'overview';
+  /* 账单筛选 */
+  const list = BILLS_RAW.filter(b=>{
+    if(S.filters.billSt && b.st!==S.filters.billSt) return false;
+    if(S.filters.billAid && b.aid!==S.filters.billAid) return false;
+    return true;
+  });
+  const sum=list.reduce((a,x)=>({bed:a.bed+x.bed,care:a.care+x.care,meal:a.meal+x.meal,med:a.med+x.med,total:a.total+x.total}),{bed:0,care:0,meal:0,med:0,total:0});
+  const tabHtml={
+    overview:`
+      <div class="ch"><div class="ct">10 月收入结构（新濠院区）</div>
+        <span style="display:flex;gap:8px"><button class="btn gh sm" onclick="go('policy')">政策参数 ›</button>
+        <button class="btn sm" onclick="toast('演示：对账单已导出（四支付方 + 服务券 + 押金预收）')">导出对账单</button></span></div>
+      <div class="paycards" style="margin-bottom:12px">
+        <div class="pc s"><div class="t">自费</div><div class="v">${nf(p.self)}</div><div class="p">${pct(p.self,p.total)}% · 占最大头 · 按月收</div></div>
+        <div class="pc l"><div class="t">长护险</div><div class="v">${nf(p.lis)}</div><div class="p">${pct(p.lis,p.total)}% · 职工 70% 报销 · 月结</div></div>
+        <div class="pc m"><div class="t">民政兜底</div><div class="v">${nf(p.mz)}</div><div class="p">${pct(p.mz,p.total)}% · 特困/低保 · 季度结算</div></div>
+        <div class="pc y"><div class="t">医保医疗</div><div class="v">${nf(p.yb)}</div><div class="p">${pct(p.yb,p.total)}% · 按项目 · 月结</div></div>
+      </div>
+      <div class="grid3">
+        <div class="kpi"><div class="k">本月应收</div><div class="v">${nf(p.total)}</div><div class="c">348 张账单</div></div>
+        <div class="kpi"><div class="k">已收</div><div class="v" style="color:var(--pri)">${nf(p.recv)}</div><div class="c g">收缴率 ${pct(p.recv,p.total)}%</div></div>
+        <div class="kpi"><div class="k">欠费</div><div class="v" style="color:var(--dan)">${nf(p.owe)}</div><div class="c r">12 户 · 2 户超 2 个月</div></div>
+      </div>
+      <div class="card" style="background:#FBFCFB;margin-top:12px">
+        <div class="ch"><div class="ct">政府购买服务券 <span class="pill n">代收代付 · 不计机构收入</span></div></div>
+        <div style="display:flex;gap:32px;font-size:12.5px">
+          <div>本月核销 <b style="font-size:17px">¥${nf(p.voucher)}</b></div>
+          <div>服务人次 <b style="font-size:17px">${nf(p.voucherTimes)}</b></div>
+          <div>券余额池 <b style="font-size:17px">¥${nf(p.voucherPool)}</b></div>
+          <div>逾期失效 <b style="font-size:17px;color:var(--warn)">¥${nf(p.voucherExpired)}</b></div></div></div>
+      <div class="note b">机构视角的支付口径全景：① 自费（家属）② 长护险（医保基金，按失能等级）③ 民政兜底（特困/低保定额）④ 医保医疗（按项目）⑤ 服务券（政府购买，代收代付）。
+      一个账单可拆给多个支付方，<b>拆分依据必须可追溯</b>。押金与预收费监管要求见「押金与预收」页签。</div>`,
+    detail:`
+      <div class="filter-bar">
+        <select onchange="S.filters.billSt=this.value;render()">
+          <option value="">结算状态（全部）</option>
+          ${['已结算','未结算','部分结算'].map(x=>`<option ${S.filters.billSt===x?'selected':''}>${x}</option>`).join('')}
+        </select>
+        <select onchange="S.filters.billAid=this.value;render()">
+          <option value="">救助类型（全部）</option>
+          ${['自费','特困供养','低保','低保边缘'].map(x=>`<option ${S.filters.billAid===x?'selected':''}>${x}</option>`).join('')}
+        </select>
+        <select onchange="toast('演示：切换账期将重算当期账单')"><option>账期：2026-10</option><option>账期：2026-09</option><option>账期：2026-08</option></select>
+        <span class="hint" style="margin-left:auto">以老人ID为主键 · 一单一支付拆分</span>
+      </div>
+      <table><thead><tr>
+        <th>老人ID</th><th>姓名</th><th>救助类型</th><th>服务券</th>
+        <th class="num">床位费</th><th class="num">护理费</th><th class="num">餐费</th><th class="num">医疗费</th><th class="num">合计</th>
+        <th>支付方拆分</th><th class="num">自费</th><th>状态</th></tr></thead>
+      <tbody>
+        ${list.map(b=>`<tr>
+          <td style="font-family:monospace;font-size:11.5px">${b.id}</td>
+          <td><b>${b.name}</b></td>
+          <td><span class="pill ${b.aid==='自费'?'n':'b'}">${b.aid}</span></td>
+          <td>${b.voucher==='是'?'<span class="pill y">是</span>':'否'}</td>
+          <td class="num">${nf(b.bed)}</td><td class="num">${nf(b.care)}</td><td class="num">${nf(b.meal)}</td><td class="num">${nf(b.med)}</td>
+          <td class="num"><b>${nf(b.total)}</b></td>
+          <td style="font-size:11px">${b.split.split(' · ').map(s=>`<span class="pill ${s.startsWith('长护险')?'l':s.startsWith('民政')?'b':s.startsWith('服务券')?'y':'n'}">${s}</span>`).join(' ')}</td>
+          <td class="num">${b.self}</td>
+          <td>${b.st==='已结算'?'<span class="pill g">已结算</span>':b.st==='部分结算'?'<span class="pill y">部分结算</span>':'<span class="pill r">未结算</span>'}</td>
+        </tr>`).join('')}
+        <tr class="sum"><td colspan="4">本页合计（全院 348 条）</td>
+          <td class="num">${nf(sum.bed)}</td><td class="num">${nf(sum.care)}</td><td class="num">${nf(sum.meal)}</td><td class="num">${nf(sum.med)}</td>
+          <td class="num">${nf(sum.total)}</td><td style="font-size:11px">长护险 ${nf(p.lis)} · 民政 ${nf(p.mz)} · 医保 ${nf(p.yb)}</td>
+          <td class="num">${nf(p.self)}</td><td>—</td></tr>
+      </tbody></table>
+      <div class="note" style="margin-top:10px">点行内老人姓名可进入其档案；「支付方拆分」点开可看每笔的依据（长护险：目录项目 × 报销比例；民政：救助类型 × 政策限价；服务券：核销凭证）。</div>`,
+    mz:`
+      <div class="note y" style="margin-bottom:10px">本季度政策限价与机构标准价差额合计 <b>¥7,200</b>，承担方为机构让利。
+        <span class="lk" style="float:right" onclick="toast('演示：已生成补差申请单，待提交区民政')">去申请财政补差 ›</span></div>
+      <table><thead><tr><th>老人</th><th>救助类型</th><th class="num">政策限价</th><th class="num">机构标准价</th>
+        <th class="num">差额</th><th>承担方</th><th>结算状态</th></tr></thead><tbody>
+        ${[['李长海','特困供养',2800,3600,'机构让利','未结算'],['赵德明','特困供养',2800,3600,'机构让利','未结算'],
+           ['孙秀珍','低保边缘',3200,3600,'财政补差','已结算'],['刘桂兰','低保',3000,3600,'机构让利 + 财政补差','部分结算']]
+          .map(r=>`<tr><td><b>${r[0]}</b></td><td><span class="pill b">${r[1]}</span></td>
+          <td class="num">${nf(r[2])}</td><td class="num">${nf(r[3])}</td>
+          <td class="num" style="color:var(--dan)">${nf(r[3]-r[2])}</td>
+          <td><span class="pill y">${r[4]}</span></td>
+          <td>${r[5]==='已结算'?'<span class="pill g">已结算</span>':r[5]==='部分结算'?'<span class="pill y">部分结算</span>':'<span class="pill r">未结算</span>'}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note" style="margin-top:10px"><b>"差额谁承担"是最容易被忽略的字段</b>——不做这个台账，年底盘账才发现毛利被吃掉一块，且说不清被谁吃掉。</div>`,
+    voucher:`
+      <div class="note" style="margin-bottom:10px"><b>无服务记录不得核销</b>：定位 + 人脸 + 电子签字三要素齐全才可结算。</div>
+      <table><thead><tr><th>券号</th><th>老人</th><th>券类型</th><th>服务项目</th>
+        <th class="num">服务金额</th><th class="num">券抵扣</th><th class="num">自付</th><th>凭证</th><th>状态</th></tr></thead><tbody>
+        ${[['V-20261105-0821','张桂芬','居家养老服务券','助浴（上门）',120,60,60,['loc','face','sign'],'ok'],
+           ['V-20261105-0834','刘桂兰','助餐补贴','助餐（送餐）',25,12,13,['loc','sign'],'ok'],
+           ['V-20261105-0847','周建国','居家养老服务券','助洁（2 小时）',160,80,80,['face','sign'],'warn'],
+           ['V-20261105-0856','吴淑芳','护理补贴','生活照护',90,45,45,['loc','face','sign'],'ok']]
+          .map(v=>`<tr ${v[8]==='warn'?'style="background:var(--dan-l)"':''}>
+          <td style="font-size:11px">${v[0]}</td><td>${v[1]}</td><td><span class="pill b">${v[2]}</span></td><td>${v[3]}</td>
+          <td class="num">${v[4]}</td><td class="num">${v[5]}</td><td class="num">${v[6]}</td>
+          <td style="font-size:12px">${credIcons(v[7])}</td>
+          <td>${v[8]==='ok'?'<span class="pill g">可结算</span>':'<span class="pill r">凭证不全</span>'}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note r" style="margin-top:10px">第 3 行（周建国）缺<b>定位凭证</b>，整行标红不可结算——这是防刷的第一道闸。</div>`,
+    settle:`
+      <table><thead><tr><th>结算单</th><th>支付方</th><th>周期</th><th class="num">金额</th><th>状态</th><th>预计到账</th><th>操作</th></tr></thead><tbody>
+        <tr><td>长护险 10 月结算</td><td><span class="pill l">医保经办</span></td><td>2026-10</td><td class="num">86,400</td>
+          <td><span class="pill g">已受理</span></td><td>11-18</td><td><span class="lk" onclick="toast('演示：结算单详情（服务量对账 + 36 项目录明细）')">查看</span></td></tr>
+        <tr><td>民政兜底 Q4 结算</td><td><span class="pill m">区民政局</span></td><td>2026 Q4</td><td class="num">26,900</td>
+          <td><span class="pill y">待申报</span></td><td>—</td><td><span class="lk" onclick="go('subsidy')">去申报</span></td></tr>
+        <tr><td>医保医疗 10 月</td><td><span class="pill b">医保局</span></td><td>2026-10</td><td class="num">4,800</td>
+          <td><span class="pill g">已提交</span></td><td>11-20</td><td><span class="lk" onclick="toast('演示：医保医疗结算明细')">查看</span></td></tr>
+        <tr><td>长护险退回件 ×2</td><td><span class="pill l">医保经办</span></td><td>2026-10</td><td class="num">2,860</td>
+          <td><span class="pill r">材料退回</span></td><td>—</td><td><span class="lk" onclick="toast('演示：缺 2 条服务记录，已生成待办 T4，补录后可重新提交')">处理退回</span></td></tr>
+      </tbody></table>
+      <div class="note" style="margin-top:10px">四类支付方、四个结算周期、四套对账口径——<b>这是养老信息化真正的复杂点，不是技术难，是口径乱。</b></div>`,
+    deposit:`
+      <div class="grid2">
+        <div><div class="ct" style="margin-bottom:9px">押金（与预收费严格分离）</div>
+          <div class="note" style="margin-bottom:8px">押金合计 <b>42 万元</b> ｜ 单床最高 <b>2 万元</b></div>
+          <div class="note" style="margin-bottom:8px">上限 = 月床位费 × 12 = ${nf(4200*12)} 元 <span class="pill g" style="float:right">合规</span></div>
+          <div class="note">监管要求：押金须第三方存管，不得挪作经营周转</div></div>
+        <div><div class="ct" style="margin-bottom:9px">预收费</div>
+          <div class="note" style="margin-bottom:8px">当前最长预收 <b>3 个月</b> ｜ 涉及 41 人</div>
+          <div class="note" style="margin-bottom:8px">上限 12 个月 <span class="pill g" style="float:right">合规</span></div>
+          <div class="note y">预收费不得用于"一床多卖"，交费人数不得超备案床位数</div></div>
+      </div>
+      <div class="note b" style="margin-top:10px">每月 25 日自动出具《押金与预收合规自查表》，随数据上报一起归档，供民政/市场监管抽查。</div>`
+  }[tab];
+  const tabs=[['overview','收费结算总览'],['detail','账单明细'],['mz','民政兜底台账'],['voucher','服务券核销'],['settle','结算单'],['deposit','押金与预收']];
+  return `
+  <div class="phead">
+    <div><h1 class="pt">收费与结算 ${info('四类支付方','民政是两条线，不是一条',
+      '① 民政兜底供养：按人×月定额，政策限价常低于机构标准价 → 差额要有人承担\\n② 政府购买服务：按券核销，必须绑定真实服务记录\\n③ 自费\\n④ 医保（医疗）+ 长护险（护理）\\n\\n把"民政"当成一种支付方，两套业务都会做错。')}</h1>
+      <div class="psub">${o.name} · 2026 年 10 月 ｜ 应收 ${nf(p.total)} ｜ 已收 ${nf(p.recv)} ｜ 欠费 ${nf(p.owe)}</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：月度收费汇总表已导出')">导出月报</button>
+      <button class="btn sm" onclick="toast('演示：进入发起结算向导（长护险/民政/医保）')">发起结算</button></div>
+  </div>
+  <div class="card np">
+    <div style="padding:10px 16px 0"><div class="tabs" style="margin-bottom:0">
+      ${tabs.map(t=>`<div class="tab ${tab===t[0]?'on':''}" onclick="S.tab.bill='${t[0]}';render()">${t[1]}</div>`).join('')}
+    </div></div>
+    <div style="padding:14px 16px 16px">${tabHtml}</div>
+  </div>`;
+}
+
+/* ============================================================
+   十一、机构数据：失能专区看板
+   ============================================================ */
+function pageDisab(){
+  const g=GROUP_DIS, tot=g.light+g.mid+g.heavy+g.total;
+  const lisIncome=216400, heavy=172+68;
+  const perBed=Math.round(lisIncome/heavy);
+  const lisRows=[['轻度',g.light,6,100,g.light*100],['中度',g.mid,9,260,g.mid*260],
+                 ['重度',g.heavy,13,520,g.heavy*520],['完全失能',g.total,16,950,g.total*950]];
+  const lisTheory=lisRows.reduce((a,r)=>a+r[4],0);
+  return `
+  <div class="phead">
+    <div><h1 class="pt">失能专区看板 ${info('失能主线','失能等级不是标签，是四个环节的共同输入',
+      '评估 → 护理分级 → 排班与护理比 → 长护险结算\\n\\n如果失能等级只是评估页上一个字段，这套系统就没真正打通。')}</h1>
+      <div class="psub">集团 4 家机构 · 失能老人 ${tot} 人 · 重度及以上 ${heavy} 人 · 截至 2026-11-05</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：失能台账已导出（等级 / 复评 / 长护险可结算金额）')">导出失能台账</button>
+      <button class="btn sm" onclick="toast('演示：已生成护理型床位改造申请（目标 73%）')">申请改造补贴</button></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="k">护理型床位</div><div class="v">512<small> 张 / 71.1%</small></div><div class="c y">政策目标 73%，差 1.9 个百分点</div></div>
+    <div class="kpi"><div class="k">失能老人</div><div class="v">${tot}<small> 人</small></div><div class="c">轻 ${g.light} / 中 ${g.mid} / 重 ${g.heavy} / 完全 ${g.total}</div></div>
+    <div class="kpi"><div class="k">重度及以上占比</div><div class="v">${pct(heavy,tot)}<small>%</small></div><div class="c">每提高 10%，单位人力成本约增 18%</div></div>
+    <div class="kpi"><div class="k">长护险可结算</div><div class="v">¥${nf(lisIncome)}</div><div class="c">单张失能床位月均 ¥${nf(perBed)}</div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ct">失能等级分布</div><span class="hint">分母 = 在住 596 人</span></div>
+    <div class="bar" style="height:32px">
+      <div style="flex:${g.light};background:#9ECFC3">轻度 ${g.light}</div>
+      <div style="flex:${g.mid};background:#6BB3A2">中度 ${g.mid}</div>
+      <div style="flex:${g.heavy};background:var(--pri)">重度 ${g.heavy}</div>
+      <div style="flex:${g.total};background:var(--pri-d)">完全 ${g.total}</div>
+      <div style="flex:${596-tot};background:#DCE5E2;color:#7A8A86">未评估 ${596-tot}</div>
+    </div>
+    <div class="grid3" style="gap:10px;margin-top:10px">
+      <div class="note">轻度 + 中度 = ${g.light+g.mid} 人（${pct(g.light+g.mid,596)}%），主要影响生活照护人力</div>
+      <div class="note y">重度 + 完全 = ${heavy} 人（${pct(heavy,596)}%），<b>决定护理比与长护险收入</b></div>
+      <div class="note b">长护险可结算 ${nf(lisIncome)} ≈ ${heavy} 人 × 人均 ¥${nf(perBed)}/月</div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">分区护理比（新濠院区）</div><span class="hint">不同护理区标准不同</span></div>
+      <table><thead><tr><th>护理区</th><th class="num">床位</th><th class="num">在住</th><th class="num">护理员</th>
+        <th class="num">护理比</th><th class="num">标准</th><th>状态</th></tr></thead><tbody>
+        ${[['自理区',96,88,6,'1:14.7','1:15'],['半失能区',128,124,18,'1:6.9','1:7'],
+           ['失能区',148,142,34,'1:4.2','1:4'],['认知症专区',24,23,9,'1:2.6','1:3'],
+           ['B 区 2 层（失能）',52,41,6,'1:6.8','1:5']]
+          .map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td><td class="num">${r[3]}</td>
+          <td class="num">${r[4]}</td><td class="num">${r[5]}</td>
+          <td>${parseFloat(r[4].slice(2))>parseFloat(r[5].slice(2))?'<span class="pill r">超标</span>':'<span class="pill g">达标</span>'}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="hint" style="margin-top:8px">B 区 2 层本月护理比 1:6.8 超标，已生成待办，可从 <span class="lk" onclick="go('carers')">护理人员 ›</span> 调配。</div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">长护险收入预测</div><span class="pill g">与实际结算一致</span></div>
+      <table><thead><tr><th>失能等级</th><th class="num">人数</th><th class="num">人均可报项目</th><th class="num">人均月额</th><th class="num">小计</th></tr></thead><tbody>
+        ${lisRows.map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]} 项</td>
+          <td class="num">¥ ${nf(r[3])}</td><td class="num">${nf(r[4])}</td></tr>`).join('')}
+        <tr class="sum"><td>理论可报合计</td><td class="num">${tot}</td><td class="num">—</td><td class="num">—</td><td class="num">${nf(lisTheory)}</td></tr>
+      </tbody></table>
+      <div class="note" style="margin-top:8px">理论可报 <b>¥${nf(lisTheory)}</b> ｜ 实际结算 <b>¥${nf(lisIncome)}</b>（达成 ${pct(lisIncome,lisTheory)}%，差异来自 2 位老人月中入住）</div>
+      <div class="note y" style="margin-top:8px">失能等级每提升一级，月均可报金额上升 2–3 倍，但护理人力成本同步上升——<b>两个曲线交叉点就是最优结构</b>。</div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">失能质量四项</div><span class="hint">监管最查的四项</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="note g"><div style="font-size:11px;color:var(--mut)">压疮发生率</div><div style="font-size:19px;font-weight:700;color:var(--pri)">0.6‰</div><div style="font-size:10.5px;color:var(--mut)">目标 ≤1‰ · II 度应为 0</div></div>
+        <div class="note g"><div style="font-size:11px;color:var(--mut)">跌倒发生率</div><div style="font-size:19px;font-weight:700;color:var(--pri)">0.9‰</div><div style="font-size:10.5px;color:var(--mut)">每千床日</div></div>
+        <div class="note y"><div style="font-size:11px;color:var(--mut)">约束具使用率</div><div style="font-size:19px;font-weight:700;color:#8A5A05">8.2%</div><div style="font-size:10.5px;color:var(--mut)">监管重点关注 · 建议复核必要性</div></div>
+        <div class="note"><div style="font-size:11px;color:var(--mut)">营养风险（体重↓5%）</div><div style="font-size:19px;font-weight:700">4 人</div><div style="font-size:10.5px;color:var(--mut)">需营养师介入</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">高风险 TOP5</div><span class="hint">30 天内需复评标红</span></div>
+      <table><thead><tr><th>老人</th><th>床位</th><th>等级</th><th>风险标签</th><th>下次复评</th></tr></thead><tbody>
+        ${[['张桂芬','A-302-1','3 级','压疮 / 跌倒 / 吞咽','2027-10-04','E2026-0001'],
+           ['刘桂兰','A-302-4','4 级','跌倒 / 走失','2026-11-20 ⚠','E2026-0004'],
+           ['周建国','A-303-4','4 级','压疮 / 约束具','2026-11-28 ⚠','E2026-0005'],
+           ['吴淑芳','A-303-3','3 级','吞咽 / 营养','2026-06-27','E2026-0009'],
+           ['赵德明','A-301-3','5 级','压疮 / 认知症','2026-11-30 ⚠','E2026-0007']]
+          .map(r=>`<tr style="cursor:pointer" onclick="viewElder('${r[5]}')"><td><b>${r[0]}</b></td><td>${r[1]}</td>
+          <td><span class="pill y">${r[2]}</span></td><td>${r[3]}</td>
+          <td style="color:${r[4].includes('⚠')?'var(--dan)':'inherit'}">${r[4]}</td></tr>`).join('')}
+      </tbody></table>
+    </div>
+  </div>
+  <div class="note b"><b>一句话：</b>失能等级不是标签，是<b>定价、排班与长护险结算的共同输入</b>——它一旦只是评估页上的一个字段，这套系统就没真正打通。</div>`;
+}
+
+/* ============================================================
+   十二、机构数据：指标与报表
+   ============================================================ */
+function pageMetric(){
+  const rows=['xh','xz','zf','ms'].map(k=>{
+    const o=ORGS[k],m=METRICS[k];
+    return `<tr><td><b>${o.name}</b></td><td class="num">${o.filed}</td><td class="num">${o.live}</td>
+      <td class="num">${pct(o.live,o.oper)}%</td><td class="num">${pct(o.live,o.filed)}%</td>
+      <td class="num">${(m.income/(o.live||1)).toFixed(0)}</td><td class="num">${m.costRate}%</td>
+      <td class="num">${m.service>999?(m.service/1000).toFixed(1)+'k':m.service}</td><td class="num">${m.ontime}%</td></tr>`;
+  }).join('');
+  return `
+  <div class="phead">
+    <div><h1 class="pt">指标与报表 ${info('指标字典','集团汇总的前提不是接口，是这张表',
+      '每家机构自己算的"入住率"都不一样，因为分母不同。\\n先把指标名、计算式、口径写进字典并指定责任部门，才谈得上汇总。')}</h1>
+      <div class="psub">统一口径 · 8 个核心指标 · 月度报表一键导出</div></div>
+    <button class="btn sm" onclick="toast('演示：经营月报（Excel+PDF）已生成')">生成经营月报</button>
+  </div>
+  <div class="card np">
+    <div style="padding:13px 16px 4px"><div class="ct">机构对比（2026-10 月）</div></div>
+    <table><thead><tr><th>机构</th><th class="num">备案</th><th class="num">在住</th><th class="num">使用率</th>
+      <th class="num">入住率(民政)</th><th class="num">单床月收入</th><th class="num">人力成本</th>
+      <th class="num">服务量</th><th class="num">按时率</th></tr></thead>
+    <tbody>${rows}
+      <tr class="sum"><td>集团合计</td><td class="num">${ORGS.group.filed}</td><td class="num">${ORGS.group.live}</td>
+      <td class="num">${pct(ORGS.group.live,ORGS.group.oper)}%</td><td class="num">${pct(ORGS.group.live,ORGS.group.filed)}%</td>
+      <td class="num">—</td><td class="num">55%</td><td class="num">3.8k</td><td class="num">95.6%</td></tr>
+    </tbody></table>
+  </div>
+  <div class="card">
+    <div class="ct" style="margin-bottom:10px">指标字典（全部报表共用同一口径）</div>
+    <table><thead><tr><th>指标</th><th>计算式</th><th>口径说明</th><th>责任部门</th></tr></thead><tbody>
+      ${[['床位使用率','在住床日 ÷ 可运营床日','分母不含维修/隔离/停用','运营'],
+         ['入住率（民政）','在住床位 ÷ 备案床位','上报口径，数值低于使用率','信息员'],
+         ['护理比','在岗护理员 ÷ 在住老人','按护理区分标准','护理部'],
+         ['人均服务时长','服务总时长 ÷ 在住人数','来自移动端记录','护理部'],
+         ['跌倒发生率','跌倒人次 ÷ 在住床日 ×1000','每千床日','质控'],
+         ['压疮发生率','新发例数 ÷ 高风险床日 ×1000','II 度及以上','质控'],
+         ['单床收入','期间收入 ÷ 平均在住床位','含四类支付方','财务'],
+         ['人力成本占比','人力成本 ÷ 营业收入','行业 50%–60%','财务']]
+        .map(r=>`<tr><td><b>${r[0]}</b></td><td style="font-size:11.5px;color:#5E6E6A">${r[1]}</td>
+        <td style="font-size:11.5px;color:var(--mut)">${r[2]}</td><td>${r[3]}</td></tr>`).join('')}
+    </tbody></table>
+  </div>
+  <div class="card">
+    <div class="ct" style="margin-bottom:10px">报表中心</div>
+    <div class="grid3">
+      ${[['民政月度报表','在住/入住率/补贴基数 · 每月 10 日前','report'],['长护险结算明细','按 36 项目录对账 · 月结','bill'],
+         ['经营月报','收入结构 + 成本 + 现金流','bill'],['失能照护质量报告','压疮/跌倒/约束具/营养','disab'],
+         ['人力与排班报表','工时/护理比/加班','carers'],['数据上报质量报告','及时率/完整率/差异率','report']]
+        .map(r=>`<div class="note" style="display:flex;justify-content:space-between;align-items:center"><span><b>${r[0]}</b><br><span style="font-size:10.5px">${r[1]}</span></span>
+        <span class="lk" onclick="go('${r[2]}')">查看 ›</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+/* ============================================================
+   十三、护理服务：评估中心（3 tab）
+   ============================================================ */
+function ensureFormScores(){
+  if(!S.formScores) S.formScores = ASSESS_ITEMS.map(x=>({...x}));
+}
+function setScore(idx,val){
+  ensureFormScores(); S.formScores[idx].s=val; render(); toast('已更新「'+S.formScores[idx].code+'」评分 · 双标结论同步重算');
+}
+function pageAssess(){
+  ensureFormScores();
+  const tab=S.tab.assess||'form';
+  const tabs=[['form','评估表格'],['params','评估参数'],['persons','评估人信息']];
+  return `
+  <div class="phead">
+    <div><h1 class="pt">评估中心 ${info('评估双标','一套字段、两套结果，靠中间的映射层',
+      '四层结构：\\n① 采集层：一套条目只采一次，每条带 归属=民政/长护险/共用\\n② 映射层：条目↔维度权重（可配置）\\n③ 计算层：两套规则引擎 + 特殊定级规则\\n④ 结果层：N 条结论，各自等级、各自签字\\n\\n不是"两套表都做一遍"，也不是"合成一张表"，是中间加一层映射。')}</h1>
+      <div class="psub">民政 GB/T 42195-2022 ｜ 医保长护险失能等级评估 · 一次采集双标输出 · 3 位长者 30 天内复评到期</div></div>
+    <div style="display:flex;gap:8px"><span class="pill y">复评到期 3 人</span>
+      <button class="btn gh sm" onclick="S.tab.assess='persons';render()">查看到期名单</button></div>
+  </div>
+  <div class="card np">
+    <div style="padding:10px 16px 0"><div class="tabs" style="margin-bottom:0">
+      ${tabs.map(t=>`<div class="tab ${tab===t[0]?'on':''}" onclick="S.tab.assess='${t[0]}';render()">${t[1]}</div>`).join('')}
+    </div></div>
+    <div style="padding:14px 16px 16px">
+      ${tab==='form'?assessForm():tab==='params'?assessParams():assessPersons()}
+    </div>
+  </div>`;
+}
+/* ---- Tab1 评估表格 ---- */
+function assessForm(){
+  const items=S.formScores;
+  const total=items.reduce((a,b)=>a+b.s,0);
+  const g=n=>items.filter(x=>x.g===n);
+  const mz=mzLevel(total), lis=lisLevel(total);
+  const sub=n=>g(n).reduce((a,b)=>a+b.s,0);
+  const e=ELDERS.find(x=>x.id===S.formElder)||ELDERS[0];
+  const hasEvent = e.risk && e.risk.includes('走失') || e.risk && e.risk.includes('跌倒');
+  return `
+  <div style="display:grid;grid-template-columns:1.35fr 1fr;gap:14px">
+    <div>
+      <div class="card" style="margin-bottom:10px">
+        <div class="ch"><div class="ct">评估对象</div><span class="hint">入住评估 / 年度复评 / 风险事件后复评共用此表</span></div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <select style="flex:1" onchange="S.formElder=this.value;render();toast('已载入评估对象：'+this.selectedOptions[0].text)">
+            ${ELDERS.filter(x=>x.status!=='退住').map(x=>`<option value="${x.id}" ${x.id===S.formElder?'selected':''}>${x.name} · ${x.age}岁 · ${x.bed} · ${x.mz}/${x.lis}</option>`).join('')}
+          </select>
+          <span class="pill b">入住评估 · 2026-11-05</span>
+        </div>
+        ${hasEvent?`<div class="note y" style="margin-top:10px">⚡ 风险事件联动：${e.name} 近 30 天发生「${e.risk}」相关事件，系统已按特殊定级规则<b>自动提升一级</b>（下方已勾选，可由评估员人工确认取消，取消需填原因并留痕）。</div>`:''}
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct">评估表单（国标 26 条目 · 一次采集）</div>
+          <span class="hint">点击分值即评分，右侧双标结论实时重算</span></div>
+        <div class="assess-form">
+          ${['自理能力','基础运动','精神状态','感知与社会参与'].map(gn=>`
+          <div class="af-group"><div class="af-gt"><span>${gn}（${g(gn).length} 项）</span>
+            <span>小计 ${sub(gn)} / ${g(gn).reduce((a,b)=>a+b.max,0)}</span></div>
+            ${g(gn).map(it=>{const idx=items.indexOf(it);return `
+            <div class="af-item"><span class="an">${it.code}
+              <span class="am" style="margin-left:6px">${it.scope==='BOTH'?'<span class="pill g">共用</span>':it.scope==='MZ'?'<span class="pill b">民政</span>':'<span class="pill y">长护险</span>'}</span></span>
+              <span class="score-btns">${Array.from({length:it.max+1},(_,v)=>`<button class="sb ${it.s===v?'on':''}" onclick="setScore(${idx},${v})">${v}</button>`).join('')}</span>
+            </div>`;}).join('')}
+          </div>`).join('')}
+        </div>
+        <div class="note y" style="margin-top:10px">注意：部分条目分值不齐（上下楼梯 0–3、意识水平 0–2、攻击行为/抑郁症状 0–1），<b>不可统一按 0–4 处理</b>——很多系统为省事统一成 0–4，评估结论就会偏。</div>
+      </div>
+    </div>
+    <div>
+      <div style="position:relative;margin-bottom:12px">
+        <div class="dual" style="grid-template-columns:1fr">
+          <div class="rpt mz"><div class="tg">民政口径 · GB/T 42195-2022（实时计算）</div>
+            <div class="lv">${mz.name}</div>
+            <div class="why">总分 <b>${total}</b> 分${mz.raised?`，原始判定「${mz.orig}（${mz.origR}）」已按特殊规则提高一级`:mz.range==='直接判定'?'，已应用「昏迷」规则直接判定':`，落在 ${mz.range} 区间`}。<br>用于照护分级、居家服务、养老补贴。</div>
+            <div class="dim">
+              <div><span>自理能力（8 项）</span><b>${sub('自理能力')}</b></div>
+              <div><span>基础运动（4 项）</span><b>${sub('基础运动')}</b></div>
+              <div><span>精神状态（9 项）</span><b>${sub('精神状态')}</b></div>
+              <div><span>感知与社会（5 项）</span><b>${sub('感知与社会参与')}</b></div>
+            </div></div>
+          <div class="rpt lis"><div class="tg">医保口径 · 长护险失能等级（实时换算）</div>
+            <div class="lv">${lis.name}</div>
+            <div class="why">由 17 项共用条目 + 专属条目换算，经映射权重与规则引擎计算。<br>用于长护险基金支付，等级越高可结算金额越高。</div>
+            <div class="dim">
+              <div><span>日常生活活动</span><b>${lis.idx>=3?'重度依赖':lis.idx>=1?'中度依赖':'轻度依赖'}</b></div>
+              <div><span>认知能力</span><b>${sub('精神状态')>=8?'重度受损':sub('精神状态')>=4?'中度受损':'轻度受损'}</b></div>
+              <div><span>感知觉与沟通</span><b>${sub('感知与社会参与')>=8?'中度受损':'轻度受损'}</b></div>
+              <div><span>可结算 / 月</span><b>≈ ¥${[0,1780,1780,2660,3540,4420][lis.idx]}</b></div>
+            </div></div>
+        </div>
+        <div class="duallink">⇅ 一次采集 · 双标输出</div>
+      </div>
+      <div class="card">
+        <div class="ct" style="margin-bottom:8px">特殊定级规则（自动应用 + 人工确认）</div>
+        ${[['coma','昏迷','直接判定为「完全失能」，不再按条目计分'],
+           ['dementia','确诊痴呆（ICD-10 F00–F03）等','在原级别上提高一级'],
+           ['event','近 30 天内发生 ≥2 次照护风险事件','跌倒、噎食、自杀、自伤、走失；在原级别上提高一级']]
+          .map(r=>`<div class="rule ${S.rules[r[0]]?'on':''}" onclick="S.rules['${r[0]}']=!S.rules['${r[0]}'];render();toast('规则已'+(S.rules['${r[0]}']?'启用':'取消')+' · 双标结论同步重算')">
+            <div class="chk">✓</div><div><div style="font-weight:600">${r[1]}</div><div class="hint" style="margin-top:2px">${r[2]}</div></div></div>`).join('')}
+      </div>
+      <div class="note b" style="margin-bottom:10px">等级结论由具备资质的评估人员签字确认，系统仅提供计算与校验，<b>不做自动定级</b>。本次评估 2 名评估员同时在场（王芳 / 周琳），全程影像留痕。</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" style="flex:1" onclick="toast('演示：双标评估记录已生成并归档（民政+长护险各一份，含评估员签字与影像索引）');S.tab.assess='persons';render()">提交评估（生成两套结论）</button>
+        <button class="btn gh" onclick="toast('演示：已保存草稿')">存草稿</button>
+      </div>
+    </div>
+  </div>`;
+}
+/* ---- Tab2 评估参数 ---- */
+function assessParams(){
+  const sub=S.tab.aparams||'mz';
+  const c=CITIES[S.city];
+  const subs=[['mz','民政参数'],['lis','医保长护险参数'],['items','条目明细'],['map','映射规则'],['rules','特殊定级规则']];
+  const editBtn=(label,rows)=>`<span class="lk" onclick="editPolicy('${label}',${JSON.stringify(rows).replace(/"/g,'&quot;').replace(/'/g,'&#39;')})">编辑</span>`;
+  const body={
+    mz:`<div class="ch"><div class="ct">民政 · 能力等级判定参数</div>${editBtn('民政等级参数',[['能力完好下限','90'],['轻度失能下限','66'],['中度失能下限','46'],['重度失能下限','30'],['复评周期（月）','12']])}</div>
+      <table><thead><tr><th>能力等级</th><th class="num">总分区间</th><th>对应照护分级</th><th>关联政策</th></tr></thead><tbody>
+        ${[['能力完好','≥ 90','自理','—'],['轻度失能','66–89','半失能（一级）','居家上门服务资格'],['中度失能','46–65','半失能（二级）','护理补贴（部分区县）'],
+           ['重度失能','30–45','失能（三级）','护理补贴 · 长护险初筛'],['完全失能','0–29','失能（四级）','护理补贴 · 长护险重点']]
+          .map(r=>`<tr><td><b>${r[0]}</b></td><td class="num">${r[1]}</td><td>${r[2]}</td><td style="font-size:11.5px;color:var(--mut)">${r[3]}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note" style="margin-top:10px">维度权重：自理 0.4 · 基础运动 0.2 · 精神状态 0.2 · 感知与社会 0.2（${S.city==='wh'?'武汉':'荆门'}口径 v${S.policyVer}）。等级区间调整将影响全院等级分布与补贴基数，保存需院长复核。</div>`,
+    lis:`<div class="ch"><div class="ct">医保 · 长护险失能等级参数</div>${editBtn('长护险参数',[['职工报销比例','70%'],['居民报销比例','50%'],['年度限额','居民可支配收入 50%'],['等级换算权重 w1','0.55'],['等级换算权重 w2','0.30'],['等级换算权重 w3','0.15']])}</div>
+      <table><thead><tr><th>长护险等级</th><th class="num">对应民政能力</th><th class="num">月可结算上限</th><th>报销比例</th><th>支付方</th></tr></thead><tbody>
+        ${[['0 级（基本正常）','能力完好','0','—','—'],['1 级（轻度失能）','轻度失能','1,780','70% / 50%','长护险基金'],
+           ['2 级（中度失能）','中度失能','1,780','70% / 50%','长护险基金'],['3 级（重度Ⅰ级）','重度失能','2,660','70% / 50%','长护险基金'],
+           ['4 级（重度Ⅱ级）','重度失能','3,540','70% / 50%','长护险基金'],['5 级（重度Ⅲ级）','完全失能','4,420','70% / 50%','长护险基金']]
+          .map(r=>`<tr><td><b>${r[0]}</b></td><td class="num">${r[1]}</td><td class="num">${r[2]}</td><td class="num">${r[3]}</td><td>${r[4]}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note b" style="margin-top:10px">等级换算由映射权重（w1/w2/w3）驱动，权重变化会影响长护险等级换算结果——权重在「民政 ↔ 长护险」间做数据复用，<b>不做结论替代</b>。</div>`,
+    items:`<table><thead><tr><th>维度</th><th>条目</th><th class="num">当前分</th><th class="num">上限</th><th>采集归属</th><th>说明</th></tr></thead><tbody>
+      ${ASSESS_ITEMS.map(it=>`<tr ${it.max!==4?'style="background:var(--warn-l)"':''}>
+        <td style="color:var(--mut);font-size:11.5px">${it.g}</td><td>${it.code}</td>
+        <td class="num"><b>${it.s}</b></td><td class="num">${it.max}</td>
+        <td>${it.scope==='BOTH'?'<span class="pill g">共用</span>':it.scope==='MZ'?'<span class="pill b">民政</span>':'<span class="pill y">长护险</span>'}</td>
+        <td style="font-size:11px;color:var(--mut)">${it.max!==4?'⚠ 分值不齐，不可按 0–4 处理':''}</td></tr>`).join('')}
+      <tr class="sum"><td colspan="2">合计</td><td class="num">${ASSESS_ITEMS.reduce((a,b)=>a+b.s,0)}</td>
+        <td class="num">${ASSESS_ITEMS.reduce((a,b)=>a+b.max,0)}</td><td colspan="2"></td></tr>
+      </tbody></table>`,
+    map:`<table><thead><tr><th>民政条目组</th><th>长护险维度</th><th>处理方式</th></tr></thead><tbody>
+      <tr><td>进食、洗澡、修饰、穿衣、大便控制、小便控制、如厕、床椅转移</td><td>日常生活活动能力</td><td><span class="pill g">复用采集</span></td></tr>
+      <tr><td>平地行走、站立、坐起</td><td>日常生活活动能力</td><td><span class="pill g">复用采集</span></td></tr>
+      <tr><td>认知功能、痴呆表现</td><td>认知能力</td><td><span class="pill g">复用采集</span></td></tr>
+      <tr><td>意识水平</td><td>认知能力</td><td><span class="pill y">需单独采集</span></td></tr>
+      <tr><td>视力、听力、沟通交流</td><td>感知觉与沟通</td><td><span class="pill g">复用采集</span></td></tr>
+      <tr><td>—（长护险独有）</td><td>失禁照护、导管护理</td><td><span class="pill y">需单独采集</span></td></tr>
+      <tr><td>上下楼梯、幻觉妄想、情绪、行为、睡眠、社会参与、角色活动</td><td>—</td><td><span class="pill n">不参与</span></td></tr>
+      </tbody></table>
+      <div class="note" style="margin-top:10px">映射只做<b>数据复用</b>，不做<b>结论替代</b>：每套结论必须由对应资质的人按对应标准算出并签字。26 → 17 的复用关系由参数表驱动，标准更新时只改映射不改代码。</div>`,
+    rules:`<div class="note" style="margin-bottom:10px">以下规则在评估表单中自动应用 + 人工确认，启用/取消全程留痕。</div>
+      ${[['R-01','昏迷','直接判定为「完全失能」，不再按条目计分','启用中'],
+         ['R-02','确诊痴呆（ICD-10 F00–F03）或其他精神行为障碍（F04–F99）','在原级别上提高一级','启用中'],
+         ['R-03','近 30 天内发生 ≥2 次照护风险事件','跌倒、噎食、自杀、自伤、走失；在原级别上提高一级','启用中（与风险事件模块自动联动）'],
+         ['R-04','难免性压疮备案','压疮风险等级自动上调一档监控','启用中']]
+        .map(r=>`<div class="rule on" onclick="toast('演示：规则 ${r[0]} 状态变更需评估主管复核，变更全程留痕')">
+        <div class="chk">✓</div><div style="flex:1"><div style="font-weight:600">${r[0]} · ${r[1]}</div>
+        <div class="hint" style="margin-top:2px">${r[2]}</div></div><span class="pill y">${r[3]}</span></div>`).join('')}
+      <div class="note y" style="margin-top:10px">这三条是国标里的<b>特殊定级规则</b>，不是条目分数。做成可配置规则 + 人工确认留痕，避免评估员凭记忆判断导致结果不一致。</div>`
+  }[sub];
+  return `
+  <div class="tabs" style="margin-bottom:12px">
+    ${subs.map(x=>`<div class="tab ${sub===x[0]?'on':''}" onclick="S.tab.aparams='${x[0]}';render()">${x[1]}</div>`).join('')}
+    <span class="hint" style="margin-left:auto;align-self:center">参数版本 v${S.policyVer} · ${S.city==='wh'?'武汉':'荆门'}口径 · 修改留痕</span>
+  </div>
+  ${body}`;
+}
+/* 参数编辑弹层 */
+function editPolicy(label,rows){
+  openModal('编辑 · '+label,'当前版本 v'+S.policyVer+' · 保存后立即生效并生成 v'+(S.policyVer+1),
+    rows.map(r=>`<div class="field-row"><span class="fk">${r[0]}</span><input value="${r[1]}"></div>`).join('')+
+    `<div class="note y" style="margin-top:10px">参数变更将影响：评估换算结果、结算金额、补贴基数。保存后系统自动重算受影响账单并生成变更日志。</div>`, true);
+  $('#mCancel').onclick=()=>{ closeAndVer(); };
+}
+function closeAndVer(){ closeModal(); S.policyVer++; render(); toast('参数已保存 · 版本已升级至 v'+S.policyVer+' · 变更日志已归档'); }
+/* ---- Tab3 评估人信息 ---- */
+function assessStatus(e){
+  const days=Math.round((new Date(e.reDate)-new Date('2026-11-05'))/86400000);
+  if(e.reDate==='—') return ['n','—'];
+  if(days<0) return ['r','已过期'];
+  if(days<=30) return ['y','即将到期'];
+  return ['g','有效'];
+}
+function filterPersons(){
+  const f=S.filters;
+  return ELDERS.filter(e=>{
+    const q=(f.personSearch||'').trim();
+    if(q && !(e.name.includes(q)||e.id.toLowerCase().includes(q.toLowerCase())||e.bed.toLowerCase().includes(q.toLowerCase()))) return false;
+    if(f.personMz){
+      const st=assessStatus(e)[1];
+      if(st!==f.personMz) return false;
+    }
+    return true;
+  });
+}
+function renderPersonRows(){
+  const list=filterPersons();
+  const tb=$('#personTbody'); if(!tb) return;
+  tb.innerHTML=list.length?list.map(e=>{
+    const st=assessStatus(e);
+    const last=ELDER_DETAIL[e.id]?ELDER_DETAIL[e.id].assessList[0]:{date:e.inDate,type:'入住评估',by:'王芳 / 周琳'};
+    return `<tr>
+      <td style="font-family:monospace;font-size:11.5px">${e.id}</td><td><b>${e.name}</b></td>
+      <td>${e.sex} / ${e.age}</td><td>${e.bed}</td><td>${e.inDate}</td>
+      <td><span class="pill ${e.mz.includes('完全')?'r':e.mz.includes('重度')?'y':e.mz.includes('中度')?'b':'n'}">${e.mz}</span></td>
+      <td><span class="pill b">长护险 ${e.lis}</span></td>
+      <td>${last.date}</td><td>${e.reDate}</td>
+      <td><span class="pill ${st[0]}">${st[1]}</span></td>
+      <td><button class="btn sm" onclick="S.formElder='${e.id}';S.tab.assess='form';render();toast('已进入重新评估（${e.name}）')">再次评估</button>
+          <button class="btn gh sm" onclick="viewElder('${e.id}')">查看详情</button></td></tr>`;
+  }).join(''):'<tr><td colspan="11" class="empty-tip">无符合条件的记录</td></tr>';
+  const c=$('#personCnt'); if(c) c.textContent=`共 ${list.length} 位长者`;
+}
+function assessPersons(){
+  const f=S.filters;
+  setTimeout(renderPersonRows,0);
+  const due=ELDERS.filter(e=>assessStatus(e)[1]==='即将到期');
+  return `
+  <div class="note y" style="margin-bottom:12px">⏰ 复评预警（30 天内到期 ${due.length} 人）：${due.map(e=>`<b>${e.name}</b>（${e.reDate}）`).join('、')}。
+  未按期复评将影响护理补贴与长护险结算，<b>系统提前 30 天生成待办</b>。</div>
+  <div class="filter-bar">
+    <input placeholder="搜索：姓名 / 老人ID / 床位号" value="${esc(f.personSearch)}" oninput="S.filters.personSearch=this.value;renderPersonRows()">
+    <select onchange="S.filters.personMz=this.value;renderPersonRows()">
+      <option value="">评估状态（全部）</option>
+      ${['有效','即将到期','已过期','—'].map(x=>`<option ${f.personMz===x?'selected':''}>${x}</option>`).join('')}
+    </select>
+    <select onchange="renderPersonRows()"><option>评估类型（全部）</option><option>入住评估</option><option>年度复评</option><option>风险事件后复评</option></select>
+    <span class="hint" id="personCnt" style="margin-left:auto"></span>
+  </div>
+  <table><thead><tr>
+    <th>老人ID</th><th>姓名</th><th>性别/年龄</th><th>床位号</th><th>入住日期</th>
+    <th>民政评估</th><th>医保评估（长护险）</th><th>最近评估时间</th><th>下次复评</th><th>评估状态</th><th>操作</th>
+  </tr></thead><tbody id="personTbody"></tbody></table>
+  <div class="note b" style="margin-top:10px">「再次评估」直接进入评估表格并带出该长者的上次评估数据与风险事件联动提示；「查看详情」跳转老人档案的评估情况页。</div>`;
+}
+
+/* ============================================================
+   十四、护理服务：护理条目
+   ============================================================ */
+function pageCareItems(){
+  const un=CARE_ITEMS.filter(x=>x.lis==='未对码').length;
+  return `
+  <div class="phead">
+    <div><h1 class="pt">护理条目（全量服务项目表）</h1>
+      <div class="psub">服务项目 ↔ 评估等级 ↔ 执行角色 ↔ 长护险目录对码 · 共 ${CARE_ITEMS.length} 项 · 未对码 ${un} 项</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：对码申请材料已生成（服务项目说明书 + 成本测算）')">申请对码</button>
+      <button class="btn sm" onclick="openCareItemForm()">新增条目</button></div>
+  </div>
+  <div class="card np">
+    <table><thead><tr>
+      <th>编码</th><th>类别</th><th>服务项目</th><th>频次</th><th>执行角色</th><th>对应评估等级 / 适用对象</th>
+      <th>长护险对码</th><th class="num">单价</th><th>状态</th><th>操作</th></tr></thead>
+    <tbody>${CARE_ITEMS.map(it=>`<tr>
+      <td style="font-family:monospace;font-size:11.5px">${it.code}</td>
+      <td><span class="pill ${it.cat==='医疗护理'?'b':it.cat==='康复理疗'?'p':it.cat==='认知照护'?'y':it.cat==='居家服务'?'g':'n'}">${it.cat}</span></td>
+      <td><b>${it.name}</b></td><td>${it.freq}</td><td>${it.role}</td><td>${it.level}</td>
+      <td>${it.lis==='已对码'?'<span class="pill g">已对码</span>':'<span class="pill y">未对码 ⚠</span>'}</td>
+      <td class="num">${it.price}</td><td><span class="pill g">${it.st}</span></td>
+      <td><span class="lk" onclick="toast('演示：编辑条目 ${it.code}（频次/角色/等级/单价），变更记录留痕')">编辑</span></td></tr>`).join('')}
+    </tbody></table>
+  </div>
+  <div class="grid2">
+    <div class="note y"><b>未对码项目不能进入长护险结算</b>，也不能计入服务量上报——LC-012 吞咽训练、LC-013 认知症定向力支持需向医保经办申请目录对码。</div>
+    <div class="note b">条目由「评估等级」驱动生成照护计划：重度失能自动带入 LC-001/003，中度带入 LC-002……评估结论变更时计划自动重算（保留版本）。</div>
+  </div>`;
+}
+function openCareItemForm(){
+  openModal('新增护理条目','新增后进入「待对码」状态，需运营主管审核后启用',
+    [['服务项目名称',''],['类别','生活照护'],['频次',''],['执行角色','护理员'],['适用评估等级',''],['单价（元）','']]
+      .map(r=>`<div class="field-row"><span class="fk">${r[0]}</span>${r[1].includes('生活')||r[1]==='护理员'?`<select>${['生活照护','医疗护理','康复理疗','认知照护','居家服务'].map(x=>`<option ${x===r[1]?'selected':''}>${x}</option>`).join('')}</select>`:`<input value="${r[1]}">`}</div>`).join(''),true);
+  $('#mCancel').onclick=()=>{ closeModal(); toast('演示：条目已创建（编码 LC-016），状态=待审核'); };
+}
+/* ============================================================
+   十五、护理服务：护理人员
+   ============================================================ */
+function pageCarers(){
+  const f=S.filters.carerSt||'';
+  const list=CARERS.filter(c=>!f||c.status===f);
+  const on=CARERS.filter(c=>c.status==='护理中').length, rest=CARERS.filter(c=>c.status==='休息').length;
+  const certWarn=CARERS.filter(c=>c.certExp!=='—'&&c.certExp<='2026-12-31');
+  setTimeout(()=>{ const c=$('#carerCnt'); if(c) c.textContent=`共 ${list.length} 名（在岗 ${on} · 休息 ${rest}）`; },0);
+  return `
+  <div class="phead">
+    <div><h1 class="pt">护理人员</h1>
+      <div class="psub">在岗 / 休息 / 排班 / 护理比 一屏掌握 · 收到新入住人可立即安排服务</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：今日排班表已导出')">导出排班</button>
+      <button class="btn sm" onclick="openAssign()">为新入住人安排服务</button></div>
+  </div>
+  <div class="kpis" style="grid-template-columns:repeat(5,1fr)">
+    <div class="kpi"><div class="k">在岗（护理中）</div><div class="v">${on}<small> 人</small></div><div class="c g">今日全部已打卡</div></div>
+    <div class="kpi"><div class="k">休息（轮休）</div><div class="v">${rest}<small> 人</small></div><div class="c">冯春花 · 蒋兰（本周轮休）</div></div>
+    <div class="kpi"><div class="k">休假</div><div class="v">0<small> 人</small></div><div class="c">本周无休假</div></div>
+    <div class="kpi"><div class="k">今日排班缺口</div><div class="v" style="color:var(--warn)">1<small> 班</small></div><div class="c y">B 区 2 层夜班缺 1 人（T1）</div></div>
+    <div class="kpi"><div class="k">全院平均护理比</div><div class="v">1:3.8</div><div class="c">标准区间 1:4 – 1:15 按区执行</div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ct">今日班次速览</div><span class="hint">早班 08:00–20:00 · 夜班 20:00–08:00 · 白班（护士）08:00–18:00</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${CARERS.map(c=>`<span class="pill ${c.status==='护理中'?(c.shift.includes('夜')?'b':'g'):'n'}" style="cursor:pointer;padding:5px 11px" onclick="viewCarer('${c.id}')">${c.name} · ${c.shift.includes('夜')?'夜':c.shift.includes('白')?'白':'早'}${c.status==='休息'?'（休）':''}</span>`).join('')}
+    </div>
+  </div>
+  <div class="filter-bar">
+    <input placeholder="搜索姓名 / ID" value="${esc(f)}" oninput="S.filters.carerSt=this.value;pageCarersSearch(this)">
+    <select onchange="S.filters.carerSt=this.value;render()">
+      <option value="">岗位状态（全部）</option>
+      ${['护理中','休息'].map(x=>`<option ${f===x?'selected':''}>${x}</option>`).join('')}
+    </select>
+    ${certWarn.length?`<span class="pill y">⚠ ${certWarn.length} 人证书 60 天内到期</span>`:''}
+    <span class="hint" id="carerCnt" style="margin-left:auto"></span>
+  </div>
+  <div class="card np"><table><thead><tr>
+    <th>护理人ID</th><th>姓名</th><th>性别/年龄</th><th>岗位状态</th><th>今日班次</th><th class="num">服务人数</th>
+    <th>资质证书</th><th>证书有效期</th><th>操作</th></tr></thead>
+    <tbody id="carerTbody">${list.map(c=>`<tr>
+      <td style="font-family:monospace;font-size:11.5px">${c.id}</td>
+      <td><span class="avatar-s">${c.name[0]}</span><b>${c.name}</b></td><td>${c.sex} / ${c.age}</td>
+      <td>${c.status==='护理中'?'<span class="pill g">护理中</span>':'<span class="pill n">休息</span>'}</td>
+      <td>${c.shift}</td><td class="num">${c.count}</td>
+      <td>${c.cert.includes('培训中')?'<span class="pill y">'+c.cert+'</span>':c.cert}</td>
+      <td style="color:${c.certExp!=='—'&&c.certExp<='2026-12-31'?'var(--dan)':'inherit'}">${c.certExp}${c.certExp!=='—'&&c.certExp<='2026-12-31'?' ⚠':''}</td>
+      <td><button class="btn gh sm" onclick="viewCarer('${c.id}')">详情</button></td></tr>`).join('')}</tbody></table></div>
+  <div class="note b">「为新入住人安排服务」按<b>评估等级与当前服务人数</b>推荐人选（如重度失能优先分配中级护理员且服务 ≤7 人），确认后自动生成次日排班与照护计划执行清单。</div>`;
+}
+function pageCarersSearch(inp){
+  const q=inp.value.trim();
+  const tb=$('#carerTbody');
+  if(!tb) return;
+  const list=CARERS.filter(c=>!q||c.name.includes(q)||c.id.toLowerCase().includes(q.toLowerCase()));
+  tb.innerHTML=list.map(c=>`<tr>
+    <td style="font-family:monospace;font-size:11.5px">${c.id}</td>
+    <td><span class="avatar-s">${c.name[0]}</span><b>${c.name}</b></td><td>${c.sex} / ${c.age}</td>
+    <td>${c.status==='护理中'?'<span class="pill g">护理中</span>':'<span class="pill n">休息</span>'}</td>
+    <td>${c.shift}</td><td class="num">${c.count}</td>
+    <td>${c.cert.includes('培训中')?'<span class="pill y">'+c.cert+'</span>':c.cert}</td>
+    <td style="color:${c.certExp!=='—'&&c.certExp<='2026-12-31'?'var(--dan)':'inherit'}">${c.certExp}${c.certExp!=='—'&&c.certExp<='2026-12-31'?' ⚠':''}</td>
+    <td><button class="btn gh sm" onclick="viewCarer('${c.id}')">详情</button></td></tr>`).join('');
+}
+function openAssign(){
+  openModal('为新入住人安排服务','按评估等级与服务人数推荐人选 · 确认后自动生成排班与照护计划',
+    `<div class="field-row"><span class="fk">新入住人</span><select><option>杨秀云 · 72 岁 · A-303-8 · 能力完好/0 级</option><option>新签约（待入住）</option></select></div>
+     <div class="field-row"><span class="fk">推荐护理员</span><select><option>郑晓婷（服务 4 人 · 初级 · 同层）✓ 推荐</option><option>吴国栋（服务 5 人 · 培训中）</option><option>王芳（服务 8 人 · 初级）</option></select></div>
+     <div class="field-row"><span class="fk">生效日期</span><input value="2026-11-06"></div>
+     <div class="note g" style="margin-top:10px">推荐依据：① 同楼层优先 ② 服务人数 ≤7 ③ 证书有效 ④ 排班不冲突。确认后将自动生成：次日排班、照护计划执行清单、家属通知短信。</div>`,true);
+  $('#mCancel').onclick=()=>{ closeModal(); toast('已安排：杨秀云 → 郑晓婷 · 次日早班生效 · 排班与计划已生成'); };
+}
+function viewCarer(id){ S.carerId=id; S.page='carerDetail'; render(); window.scrollTo(0,0); }
+function pageCarerDetail(){
+  const c=CARERS.find(x=>x.id===S.carerId)||CARERS[0];
+  const ex=CARER_EXTRA[c.id]||{join:'2022-08-01',dept:'A 区',alert:[],month:{hours:208,ontime:96.5,redo:2.8,service:150}};
+  const serve=ELDERS.filter(e=>e.carer===c.name&&e.status!=='退住');
+  const tab=S.tab.carer||'serve';
+  const tabs=[['serve','服务对象'],['clock','打卡记录'],['alert','告警处置'],['stat','服务量统计']];
+  const body={
+    serve:`<div class="card"><div class="ch"><div class="ct">在服务长者（${serve.length} 人）</div>
+      <span class="hint">护理比 = ${serve.length} 人 ÷ 1 人（${c.status==='护理中'?'在岗':'轮休'}）</span></div>
+      ${serve.length?`<table><thead><tr><th>老人</th><th>床位</th><th>民政评估</th><th>长护险</th><th>风险标签</th><th>操作</th></tr></thead>
+      <tbody>${serve.map(e=>`<tr><td><b>${e.name}</b></td><td>${e.bed}</td><td>${e.mz}</td><td>${e.lis}</td>
+        <td>${e.risk==='—'?'<span style="color:var(--mut)">—</span>':'<span style="color:var(--dan)">'+e.risk+'</span>'}</td>
+        <td><span class="lk" onclick="viewElder('${e.id}')">档案 ›</span></td></tr>`).join('')}</tbody></table>
+      ${c.status==='休息'?'<div class="note y" style="margin-top:8px">本周轮休：以上长者的日常服务暂由同班次同事代班，交班记录已留痕。</div>':''}`
+      :'<div class="note">本周轮休，暂无在服务长者（服务对象已交接近似班次同事）</div>'}</div>`,
+    clock:`<div class="card"><div class="ct" style="margin-bottom:10px">本月打卡（11 月）</div>
+      <div class="note g" style="margin-bottom:10px">出勤 ${c.status==='护理中'?'5':'0'} 天 ｜ 迟到 0 次 ｜ 漏卡 0 次 ｜ 全部通过移动端定位打卡（院内 GPS 围栏 ±30 米）</div>
+      <table><thead><tr><th>日期</th><th>班次</th><th>上班打卡</th><th>下班打卡</th><th>状态</th></tr></thead><tbody>
+        ${[['11-05','早班','07:52','20:04','正常'],['11-04','早班','07:55','20:01','正常'],['11-03','早班','07:50','20:03','正常'],
+           ['11-02','早班','07:58','20:02','正常'],['11-01','早班','07:54','20:05','正常']]
+          .map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><span class="pill g">${r[4]}</span></td></tr>`).join('')}
+      </tbody></table>
+      <div class="note" style="margin-top:8px">打卡记录与服务记录交叉校验：打卡但无服务记录将标记"空转"，服务记录无打卡则该记录不可用于券核销与结算。</div></div>`,
+    alert:`<div class="card"><div class="ct" style="margin-bottom:10px">参与处置的告警 / 风险事件（${ex.alert.length}）</div>
+      ${ex.alert.length?ex.alert.map(a=>`<div class="note y" style="margin-bottom:8px"><b>${a[0]} · ${a[1]}</b><br>处置动作：${a[2]}　<span class="pill g">处置评估：${a[3]}</span></div>`).join('')
+      :'<div class="note g">本月无参与处置的告警事件 ✓</div>'}
+      <div class="note b" style="margin-top:8px">告警来源：跌倒雷达、离床感应、门磁、约束具超时、生命体征异常；处置闭环需拍照 + 处置说明，纳入护理员绩效。</div></div>`,
+    stat:`<div class="grid2">
+      <div class="card"><div class="ct" style="margin-bottom:10px">本月服务量</div>
+        ${[['服务工时',ex.month.hours+' h'],['服务条目执行',ex.month.service+' 条'],['按时执行率',ex.month.ontime+'%'],['补记率',ex.month.redo+'%']]
+          .map(r=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line2);font-size:12.5px">
+          <span style="color:var(--mut)">${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div>
+      <div class="card"><div class="ct" style="margin-bottom:10px">任职信息</div>
+        ${[['入职日期',ex.join],['所属区域',ex.dept],['资质证书',c.cert],['证书有效期',c.certExp],['联系电话',c.phone],['紧急联系',c.phone.slice(0,3)+'****（本人）']]
+          .map(r=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line2);font-size:12.5px">
+          <span style="color:var(--mut)">${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div></div>`
+  }[tab];
+  return `
+  <div class="phead">
+    <div style="display:flex;gap:14px;align-items:center">
+      <div class="av" style="width:52px;height:52px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">${c.name[0]}</div>
+      <div><h1 class="pt">${c.name} <span style="font-size:13px;color:var(--mut);font-weight:400">${c.id} · 护理员</span></h1>
+        <div class="psub">${c.sex} · ${c.age} 岁 · ${ex.dept} · ${c.status==='护理中'?'<span class="pill g" style="vertical-align:1px">护理中</span>':'<span class="pill n" style="vertical-align:1px">休息</span>'} · 今日班次：${c.shift}</div></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="S.page='carers';render()">← 返回列表</button>
+      <button class="btn sm" onclick="toast('演示：调班/调岗申请已发起（需护理部主任审批）')">调班 / 调岗</button></div>
+  </div>
+  <div class="card np">
+    <div style="padding:10px 16px 0"><div class="tabs" style="margin-bottom:0">
+      ${tabs.map(t=>`<div class="tab ${tab===t[0]?'on':''}" onclick="S.tab.carer='${t[0]}';render()">${t[1]}</div>`).join('')}
+    </div></div>
+    <div style="padding:14px 16px 16px">${body}</div>
+  </div>`;
+}
+
+/* ============================================================
+   十六、数据监管（机构自查自审）
+   ============================================================ */
+function pageReport(){
+  const key=S.org==='group'?'xh':S.org;
+  const o=ORGS[key];
+  const isHosp=o.type==='护理院';
+  const tasks=[
+    {n:'民政月度报表',per:'2026-10',due:'11-10',st:'done',stTxt:'已提交',by:'王信息员'},
+    {n:'民政补贴申领（护理补贴）',per:'2026-10',due:'11-08',st:'wait',stTxt:'待提交 D-2',by:'—'},
+    {n:'长护险结算表',per:'2026-10',due:'11-05',st:'accept',stTxt:'已受理',by:'财务 张敏'},
+    {n:'卫健医养结合监测',per:'2026-10',due:'11-08',st:isHosp?'wait':'na',stTxt:isHosp?'必报 D-3':'不适用（非医疗机构）',by:'—'},
+    {n:'医保医疗结算',per:'2026-10',due:'11-05',st:isHosp?'done':'na',stTxt:isHosp?'已提交':'不适用（无医保医疗）',by:isHosp?'医保办':'—'}
+  ];
+  const stMap={done:['g','已提交'],wait:['y','待提交'],accept:['b','已受理'],na:['n','不适用']};
+  return `
+  <div class="phead">
+    <div><h1 class="pt">数据上报与校验 ${info('上报三条铁律','机构可审计的底线',
+      '① 快照——上报即冻结，之后改数留痕；\\n② 校验前置——提交前跑规则，别等退回来；\\n③ 差异留单——数不对不是改数，是开单说明原因。\\n\\n上报清单按机构类型动态生成：护理院比养老院多 卫健监测 + 医保医疗结算。')}</h1>
+      <div class="psub">${o.name} · ${o.type} · ${o.lis?'长护险定点':'非长护险定点'} · 2026 年 10 月</div></div>
+    <div style="display:flex;gap:8px"><button class="btn gh sm" onclick="toast('演示：上报日历（全年 12 期 × 各报表截止日）')">上报日历</button>
+      <button class="btn sm" onclick="toast('演示：阻断项未清空，禁止一键提交——请先处理 B-201 床位状态冲突')">一键提交</button></div>
+  </div>
+  <div class="note b" style="margin-bottom:12px">已按机构类型生成上报清单：<b>${o.type}</b> → ${tasks.filter(t=>t.st!=='na').length} 张必报 + ${tasks.filter(t=>t.st==='na').length} 张不适用。</div>
+  <div class="kpis" style="grid-template-columns:repeat(5,1fr)">
+    ${tasks.map(t=>`<div class="kpi" style="${t.st==='na'?'opacity:.5':''}">
+      <div class="k">${t.n}</div>
+      <div class="v" style="font-size:14px;letter-spacing:0;margin:8px 0 4px"><span class="pill ${stMap[t.st][0]}">${t.stTxt}</span></div>
+      <div class="c">周期 ${t.per} · 截止 ${t.due}</div><div class="c" style="margin-top:3px">提交人：${t.by}</div></div>`).join('')}
+  </div>
+  <div class="grid2" style="grid-template-columns:1.1fr 1fr">
+    <div class="card">
+      <div class="ch"><div class="ct">提交前校验</div><span class="hint">12 项 · 通过 9 / 提醒 2 / 阻断 1</span></div>
+      <table><thead><tr><th>类型</th><th>校验内容</th><th>结果</th><th>处理</th></tr></thead><tbody>
+        <tr><td><span class="pill n">必填</span></td><td>2 位长者缺少紧急联系人</td><td><span class="pill y">提醒</span></td><td><span class="lk" onclick="S.filters.elderSearch='E2026-0007';S.page='elders';render()">去补录 ›</span></td></tr>
+        <tr><td><span class="pill n">值域</span></td><td>床位状态与在住记录一致性</td><td><span class="pill g">通过</span></td><td>—</td></tr>
+        <tr><td><span class="pill n">逻辑</span></td><td>A 区失能占比 62%，上月 48%，差异较大请确认</td><td><span class="pill y">提醒</span></td><td><span class="lk" onclick="toast('演示：已填写说明「本月新入住 8 人中 6 人为重度失能转介」')">填写说明 ›</span></td></tr>
+        <tr><td><span class="pill n">跨表</span></td><td>备案床位 ${o.filed} 与民政备案库一致</td><td><span class="pill g">通过</span></td><td>—</td></tr>
+        <tr><td><span class="pill n">逻辑</span></td><td>B-201 房间床位状态与在住记录冲突</td><td><span class="pill r">阻断</span></td><td><span class="lk" onclick="go('beds')">去处理 ›</span></td></tr>
+        <tr><td><span class="pill n">跨表</span></td><td>长护险结算服务量 vs 服务记录</td><td><span class="pill g">通过</span></td><td>—</td></tr>
+      </tbody></table>
+      <div class="note r" style="margin-top:10px"><b>存在 1 项阻断，禁止提交。</b>请先处理 B-201 床位状态冲突。</div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><div class="ct">上报快照</div><span class="hint">上报即冻结，之后修改留痕</span></div>
+        <table><tbody>
+          ${[['2026-10-31 23:50','#S20261031','a3f8c1d2','王信息员'],['2026-09-30 23:48','#S20260930','b71e4a9f','王信息员'],
+             ['2026-08-31 23:52','#S20260831','c02d8e55','王信息员']]
+            .map(r=>`<tr><td style="font-size:11.5px;color:var(--mut)">${r[0]}</td><td><b>${r[1]}</b></td>
+            <td style="font-family:monospace;font-size:11px">${r[2]}</td><td style="font-size:11.5px;color:var(--mut)">${r[3]}</td>
+            <td><span class="lk" onclick="toast('演示：打开快照 ${r[1]}（当时的完整数据只读视图）')">查看</span></td></tr>`).join('')}
+        </tbody></table>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct">差异单</div><span class="pill y">1 条未闭合</span></div>
+        <div class="note y" style="margin-bottom:8px"><b>2026-09 · 在住床位</b><br>上报值 344 ｜ 实际值 348 ｜ 差异 +4<br>
+          原因：月末 4 人补录入住未及时同步<br><span style="color:var(--mut)">处理人 王信息员 · 待闭合</span>
+          <span class="lk" style="float:right" onclick="toast('演示：差异单已闭合并归档')">闭合 ›</span></div>
+        <div class="note"><b>2026-08 · 护理服务量</b> 已闭合<br><span style="color:var(--mut)">原因：3 条记录补记，已核减对应补贴</span></div>
+      </div>
+    </div>
+  </div>
+  ${isHosp?`<div class="card"><div class="ch"><div class="ct">合规证照（护理院专项）</div></div>
+    <table><thead><tr><th>证照 / 事项</th><th>有效期 / 状态</th><th>提示</th></tr></thead><tbody>
+      <tr><td>医疗机构执业许可证</td><td>至 2028-06-30</td><td><span class="pill g">正常</span></td></tr>
+      <tr><td>护士执业注册（9 人）</td><td>1 人 60 天内到期</td><td><span class="pill y">提醒续期</span></td></tr>
+      <tr><td>医疗废物处置协议</td><td>至 2027-03-31</td><td><span class="pill g">正常</span></td></tr>
+    </tbody></table></div>`:''}
+  <div class="note"><b>上报三条铁律：</b>① <b>快照</b>——上报即冻结，之后改数留痕；② <b>校验前置</b>——提交前跑规则，别等退回来；③ <b>差异留单</b>——数不对不是改数，是开单说明原因。</div>`;
+}
+
+/* ---- 政府补贴申请 ---- */
+function pageSubsidy(){
+  return `
+  <div class="phead">
+    <div><h1 class="pt">政府补贴申请</h1>
+      <div class="psub">可申领补贴总览 → 材料准备 → 提交 → 受理 → 拨付，全流程跟踪留痕</div></div>
+    <button class="btn sm" onclick="toast('演示：新建补贴申请（选择类型后自动带出材料清单与达标检查）')">新建申请</button>
+  </div>
+  <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi"><div class="k">运营补贴（按床位）</div><div class="v">¥8.3<small> 万/年</small></div>
+      <div class="c g">200 元/床/月 × 380 备案床 · 达标 ✓</div></div>
+    <div class="kpi"><div class="k">护理补贴（按人）</div><div class="v">¥2.7<small> 万/月</small></div>
+      <div class="c y">重度失能 90 人 × 300 元/月 · 待申报（11-08 截止）</div></div>
+    <div class="kpi"><div class="k">一次性建设补贴</div><div class="v">¥8,000<small> /床</small></div>
+      <div class="c">2024 年新增 60 床已拨付 48 万 ✓</div></div>
+    <div class="kpi"><div class="k">护理型床位改造补贴</div><div class="v">可申请</div>
+      <div class="c y">护理型占比 71.1% → 目标 73%，差 13 床</div></div>
+  </div>
+  <div class="grid2" style="grid-template-columns:1.2fr 1fr">
+    <div class="card">
+      <div class="ch"><div class="ct">申请进度</div></div>
+      <table><thead><tr><th>补贴类型</th><th>周期</th><th class="num">申报金额</th><th>进度</th><th>下一步</th></tr></thead><tbody>
+        ${[['运营补贴（10 月）','2026-10','98,600','提交 → 区民政受理中','预计 11-25 拨付','g'],
+           ['护理补贴（10 月）','2026-10','27,000','草稿 · 材料缺 1 项','补评估影像后提交','y'],
+           ['长护险基金结算','2026-10','86,400','医保经办已受理','11-18 到账','b'],
+           ['床改补贴（Q4）','2026-Q4','—','可申请 · 差 13 张达标床','完成 3 层改造后申报','n']]
+          .map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="num">${r[2]}</td>
+          <td><span class="pill ${r[5]}">${r[3]}</span></td><td style="font-size:11.5px;color:var(--mut)">${r[4]}</td></tr>`).join('')}
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">材料清单检查（护理补贴 · 10 月）</div></div>
+      ${[['在住老人花名册（民政版本）',1],['重度失能评估报告（双标）',1],['评估过程影像留痕',0],
+         ['护理服务记录抽样（≥5%）',1],['机构资质证照复印件',1]]
+        .map(m=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line2);font-size:12.5px">
+        <span>${m[1]?'✅':'❌'} ${m[0]}</span>${m[1]?'<span class="pill g">已上传</span>':'<span class="pill r">缺失</span>'}</div>`).join('')}
+      <div class="note r" style="margin-top:10px"><b>评估影像缺失 2 份</b>（10 月新评估 8 人中 2 人未上传过程影像）——按规定该部分补贴不予结算，
+      <span class="lk" onclick="S.page='assess';S.tab.assess='form';render()">去评估中心补录 ›</span></div>
+    </div>
+  </div>
+  <div class="note b">补贴申请与数据上报共用同一套校验：材料完整率、评估影像留痕、服务记录抽样由系统自动检查，
+  <b>不达标的材料直接标红并给出系统建议</b>，避免提交后被退回核减。</div>`;
+}
+
+/* ---- 档案预警自查 ---- */
+function pageAudit(){
+  return `
+  <div class="phead">
+    <div><h1 class="pt">档案预警自查</h1>
+      <div class="psub">机构证照 · 人员资质 · 老人档案完整性 · 检查整改，四类自查每日凌晨自动运行</div></div>
+    <button class="btn sm" onclick="toast('演示：已生成《档案预警自查报告（11 月第 1 周）》')">生成自查报告</button>
+  </div>
+  <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi"><div class="k">机构证照预警</div><div class="v">1<small> 项</small></div><div class="c y">食品经营许可证 60 天内到期</div></div>
+    <div class="kpi"><div class="k">人员资质预警</div><div class="v">3<small> 人</small></div><div class="c y">2 人证书到期 + 1 人待考证</div></div>
+    <div class="kpi"><div class="k">老人档案不完整</div><div class="v">5<small> 人</small></div><div class="c y">缺紧急联系人 2 · 评估到期 3</div></div>
+    <div class="kpi"><div class="k">待整改事项</div><div class="v">2<small> 项</small></div><div class="c">民政检查 1 · 消防 1（进行中）</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">机构证照</div></div>
+      <table><thead><tr><th>证照</th><th>有效期</th><th>剩余天数</th><th>状态</th></tr></thead><tbody>
+        ${[['养老机构备案证','2027-03-31','146','g'],['食品经营许可证','2027-01-05','61','y'],
+           ['消防安全检查合格证','2028-06-30','237','g'],['医疗机构执业许可证（医务室）','2028-06-30','237','g']]
+          .map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="num">${r[2]}</td>
+          <td><span class="pill ${r[3]}">${r[3]==='y'?'60 天内到期 ⚠':'正常'}</span></td></tr>`).join('')}
+      </tbody></table>
+      <div class="note" style="margin-top:8px">规则：有效期 ≤90 天黄色预警、≤30 天红色并生成待办。</div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">人员资质</div></div>
+      <table><thead><tr><th>人员</th><th>资质</th><th>有效期</th><th>状态</th></tr></thead><tbody>
+        ${[['沈月华','健康证 + 护理员（初级）','2026-11-30','r'],['赵秀兰','养老护理员（初级）','2026-12-10','y'],
+           ['吴国栋','养老护理员证','—','r'],['周琳','护士执业证','2027-04-22','g']]
+          .map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td>
+          <td><span class="pill ${r[3]}">${r[3]==='g'?'正常':r[3]==='y'?'即将到期':'⚠ 待办'}</span></td></tr>`).join('')}
+      </tbody></table>
+      <div class="note" style="margin-top:8px">无证上岗将直接阻断长护险服务量上报——<span class="lk" onclick="go('carers')">查看护理人员 ›</span></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">老人档案完整性</div></div>
+      <table><thead><tr><th>检查项</th><th class="num">涉及人数</th><th>影响</th><th>操作</th></tr></thead><tbody>
+        <tr><td>缺紧急联系人</td><td class="num">2</td><td style="font-size:11.5px;color:var(--mut)">上报完整率扣分</td><td><span class="lk" onclick="S.page='elders';render()">去补录 ›</span></td></tr>
+        <tr><td>评估 30 天内到期</td><td class="num">3</td><td style="font-size:11.5px;color:var(--mut)">补贴 / 长护险结算</td><td><span class="lk" onclick="S.page='assess';S.tab.assess='persons';render()">去复评 ›</span></td></tr>
+        <tr><td>家属联系方式空缺</td><td class="num">1</td><td style="font-size:11.5px;color:var(--mut)">应急联络</td><td><span class="lk" onclick="S.page='elders';render()">去补录 ›</span></td></tr>
+        <tr><td>押金协议缺家属签字扫描件</td><td class="num">1</td><td style="font-size:11.5px;color:var(--mut)">审计风险</td><td><span class="lk" onclick="toast('演示：已生成补签待办')">去处理 ›</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">检查与整改跟踪</div></div>
+      ${[['2026-10-08 · 区民政局年检','合格','2 项建议（台账格式、影像命名）已整改','g'],
+         ['2026-09-20 · 消防部门抽查','基本合格','3 层疏散指示灯更换 · <b>进行中（11-15 截止）</b>','y'],
+         ['2026-08-14 · 市场监管（食品）','合格','留样记录规范 ✓','g']]
+        .map(r=>`<div class="note ${r[3]}" style="margin-bottom:8px"><b>${r[0]}</b>　<span class="pill ${r[3]}">${r[1]}</span><br>
+        <span style="font-size:11.5px">${r[2]}</span></div>`).join('')}
+      <div class="note b">历次检查结论、整改项、佐证照片全部归档，形成机构<b>审计档案</b>，随时可被调取。</div>
+    </div>
+  </div>`;
+}
+
+/* ---- 异常波动监测 ---- */
+function pageMonitor(){
+  return `
+  <div class="phead">
+    <div><h1 class="pt">异常波动监测</h1>
+      <div class="psub">核心指标环比自动监控（阈值可配）→ 超阈值生成说明单 → 机构填写原因留档备查</div></div>
+    <button class="btn gh sm" onclick="toast('演示：监测规则配置（阈值、周期、责任部门）')">监测规则配置</button>
+  </div>
+  <div class="card np">
+    <div style="padding:13px 16px 4px"><div class="ct">2026-10 · 核心指标环比（新濠院区）</div></div>
+    <table><thead><tr><th>指标</th><th class="num">9 月</th><th class="num">10 月</th><th class="num">环比</th><th>阈值</th><th>状态</th></tr></thead><tbody>
+      ${[['在住人数','344','348','+1.2%','±15%','ok'],['入住率','90.5%','91.6%','+1.1pp','±15%','ok'],
+         ['月收入','¥27.9 万','¥28.6 万','+2.5%','±20%','ok'],['退住人数','4','6','+50%','≥50%','warn'],
+         ['人力成本占比','53.8%','52.0%','-1.8pp','±10%','ok'],['跌倒人次','0','1','+1 起','≥2 起','ok'],
+         ['补记率','3.4%','3.1%','-0.3pp','≥5%','ok'],['欠费金额','¥3.8 万','¥4.5 万','+18.4%','≥30%','ok']]
+        .map(r=>`<tr><td><b>${r[0]}</b></td><td class="num">${r[1]}</td><td class="num">${r[2]}</td>
+        <td class="num" style="color:${r[4]==='warn'?'var(--warn)':'inherit'}">${r[3]}</td><td class="num">${r[4]}</td>
+        <td>${r[5]==='warn'?'<span class="pill y">触发说明</span>':'<span class="pill g">正常</span>'}</td></tr>`).join('')}
+    </tbody></table>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><div class="ct">待说明波动单</div><span class="pill y">1 条</span></div>
+      <div class="note y"><b>退住人数 +50%</b>（4 → 6）<br>
+        <span style="color:var(--mut)">波动说明（自动带出数据）：本月退住 6 人中 2 人转院、2 人家庭照护、1 人身故、1 人合同到期不续；
+        转院 2 人系同一家属住址变迁。已与家属回访确认，非服务质量原因。</span>
+        <div style="margin-top:8px"><button class="btn gh sm" onclick="toast('说明已提交留档，生成审计记录 #AUD2026110501')">提交说明并留档</button></div></div>
+      <div class="note" style="margin-top:8px"><b>2026-09 · 入住率 -15.3%</b> 已说明留档（纸坊街 · 日间照料转居家）<span class="pill g" style="margin-left:6px">已闭合</span></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">监测规则（默认，可配）</div></div>
+      <table><thead><tr><th>规则</th><th>阈值</th><th>动作</th></tr></thead><tbody>
+        ${[['入住率环比','±15%','生成说明单'],['退住人数环比','≥50%','生成说明单 + 院长提醒'],
+           ['收入环比','±20%','财务复核'],['补记率','≥5%','护理部说明 + 培训'],
+           ['护理比超标','任意分区','待办 + 排班调整'],['评估到期未复评','30 天','待办 + 补贴影响提示'],
+           ['押金 / 预收超限','任意','阻断 + 合规自查表']]
+          .map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td style="font-size:11.5px;color:var(--mut)">${r[2]}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note b" style="margin-top:8px">异常波动不是问题，<b>不解释才是问题</b>——说明单留档后即构成机构"可被审计"的证据链。</div>
+    </div>
+  </div>`;
+}
+
+/* ---- 政策参数配置 ---- */
+function pagePolicy(){
+  const c=CITIES[S.city];
+  const card=(t,rows,note,tag)=>`<div class="acc open" style="margin-bottom:9px">
+    <div class="ah" onclick="this.parentNode.classList.toggle('open')">
+      <span>${t} ${tag?`<span class="pill g" style="margin-left:6px">${tag}</span>`:''}</span>
+      <span style="display:flex;align-items:center;gap:9px">
+      <span class="lk" onclick="event.stopPropagation();editPolicy('${t}',${JSON.stringify(rows).replace(/"/g,'&quot;').replace(/'/g,'&#39;')})">编辑</span>
+      <span class="ar">›</span></span></div>
+    <div class="ab">${rows.map(r=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line2)">
+      <span style="color:#5E6E6A">${r[0]}</span><b>${r[1]}</b></div>`).join('')}
+      ${note?`<div class="hint" style="margin-top:8px">${note}</div>`:''}</div></div>`;
+  return `
+  <div class="phead">
+    <div><h1 class="pt">政策参数配置 ${info('政策参数','一城一版不是产品问题，是配置问题',
+      '把政策差异做成参数，而不是开发。补贴标准、报销比例、评估权重、审批流、服务项目对码——新城市上线只改配置不改代码。')}</h1>
+      <div class="psub">当前统筹区：${c.name} · 生效 2026-01-01 · 版本 v${S.policyVer} · 修改即时生效并留版本痕迹</div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn ${S.city==='wh'?'':'gh'} sm" onclick="switchCity('wh')">武汉</button>
+      <button class="btn ${S.city==='jm'?'':'gh'} sm" onclick="switchCity('jm')">荆门</button>
+    </div>
+  </div>
+  <div class="note b" style="margin-bottom:12px">切换统筹区后，参数与「收费与结算」的结算金额、差额承担<b>同步生效</b>。当前对齐 6 组参数。</div>
+  <div class="grid2">
+    <div>
+      ${card('💰 补贴标准',[['建设补贴',c.build],['运营补贴',c.op],['护理补贴（重度）',c.care]],'','联动补贴申请')}
+      ${card('🛡 长护险结算',[['职工报销比例',c.emp],['居民报销比例',c.res],['年度限额',c.cap],['服务目录版本','2025 版 · 36 项']],'','联动收费结算')}
+      ${card('⚖️ 评估映射权重',[['自理能力 → 日常生活活动',c.w1],['精神状态 → 认知能力',c.w2],['感知觉 → 感知觉与沟通',c.w3]],'权重变化会影响长护险等级换算结果','联动评估中心')}
+    </div>
+    <div>
+      ${card('🔀 审批流',[['补贴审批环节数',c.flow.split('·')[0]],['审批路径',c.flow.split('· ')[1]||'']],'','')}
+      ${card('🎫 政府购买服务券规则',[['抵扣比例',c.voucherRate],['单人月度上限',c.voucherCap],['核销方式','定位 + 人脸 + 电子签字']],'缺任一项凭证不可结算','联动券核销')}
+      ${card('🧾 服务项目对码',[['机构服务项目','15 项'],['已对码长护险目录','13 / 36'],['未对码','2 项（黄色）']],'未对码项目无法进入长护险结算，也不能计入服务量上报','联动护理条目')}
+    </div>
+  </div>
+  <div class="card" style="background:var(--pri);color:#fff;border:none">
+    <div style="font-size:16px;font-weight:700;letter-spacing:-.3px">新城市上线：改配置，不改代码</div>
+    <div style="font-size:12px;opacity:.88;margin-top:8px;line-height:1.7">传统做法：每个城市重做一遍，交付约 3 个月，边际成本不下降<br>本项目做法：产品内核 + 政策参数中心，交付约 3 周</div>
+  </div>`;
+}
+function switchCity(c){ S.city=c; render(); toast('已切换为「'+CITIES[c].name+'」口径 · 影响 6 组参数，评估与结算同步重算'); }
+/* ============================================================
+   十七、路由与主渲染
+   ============================================================ */
+const PAGES = {
+  dash:pageDash, weekly:pageWeekly, todo:pageTodo,
+  beds:pageBeds, elders:pageElders, eldersDetail:pageElderDetail,
+  bill:pageBill, disab:pageDisab, metric:pageMetric,
+  assess:pageAssess, careitems:pageCareItems, carers:pageCarers, carerDetail:pageCarerDetail,
+  report:pageReport, subsidy:pageSubsidy, audit:pageAudit, monitor:pageMonitor, policy:pagePolicy
+};
+function render(){
+  const root=$('#root');
+  if(S.view==='site'){ root.innerHTML=renderSite(); return; }
+  if(S.view==='login'){ root.innerHTML=renderLogin(); return; }
+  root.innerHTML=renderApp();
+  /* 渲染后填充动态列表 */
+  if(S.page==='elders') renderElderRows();
+  if(S.page==='assess'&&S.tab.assess==='persons') renderPersonRows();
+}
+/* 官网导航锚点 */
+document.addEventListener('click',e=>{
+  const chip=e.target.closest('.role-chip');
+  if(chip) doLogin(chip.dataset.role);
+});
+render();
+</script>
+</body>
+</html>
